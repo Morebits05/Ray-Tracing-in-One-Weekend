@@ -27,9 +27,9 @@ public final class Vector3 {
         Vec3 v1 = new Vec3();
 
 
-        assertEquals(0, v1.X);
-        assertEquals(0, v1.Y);
-        assertEquals(0, v1.Z);
+        assertEquals(0, v1.x);
+        assertEquals(0, v1.y);
+        assertEquals(0, v1.z);
     }
 
     @Test
@@ -37,9 +37,9 @@ public final class Vector3 {
     public void shouldBeSetTo0() {
         Vec3 v1 = new Vec3(0, 0, 0);
 
-        assertEquals(0, v1.X);
-        assertEquals(0, v1.Y);
-        assertEquals(0, v1.Z);
+        assertEquals(0, v1.x);
+        assertEquals(0, v1.y);
+        assertEquals(0, v1.z);
     }
 
     @Test
@@ -80,9 +80,9 @@ public final class Vector3 {
             Vec3 v2 = new Vec3(x, y, z);
             assertEquals(v1, v2);
 
-            v2.X += delta;
-            v2.Y += delta;
-            v2.Z += delta;
+            v2.x += delta;
+            v2.y += delta;
+            v2.z += delta;
             assertNotEquals(v1, v2);
         }
     }
@@ -106,17 +106,16 @@ public final class Vector3 {
             y2 = getFloatInRange(-100,100);
             z2 = getFloatInRange(-100,100);
 
-            float expectedX = testVec.X + x2;
 
             Vec3 actualVec = testVec.addEquals(new Vec3(x2, y2, z2));
-            assertEquals(x + x2, actualVec.X);
-            assertEquals(y + y2, actualVec.Y);
-            assertEquals(z + z2, actualVec.Z);
+            assertEquals(x + x2, actualVec.x);
+            assertEquals(y + y2, actualVec.y);
+            assertEquals(z + z2, actualVec.z);
         }
     }
 
     @Test
-    @DisplayName("should set Vector X after assignment")
+    @DisplayName("should set Vector x after assignment")
     public void addEqualsAssignmentTest(){
 
         //Basic Vectors
@@ -127,14 +126,14 @@ public final class Vector3 {
         testVec.addEquals(vectorToAdd);
 
         // Check original value has changed
-        assertEquals(-10, testVec.X);
+        assertEquals(-10, testVec.x);
 
     }
 
 
     @Test
-    @DisplayName("Should Add Two Vectors And Return Vector With NegativeX")
-    public void shouldAddTwoVectorsAndReturnVectorWithNegativeX() {
+    @DisplayName("Should Add Two Vectors And Return Vector With Negativex")
+    public void shouldAddTwoVectorsAndReturnVectorWithNegativex() {
         Vec3 v1 = new Vec3(1, 2, 3);
 
         Vec3 expected = new Vec3(-1, 2, 3);
@@ -143,8 +142,8 @@ public final class Vector3 {
 
 
     @Test
-    @DisplayName("Should Add Two Vectors And Return Vector With Positive X")
-    public void shouldAddTwoVectorsAndReturnVectorWithPositiveX() {
+    @DisplayName("Should Add Two Vectors And Return Vector With Positive x")
+    public void shouldAddTwoVectorsAndReturnVectorWithPositivex() {
         Vec3 v1 = new Vec3(1, 2, 3);
 
         Vec3 expected = new Vec3(2, 2, 3);
@@ -152,8 +151,8 @@ public final class Vector3 {
     }
 
     @Test
-    @DisplayName("Should Add One Vector that's negative And Return With Negative Y")
-    public void shouldAddOneVectorsThatsNegativeAndReturnVectorWithNegativeY() {
+    @DisplayName("Should Add One Vector that's negative And Return With Negative y")
+    public void shouldAddOneVectorsThatsNegativeAndReturnVectorWithNegativey() {
         Vec3 testVector = new Vec3(0, 1, 0);
 
         Vec3 expected = new Vec3(0, -1, 0);
@@ -173,8 +172,8 @@ public final class Vector3 {
 
 
     @Test
-    @DisplayName("Should Add Two Positive Vectors And Return Vector With Positive Y")
-    public void shouldAddTwoPositiveVectorsAndReturnVectorWithPositiveY() {
+    @DisplayName("Should Add Two Positive Vectors And Return Vector With Positive y")
+    public void shouldAddTwoPositiveVectorsAndReturnVectorWithPositivey() {
         Vec3 testVector = new Vec3(1, 2, 3);
 
         Vec3 expectedVector = new Vec3(2, 2, 3);
@@ -202,16 +201,16 @@ public final class Vector3 {
 
                 Vec3 v2 = new Vec3(x2,y2,z2);
 
-                assertEquals(v1.X - x2,v1.subtractEquals(v2).X);
-                assertEquals(v1.Y - y2,v1.subtractEquals(v2).Y);
-                assertEquals(v1.Z - z2,v1.subtractEquals(v2).Z);
+                assertEquals(v1.x - x2,v1.subtractEquals(v2).x);
+                assertEquals(v1.y - y2,v1.subtractEquals(v2).y);
+                assertEquals(v1.z - z2,v1.subtractEquals(v2).z);
         }
     }
 
 
     @Test
-    @DisplayName("subtract method subtracts 1 from X and returns 0")
-    public void subtractMethodSubtracts1FromXandreturns0() {
+    @DisplayName("subtract method subtracts 1 from x and returns 0")
+    public void subtractMethodSubtracts1FromXandReturns0() {
         Vec3 testVec = new Vec3(2, 2, 2);
 
         Vec3 actualVec = testVec.subtract(new Vec3(2, 0, 0));
@@ -221,8 +220,8 @@ public final class Vector3 {
     }
 
     @Test
-    @DisplayName("subtract method subtracts 1 from Y and returns 0")
-    public void subtractMethodSubtracts1FromYandreturns0() {
+    @DisplayName("subtract method subtracts 1 from y and returns 0")
+    public void subtractMethodSubtracts1FromYandReturns0() {
         Vec3 testVec = new Vec3(2, 2, 2);
 
         Vec3 actualVec = testVec.subtract(new Vec3(2, 2, 0));
@@ -303,8 +302,8 @@ public final class Vector3 {
     }
 
     @Test
-    @DisplayName("Multiplies X by 2 and Doubles X")
-    public void multipliesXby2andDoublesX() {
+    @DisplayName("Multiplies x by 2 and Doubles x")
+    public void multipliesxby2andDoublesx() {
         Vec3 testVec = new Vec3(2, -5, 10);
         Vec3 expected = new Vec3(4, -5, 10);
         assertEquals(expected, testVec.scale(new Vec3(2, 1, 1)));
@@ -313,7 +312,7 @@ public final class Vector3 {
 
     // Test with Extreme Values
     @Test
-    @DisplayName("Multiplies X by 2 and Doubles X")
+    @DisplayName("Multiplies x by 2 and Doubles x")
     public void multipliesV1ByV2() {
 
         Vec3 testVec = new Vec3(2, 35, -45);
@@ -325,20 +324,20 @@ public final class Vector3 {
     @ParameterizedTest
     @DisplayName("Should Multiply a Vector by a Doubles")
     @ValueSource(doubles = {2.0, 4.0, 6.0, 35, 29, -24, Double.MAX_VALUE})
-    public void shouldScaleByDoubles(Double double_to_scaleBy) {
+    public void shouldScaleByDoubles(Double doubleToScaleBy) {
         Vec3 testVec = new Vec3(-3, -2, -1);
         Vec3 testVec2 = new Vec3(5, 10, -4);
 
         int x, y, z;
-        x = (int) (testVec.X * double_to_scaleBy);
-        y = (int) (testVec.Y * double_to_scaleBy);
-        z = (int) (testVec.Z * double_to_scaleBy);
-        testVec.scale(double_to_scaleBy);
+        x = (int) (testVec.x * doubleToScaleBy);
+        y = (int) (testVec.y * doubleToScaleBy);
+        z = (int) (testVec.z * doubleToScaleBy);
+        testVec.scale(doubleToScaleBy);
 
 
-        assertEquals(x, testVec.scale(double_to_scaleBy).X);
-        assertEquals(y, testVec.scale(double_to_scaleBy).Y);
-        assertEquals(z, testVec.scale(double_to_scaleBy).Z);
+        assertEquals(x, testVec.scale(doubleToScaleBy).x);
+        assertEquals(y, testVec.scale(doubleToScaleBy).y);
+        assertEquals(z, testVec.scale(doubleToScaleBy).z);
     }
 
     @Test
@@ -356,7 +355,7 @@ public final class Vector3 {
         // AddEquals use += on original values and returns itself
         // hence been Volatile
 
-        assertTrue(testVec.X == 1 && testVec.Y == -3 && testVec.Z == -5, "Vector Coordinates Should have stayed same");
+        assertTrue(testVec.x == 1 && testVec.y == -3 && testVec.z == -5, "Vector Coordinates Should have stayed same");
 
     }
 
@@ -402,9 +401,9 @@ public final class Vector3 {
                 Vec3 vectorToBeScaledBy = new Vec3(x2, y2, z2);
                 testVector.scaleEquals(vectorToBeScaledBy);
 
-                assertEquals(x1 * x2, testVector.X);
-                assertEquals(y1 * y2, testVector.Y);
-                assertEquals(z1 * z2, testVector.Z);
+                assertEquals(x1 * x2, testVector.x);
+                assertEquals(y1 * y2, testVector.y);
+                assertEquals(z1 * z2, testVector.z);
             }
         }
 
@@ -426,9 +425,9 @@ public final class Vector3 {
                 Vec3 vectorDivideBy = new Vec3(x2,y2,z2);
 
                 testVec.divideEqual(vectorDivideBy);
-                assertEquals(x1 / x2, testVec.X);
-                assertEquals(y1 / y2, testVec.Y);
-                assertEquals(z1 / z2, testVec.Z);
+                assertEquals(x1 / x2, testVec.x);
+                assertEquals(y1 / y2, testVec.y);
+                assertEquals(z1 / z2, testVec.z);
             }
 
         }
@@ -462,5 +461,14 @@ public final class Vector3 {
 
                 assertThat(v1.length(),is(expectedLengthSquared));
             }
+        }
+
+        @Test
+        @DisplayName("Should Give HashValue")
+        public void shouldGiveHashValue(){
+            Vec3 v1 = new Vec3(2,4,4);
+
+
+
         }
  }
