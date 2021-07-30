@@ -20,6 +20,7 @@ public class Vec3 {
         z = 0;
     }
 
+
     @Override
     public String toString() {
         return "<" + x + "," + y + "," + z + ">";
@@ -53,10 +54,20 @@ public class Vec3 {
         return new Vec3(x * other.x, y * other.y, z * other.z);
     }
 
-    public Vec3 scale(double t) {
-        return new Vec3((int) (x * t), (int) (y * t), (int) (z * t));
+    public Vec3 scale(float t) {
+        return new Vec3((x * t),(y * t),(z * t));
     }
 
+    public  static Vec3 scale(float t, Vec3 vec){
+        return vec.scale(t);
+    }
+    public static Vec3  divide(Vec3 vectorToDivide, float t){
+        return scale(1/t,vectorToDivide);
+    }
+
+    public static Vec3 unit(Vec3 v){
+        return divide(v,v.length());
+    }
 
     public Vec3 addEquals(Vec3 other) {
         this.x += other.x;
@@ -72,11 +83,15 @@ public class Vec3 {
         return this;
     }
 
-    public Vec3 divideEqual(Vec3 other) {
-        this.x /= other.x;
-        this.y /= other.y;
-        this.z /= other.z;
+    public Vec3 scaleEquals(float t) {
+        this.x *= t;
+        this.y *= t;
+        this.z *= t;
         return this;
+    }
+
+    public Vec3 divideEqual(float t) {
+        return scaleEquals(1/t);
     }
 
     public Vec3 subtractEquals(Vec3 other) {

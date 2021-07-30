@@ -1,10 +1,6 @@
 package Tests;
 
 
-
-
-
-
 import com.MB.Vec3;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -15,12 +11,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 public final class Vector3 {
+    static int LOW = -100;
+    static int HIGH = 100;
     Random gen = new Random();
-    static  int LOW = -100;
-    static  int HIGH = 100;
+
     @Test
     @DisplayName("should Initialize as 0")
     public void shouldInitializeAs0() {
@@ -65,6 +63,15 @@ public final class Vector3 {
         return gen.nextFloat() * (h - l) + l;
     }
 
+    @Test
+    @DisplayName("Equality Test with Hashcode")
+    public void EqualityTest(){
+        Vec3 v1 = new Vec3(0,2,0);
+        Vec3 v2 = new Vec3(0,2,0);
+
+        assertThat(v1.equals(v2),is(v2.equals(v1)));
+        assertThat(v1.hashCode(),is(v2.hashCode()));
+    }
 
     @Test
     @DisplayName("Should Test for Equality")
@@ -102,9 +109,9 @@ public final class Vector3 {
             y = getFloatInRange(-100, 100);
             z = getFloatInRange(-100, 100);
             Vec3 testVec = new Vec3(x, y, z);
-            x2 = getFloatInRange(-100,100);
-            y2 = getFloatInRange(-100,100);
-            z2 = getFloatInRange(-100,100);
+            x2 = getFloatInRange(-100, 100);
+            y2 = getFloatInRange(-100, 100);
+            z2 = getFloatInRange(-100, 100);
 
 
             Vec3 actualVec = testVec.addEquals(new Vec3(x2, y2, z2));
@@ -115,12 +122,21 @@ public final class Vector3 {
     }
 
     @Test
+    @DisplayName("should Divide Vector and Return Correct Value")
+    public void unitVectorTest(){
+        Vec3 v1 = new Vec3(3,3,3);
+
+        assertEquals((float) Math.sqrt(3 * 3 + 3 * 3 + 3 * 3), Vec3.unit(v1));
+
+    }
+
+    @Test
     @DisplayName("should set Vector x after assignment")
-    public void addEqualsAssignmentTest(){
+    public void addEqualsAssignmentTest() {
 
         //Basic Vectors
-        Vec3 testVec = new Vec3(-4,26,12);
-        Vec3 vectorToAdd = new Vec3(-6,24,13);
+        Vec3 testVec = new Vec3(-4, 26, 12);
+        Vec3 vectorToAdd = new Vec3(-6, 24, 13);
 
         // Call Method to Add Another Vector
         testVec.addEquals(vectorToAdd);
@@ -132,18 +148,29 @@ public final class Vector3 {
 
 
     @Test
-    @DisplayName("Should Add Two Vectors And Return Vector With Negativex")
-    public void shouldAddTwoVectorsAndReturnVectorWithNegativex() {
+    @DisplayName("Should Add Two Vectors And Return Vector With Negative X")
+    public void shouldAddTwoVectorsAndReturnVectorWithNegativeX() {
         Vec3 v1 = new Vec3(1, 2, 3);
 
         Vec3 expected = new Vec3(-1, 2, 3);
         assertEquals(expected, v1.add(new Vec3(-2, 0, 0)));
     }
 
+    @Test
+    @DisplayName("Equality Should Fail with Null or Other Class")
+    public void NullEqualityTest(){
+        Vec3 v1 = new Vec3(3,3,2);
+        Vec3 v2 = null;
+        Integer v3 = new Integer(3);
+
+        assertThat(v1.equals(v2),is(not(true)));
+        assertThat(v1.equals(v3),is(not(true)));
+    }
+
 
     @Test
     @DisplayName("Should Add Two Vectors And Return Vector With Positive x")
-    public void shouldAddTwoVectorsAndReturnVectorWithPositivex() {
+    public void shouldAddTwoVectorsAndReturnVectorWithPositiveY() {
         Vec3 v1 = new Vec3(1, 2, 3);
 
         Vec3 expected = new Vec3(2, 2, 3);
@@ -152,7 +179,7 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Should Add One Vector that's negative And Return With Negative y")
-    public void shouldAddOneVectorsThatsNegativeAndReturnVectorWithNegativey() {
+    public void shouldAddOneVectorsThatsNegativeAndReturnVectorWithNegativeY() {
         Vec3 testVector = new Vec3(0, 1, 0);
 
         Vec3 expected = new Vec3(0, -1, 0);
@@ -184,26 +211,30 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Should Call minus equals, with random numbers")
-    public void MinusEqualsTest(){
-        float x; float y;float z;
-        float x2;float y2; float z2;
+    public void MinusEqualsTest() {
+        float x;
+        float y;
+        float z;
+        float x2;
+        float y2;
+        float z2;
 
         for (int i = 0; i < 200; i++) {
-                x = getFloatInRange(LOW,HIGH);
-                y = getFloatInRange(LOW,HIGH);
-                z = getFloatInRange(LOW,HIGH);
+            x = getFloatInRange(LOW, HIGH);
+            y = getFloatInRange(LOW, HIGH);
+            z = getFloatInRange(LOW, HIGH);
 
-                x2 = getFloatInRange(LOW,HIGH);
-                y2 = getFloatInRange(LOW,HIGH);
-                z2= getFloatInRange(LOW,HIGH);
+            x2 = getFloatInRange(LOW, HIGH);
+            y2 = getFloatInRange(LOW, HIGH);
+            z2 = getFloatInRange(LOW, HIGH);
 
-                Vec3 v1 = new Vec3(x,y,z);
+            Vec3 v1 = new Vec3(x, y, z);
 
-                Vec3 v2 = new Vec3(x2,y2,z2);
+            Vec3 v2 = new Vec3(x2, y2, z2);
 
-                assertEquals(v1.x - x2,v1.subtractEquals(v2).x);
-                assertEquals(v1.y - y2,v1.subtractEquals(v2).y);
-                assertEquals(v1.z - z2,v1.subtractEquals(v2).z);
+            assertEquals(v1.x - x2, v1.subtractEquals(v2).x);
+            assertEquals(v1.y - y2, v1.subtractEquals(v2).y);
+            assertEquals(v1.z - z2, v1.subtractEquals(v2).z);
         }
     }
 
@@ -231,14 +262,14 @@ public final class Vector3 {
     }
 
     @Test
-    @DisplayName("Add adds A Postive and Negative and Returns a Negative")
+    @DisplayName("Add adds A Positive and Negative and Returns a Negative")
     public void addAddsAPostiveAndNegativeandReturnsNegative() {
         Vec3 testVec = new Vec3(-9, -90, 20);
 
         Vec3 actual = testVec.add(new Vec3(-13, 41, -36));
 
         Vec3 expected = new Vec3(-22, -49, -16);
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
 
@@ -323,21 +354,21 @@ public final class Vector3 {
 
     @ParameterizedTest
     @DisplayName("Should Multiply a Vector by a Doubles")
-    @ValueSource(doubles = {2.0, 4.0, 6.0, 35, 29, -24, Double.MAX_VALUE})
-    public void shouldScaleByDoubles(Double doubleToScaleBy) {
+    @ValueSource(floats = {2.0f, 4.0f, 6.0f, 35, 29, -24, Float.MAX_VALUE})
+    public void shouldScaleByDoubles(float floatToScaleBy) {
         Vec3 testVec = new Vec3(-3, -2, -1);
         Vec3 testVec2 = new Vec3(5, 10, -4);
 
-        int x, y, z;
-        x = (int) (testVec.x * doubleToScaleBy);
-        y = (int) (testVec.y * doubleToScaleBy);
-        z = (int) (testVec.z * doubleToScaleBy);
-        testVec.scale(doubleToScaleBy);
+        float x, y, z;
+        x =  testVec.x * floatToScaleBy;
+        y =  testVec.y * floatToScaleBy;
+        z =  testVec.z * floatToScaleBy;
+        testVec.scale(floatToScaleBy);
 
 
-        assertEquals(x, testVec.scale(doubleToScaleBy).x);
-        assertEquals(y, testVec.scale(doubleToScaleBy).y);
-        assertEquals(z, testVec.scale(doubleToScaleBy).z);
+        assertEquals(x, testVec.scale(floatToScaleBy).x);
+        assertEquals(y, testVec.scale(floatToScaleBy).y);
+        assertEquals(z, testVec.scale(floatToScaleBy).z);
     }
 
     @Test
@@ -365,110 +396,97 @@ public final class Vector3 {
     public void shouldScaleEqualWithV2AndReturn42point5646() {
 
 
-        Vec3 testVec = new Vec3(13.26f,10,10);
-        Vec3 other = new Vec3(3.21f,2,2);
+        Vec3 testVec = new Vec3(13.26f, 10, 10);
+        Vec3 other = new Vec3(3.21f, 2, 2);
 
-        Vec3 expected = new Vec3(42.5646f,20,20);
+        Vec3 expected = new Vec3(42.5646f, 20, 20);
         Vec3 actual = testVec.scaleEquals(other);
 
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     @DisplayName("Should Scale Equal with Random Numbers")
-    public void shouldScaleEqualWithRandom(){
-            // Variables
-            float x1;
-            float y1;
-            float z1;
+    public void shouldScaleEqualWithRandom() {
+        // Variables
+        float x1;
+        float y1;
+        float z1;
 
-            float x2;
-            float y2;
-            float z2;
+        float x2;
+        float y2;
+        float z2;
 
-            for (int tests = 0; tests < 20;tests++) {
+        for (int tests = 0; tests < 20; tests++) {
 
-                x1 = getFloatInRange(-100, 100);
-                y1 = getFloatInRange(-100, 100);
-                z1 = getFloatInRange(-100, 100);
+            x1 = getFloatInRange(-100, 100);
+            y1 = getFloatInRange(-100, 100);
+            z1 = getFloatInRange(-100, 100);
 
-                Vec3 testVector = new Vec3(x1, y1, z1);
+            Vec3 testVector = new Vec3(x1, y1, z1);
 
-                x2 = getFloatInRange(-100, 100);
-                y2 = getFloatInRange(-100, 100);
-                z2 = getFloatInRange(-100, 100);
+            x2 = getFloatInRange(-100, 100);
+            y2 = getFloatInRange(-100, 100);
+            z2 = getFloatInRange(-100, 100);
 
-                Vec3 vectorToBeScaledBy = new Vec3(x2, y2, z2);
-                testVector.scaleEquals(vectorToBeScaledBy);
+            Vec3 vectorToBeScaledBy = new Vec3(x2, y2, z2);
+            testVector.scaleEquals(vectorToBeScaledBy);
 
-                assertEquals(x1 * x2, testVector.x);
-                assertEquals(y1 * y2, testVector.y);
-                assertEquals(z1 * z2, testVector.z);
-            }
+            assertEquals(x1 * x2, testVector.x);
+            assertEquals(y1 * y2, testVector.y);
+            assertEquals(z1 * z2, testVector.z);
+        }
+    }
+
+
+    @Test
+    @DisplayName("Should DivideEqual with Random Delta")
+    public void shouldDivideEqual() {
+        float h = 100;
+        float l = -100;
+        for (int i = 0; i < 20; i++) {
+            float x1 = getFloatInRange(l, h);
+            float y1 = getFloatInRange(l, h);
+            float z1 = getFloatInRange(l, h);
+            Vec3 testVec = new Vec3(x1, y1, z1);
+            float t = getFloatInRange(l, h);
+
+            testVec.divideEqual(t);
+            assertEquals(x1 / t, testVec.x,1e-3);
+            assertEquals(y1 / t, testVec.y,1e-3);
+            assertEquals(z1 / t, testVec.z,1e-3);
         }
 
+    }
 
 
-        @Test
-        @DisplayName("Should DivideEqual with V2")
-        public void shouldDivideEqual () {
-            float h = 100f;
-            float l = -100f;
-            for (int i = 0; i < 20; i++){
-                float x1 = getFloatInRange(l, h);
-                float y1 = getFloatInRange(l, h);
-                float z1 = getFloatInRange(l, h);
-                Vec3 testVec = new Vec3(x1, y1, z1);
-                float x2 = getFloatInRange(l, h);
-                float y2 = getFloatInRange(l, h);
-                float z2 = getFloatInRange(l, h);
-                Vec3 vectorDivideBy = new Vec3(x2,y2,z2);
+    @Test
+    @DisplayName("Should Give Length Squared")
+    public void lengthSquaredTest() {
+        for (int i = 0; i < 200; i++) {
+            float x = getFloatInRange(LOW, HIGH);
+            float y = getFloatInRange(LOW, HIGH);
+            float z = getFloatInRange(LOW, HIGH);
 
-                testVec.divideEqual(vectorDivideBy);
-                assertEquals(x1 / x2, testVec.x);
-                assertEquals(y1 / y2, testVec.y);
-                assertEquals(z1 / z2, testVec.z);
-            }
-
+            float expectedLength = x * x + y * y + z * z;
+            Vec3 v1 = new Vec3(x, y, z);
+            assertThat(v1.lengthSquared(), is(expectedLength));
         }
+    }
+
+    @Test
+    @DisplayName("Should give Length Squared")
+    public void should_give_Length() {
+        for (int i = 0; i < 200; i++) {
+            float x = getFloatInRange(LOW, HIGH);
+            float y = getFloatInRange(LOW, HIGH);
+            float z = getFloatInRange(LOW, HIGH);
 
 
-        @Test
-        @DisplayName("Should Give Length Squared")
-        public void lengthSquaredTest(){
-            for (int i = 0; i < 200; i++) {
-                    float x = getFloatInRange(LOW,HIGH);
-                    float y = getFloatInRange(LOW,HIGH);
-                    float z = getFloatInRange(LOW,HIGH);
+            Vec3 v1 = new Vec3(x, y, z);
+            float expectedLengthSquared = (float) Math.sqrt(v1.lengthSquared());
 
-                    float expectedLength = x*x + y*y + z*z;
-                    Vec3 v1 = new Vec3(x, y ,z );
-                    assertThat(v1.lengthSquared(),is(expectedLength));
-            }
+            assertThat(v1.length(), is(expectedLengthSquared));
         }
-
-        @Test
-        @DisplayName("Should give Length Squared")
-        public void should_give_Length () {
-            for (int i = 0; i < 200; i++) {
-                float x = getFloatInRange(LOW,HIGH);
-                float y = getFloatInRange(LOW,HIGH);
-                float z = getFloatInRange(LOW,HIGH);
-
-
-                Vec3 v1 = new Vec3(x, y ,z );
-                float expectedLengthSquared = (float) Math.sqrt(v1.lengthSquared());
-
-                assertThat(v1.length(),is(expectedLengthSquared));
-            }
-        }
-
-        @Test
-        @DisplayName("Should Give HashValue")
-        public void shouldGiveHashValue(){
-            Vec3 v1 = new Vec3(2,4,4);
-
-
-
-        }
- }
+    }
+}
