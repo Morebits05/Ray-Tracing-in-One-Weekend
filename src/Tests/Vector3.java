@@ -11,7 +11,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.*;
 
 public final class Vector3 {
@@ -59,7 +60,7 @@ public final class Vector3 {
         assertEquals(v2, v1);
     }
 
-    public float getFloatInRange(float l, float h) {
+    public  float getFloatInRange(float l, float h) {
         return gen.nextFloat() * (h - l) + l;
     }
 
@@ -552,5 +553,29 @@ public final class Vector3 {
         }
     }
 
+    @Test
+    @DisplayName("Set Method should set Vector")
+    public void setMethodTest(){
+        Vec3 vec1 = new Vec3(3,2,1);
+
+        Vec3 vec2 = new Vec3();
+        vec2.set(vec1);
+
+        assertAll(vec1, vec2);
+
+        vec1.x = 5;
+        vec1.y = 6;
+        vec1.z = 7;
+
+        vec2.set(vec1);
+
+      assertAll(vec1, vec2);
+    }
+
+    private void assertAll(Vec3 expected,Vec3 actual){
+        assertEquals(expected.x, actual.x);
+        assertEquals(expected.y, actual.y);
+        assertEquals(expected.z, actual.z);
+    }
 
 }

@@ -117,4 +117,10 @@ public class Vec3 {
               + vectorU.y * vectorV.y
               + vectorU.z * vectorV.z;
     }
+
+    public void set(Vec3 other){
+        x = other.x;
+        y = other.y;
+        z = other.z;
+    }
 }
