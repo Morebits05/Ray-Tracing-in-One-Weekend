@@ -65,12 +65,12 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Equality Test with Hashcode")
-    public void EqualityTest(){
-        Vec3 v1 = new Vec3(0,2,0);
-        Vec3 v2 = new Vec3(0,2,0);
+    public void EqualityTest() {
+        Vec3 v1 = new Vec3(0, 2, 0);
+        Vec3 v2 = new Vec3(0, 2, 0);
 
-        assertThat(v1.equals(v2),is(v2.equals(v1)));
-        assertThat(v1.hashCode(),is(v2.hashCode()));
+        assertThat(v1.equals(v2), is(v2.equals(v1)));
+        assertThat(v1.hashCode(), is(v2.hashCode()));
     }
 
     @Test
@@ -122,11 +122,17 @@ public final class Vector3 {
     }
 
     @Test
-    @DisplayName("should Divide Vector and Return Correct Value")
-    public void unitVectorTest(){
-        Vec3 v1 = new Vec3(3,3,3);
+    @DisplayName("should Be Unit Vector")
+    public void unitVectorTest() {
+        final float x = 3;
+        final float y = 3;
+        final float z = 3;
 
-        assertEquals((float) Math.sqrt(3 * 3 + 3 * 3 + 3 * 3), Vec3.unit(v1));
+        Vec3 v1 = new Vec3(x, y, z);
+
+
+
+        assertThat((float)Math.round(Vec3.normalize(v1).x), is(1.0f));
 
     }
 
@@ -158,13 +164,13 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Equality Should Fail with Null or Other Class")
-    public void NullEqualityTest(){
-        Vec3 v1 = new Vec3(3,3,2);
+    public void NullEqualityTest() {
+        Vec3 v1 = new Vec3(3, 3, 2);
         Vec3 v2 = null;
         Integer v3 = new Integer(3);
 
-        assertThat(v1.equals(v2),is(not(true)));
-        assertThat(v1.equals(v3),is(not(true)));
+        assertThat(v1.equals(v2), is(not(true)));
+        assertThat(v1.equals(v3), is(not(true)));
     }
 
 
@@ -360,9 +366,9 @@ public final class Vector3 {
         Vec3 testVec2 = new Vec3(5, 10, -4);
 
         float x, y, z;
-        x =  testVec.x * floatToScaleBy;
-        y =  testVec.y * floatToScaleBy;
-        z =  testVec.z * floatToScaleBy;
+        x = testVec.x * floatToScaleBy;
+        y = testVec.y * floatToScaleBy;
+        z = testVec.z * floatToScaleBy;
         testVec.scale(floatToScaleBy);
 
 
@@ -378,13 +384,6 @@ public final class Vector3 {
         Vec3 testVec = new Vec3(1, -3, -5);
 
         Vec3 vectorToBeAdded = new Vec3(3, 3, 3);
-
-        // Remove Comment to make test fail
-        //testVec.addEquals(vectorToBeAdded);
-
-        //NOTE:
-        // AddEquals use += on original values and returns itself
-        // hence been Volatile
 
         assertTrue(testVec.x == 1 && testVec.y == -3 && testVec.z == -5, "Vector Coordinates Should have stayed same");
 
@@ -452,9 +451,9 @@ public final class Vector3 {
             float t = getFloatInRange(l, h);
 
             testVec.divideEqual(t);
-            assertEquals(x1 / t, testVec.x,1e-3);
-            assertEquals(y1 / t, testVec.y,1e-3);
-            assertEquals(z1 / t, testVec.z,1e-3);
+            assertEquals(x1 / t, testVec.x, 1e-3);
+            assertEquals(y1 / t, testVec.y, 1e-3);
+            assertEquals(z1 / t, testVec.z, 1e-3);
         }
 
     }
@@ -487,6 +486,57 @@ public final class Vector3 {
             float expectedLengthSquared = (float) Math.sqrt(v1.lengthSquared());
 
             assertThat(v1.length(), is(expectedLengthSquared));
+        }
+    }
+
+    @Test
+    @DisplayName("Should Give A Unit Vector Close To 1 - With Random Values")
+    public void unitVectorTest2(){
+            float x = 0;
+            float y = x;
+            float z = x;
+            final int noOfTests = 2000;
+        for (int i = 0; i < noOfTests; i++) {
+            x = getFloatInRange(LOW, HIGH);
+            y = getFloatInRange(LOW, HIGH);
+            z = getFloatInRange(LOW, HIGH);
+
+            Vec3 vectorToTest = new Vec3(x,y,z);
+
+            assertEquals(1.0,Vec3.normalize(vectorToTest).length(),1.0e-3);
+        }
+
+    }
+
+    @Test
+    @DisplayName("Normalize Method should Throw Exception when given Zero Vector")
+    public void zeroVectorShouldFail(){
+        Vec3 zeroVector = new Vec3(0,0,0);
+        try {
+            Vec3.normalize(zeroVector);
+            fail("The normalize method should fail to normalize a zero vector");
+        } catch (Exception e) {
+            assertNotNull(e.getMessage());
+        }
+    }
+
+    @Test
+    @DisplayName("Should give dot Product")
+    public void dotProduct(){
+        for (int tests = 0; tests < 200; tests++) {
+            float x = 0; float y = x; float z = x;
+
+            x = getFloatInRange(LOW,HIGH);
+            y = getFloatInRange(LOW,HIGH);
+            z = getFloatInRange(LOW,HIGH);
+
+            Vec3 v1 = new Vec3(x, y , z );
+
+            Vec3 v2 = new Vec3(x+2,y+2,z+2);
+
+            float expected = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+            float actual = Vec3.dot(v1, v2);
+            assertEquals(expected, actual);
         }
     }
 }

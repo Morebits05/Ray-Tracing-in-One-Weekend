@@ -55,7 +55,7 @@ public class Vec3 {
     }
 
     public Vec3 scale(float t) {
-        return new Vec3((x * t),(y * t),(z * t));
+        return new Vec3(x * t,y * t,z * t);
     }
 
     public  static Vec3 scale(float t, Vec3 vec){
@@ -65,9 +65,12 @@ public class Vec3 {
         return scale(1/t,vectorToDivide);
     }
 
-    public static Vec3 unit(Vec3 v){
+    public static Vec3 normalize(Vec3 v){
+        if (v.x == 0 && v.y == 0 && v.z == 0)
+            throw new ArithmeticException("Can't Normalize a Zero Vector");
         return divide(v,v.length());
     }
+
 
     public Vec3 addEquals(Vec3 other) {
         this.x += other.x;
@@ -102,10 +105,16 @@ public class Vec3 {
     }
 
     public float lengthSquared() {
-        return (x * x) + (y * y) + (z * z);
+        return x * x + y * y + z * z;
     }
 
     public float length() {
         return (float) Math.sqrt(lengthSquared());
+    }
+
+    public static float dot(Vec3 vectorU, Vec3 vectorV){
+        return vectorU.x * vectorV.x
+              + vectorU.y * vectorV.y
+              + vectorU.z * vectorV.z;
     }
 }
