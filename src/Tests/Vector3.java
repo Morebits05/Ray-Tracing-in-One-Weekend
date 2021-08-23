@@ -521,6 +521,18 @@ public final class Vector3 {
     }
 
     @Test
+    @DisplayName("Normalize Method should Not Throw Exception when given non Zero Vector")
+    public void zeroVectorShouldNotFail(){
+        Vec3 nonZeroVector = new Vec3(3,2,1);
+        try {
+            float length = Vec3.normalize(nonZeroVector).length();
+            assertEquals(1.0, length,0.001);
+        } catch (Exception e) {
+           fail("Should not Throw Exception");
+        }
+    }
+
+    @Test
     @DisplayName("Should give dot Product")
     public void dotProduct(){
         for (int tests = 0; tests < 200; tests++) {
@@ -539,4 +551,6 @@ public final class Vector3 {
             assertEquals(expected, actual);
         }
     }
+
+
 }
