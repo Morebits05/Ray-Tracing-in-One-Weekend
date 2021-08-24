@@ -18,4 +18,17 @@ public class Ray {
        origin = r.origin;
        direction = r.direction;
     }
+
+    public Vec3 at(float t) {
+        return origin.add(
+                direction.scale(t));
+    }
+
+    public Vec3 origin() {
+        return origin;
+    }
+
+    public Vec3 direction(){
+        return direction;
+    }
 }
