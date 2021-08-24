@@ -62,13 +62,13 @@ public class RayClass {
 
             // Is set called on ray
             v2.set(new Vec3(getFloatInRange(-100,100),getFloatInRange(-100,100),getFloatInRange(-100,100)));
-            ray.set(v2,false);
+            ray.set(new Ray(v1,v2));
             assertEquals(v2.z,ray.direction.z);
 
 
             v2.set(new Vec3(getFloatInRange(-100,100),getFloatInRange(-100,100),getFloatInRange(-100,100)));
-            ray.set(v2,true);
-            assertEquals(v2.z,ray.origin.z);
+            ray.set(new Ray(v1,v2));
+            assertEquals(v1.z,ray.origin.z);
         }
     }
 }

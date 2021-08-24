@@ -130,11 +130,7 @@ public final class Vector3 {
         final float z = 3;
 
         Vec3 v1 = new Vec3(x, y, z);
-
-
-
-        assertThat((float)Math.round(Vec3.normalize(v1).x), is(1.0f));
-
+          assertThat((float)Math.round(Vec3.normalize(v1).x), is(1.0f));
     }
 
     @Test

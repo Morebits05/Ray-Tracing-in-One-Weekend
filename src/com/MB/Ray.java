@@ -14,10 +14,8 @@ public class Ray {
        direction = newDirection;
     }
 
-    public void set(Vec3 vector, boolean origin) {
-       if (origin)
-           this.origin.set(vector);
-       else
-           this.direction.set(vector);
+    public void set(Ray r) {
+       origin = r.origin;
+       direction = r.direction;
     }
 }
