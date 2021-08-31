@@ -568,10 +568,47 @@ public final class Vector3 {
       assertAll(vec1, vec2);
     }
 
+    @Test
+    @DisplayName("toRGB should print Vector 3 in Colour Format")
+    public void vector3ToRGBTest(){
+        for (int i = 0; i < 2000; i++) {
+                Vec3  testVector = new Vec3(getFloatInRange(LOW,HIGH),
+                                            getFloatInRange(LOW,HIGH),
+                                            getFloatInRange(LOW,HIGH));
+                int r = (int) (testVector.x * 255.999);
+                int g = (int) (testVector.y * 255.999);
+                int b = (int) (testVector.z * 255.999);
+
+                String expected = String.format("%d %d %d",r,g,b);
+
+                assertEquals(expected,testVector.toRGB());
+        }
+    }
+
+    @Test
+    @DisplayName("getRedValue should return Red Value")
+    public void RedTest(){
+        assertEquals(255,new Vec3(1,1,1).getRedValue());
+    }
+
+    @Test
+    @DisplayName("getGreenValue should return Green Value")
+    public void GreenTest(){
+        assertEquals(255,new Vec3(1,1,1).getGreenValue());
+    }
+
+    @Test
+    @DisplayName("getBlueValue should return Blue Value")
+    public void BlueTest(){
+        assertEquals(255,new Vec3(1,1,1).getBlueValue());
+    }
+
     private void assertAll(Vec3 expected,Vec3 actual){
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
         assertEquals(expected.z, actual.z);
     }
+
+
 
 }

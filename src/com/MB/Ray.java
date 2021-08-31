@@ -31,4 +31,20 @@ public class Ray {
     public Vec3 direction(){
         return direction;
     }
+
+    public void setDirection(Vec3 direction) {
+        this.direction = direction;
+    }
+
+    @Override
+    public String toString() {
+        return "<" +
+                "origin=" + origin +
+                ", direction=" + direction +
+                '>';
+    }
+
+    public void setOrigin(Vec3 origin) {
+        this.origin = origin;
+    }
 }

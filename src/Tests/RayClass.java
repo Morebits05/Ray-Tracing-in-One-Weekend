@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class RayClass {
     private Random gen;
 
@@ -131,5 +131,25 @@ public class RayClass {
 
         assertEquals(orig,r.origin());
         assertEquals(direc,r.direction());
+    }
+
+
+    @Test
+    @DisplayName("Should have setters for both methods")
+    public void setterTest3(){
+
+
+        Vec3 orig = new Vec3(3,2,1);
+        Vec3 direc = new Vec3( 1, 1, 4);
+
+        Ray r = new Ray(orig,direc);
+
+
+        direc = new Vec3(1,1,5);
+        orig = new Vec3(1,1,6);
+        r.setDirection(direc);
+        r.setOrigin(orig);
+        assertEquals(5 ,r.direction.z, 0.0);
+        assertEquals(6 ,r.origin.z, 0.0);
     }
 }

@@ -123,4 +123,20 @@ public class Vec3 {
         y = other.y;
         z = other.z;
     }
+
+    public String toRGB(){
+        return String.format("%d %d %d",getRedValue(),getGreenValue() ,getBlueValue()).toString();
+    }
+
+    public int getRedValue() {
+        return (int) (x * 255.999);
+    }
+
+    public int getGreenValue() {
+        return (int) (y * 255.999);
+    }
+
+    public int getBlueValue() {
+        return (int) (z * 255.999);
+    }
 }
