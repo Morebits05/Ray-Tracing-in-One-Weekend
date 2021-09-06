@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Random;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public final class Vector3 {
     static int LOW = -100;
     static int HIGH = 100;
-    Random gen = new Random();
+    TestUtil util = new TestUtil();
 
     @Test
     @DisplayName("should Initialize as 0")
@@ -60,9 +58,7 @@ public final class Vector3 {
         assertEquals(v2, v1);
     }
 
-    public  float getFloatInRange(float l, float h) {
-        return gen.nextFloat() * (h - l) + l;
-    }
+
 
     @Test
     @DisplayName("Equality Test with Hashcode")
@@ -81,9 +77,9 @@ public final class Vector3 {
         float low = -100;
         float delta = .25f;
         for (int i = 0; i < 100; i++) {
-            float x = getFloatInRange(high, low);
-            float y = getFloatInRange(high, low);
-            float z = getFloatInRange(high, low);
+            float x = util.getFloatInRange(high, low);
+            float y = util.getFloatInRange(high, low);
+            float z = util.getFloatInRange(high, low);
             Vec3 v1 = new Vec3(x, y, z);
             Vec3 v2 = new Vec3(x, y, z);
             assertEquals(v1, v2);
@@ -106,13 +102,13 @@ public final class Vector3 {
         float y2;
         float z2;
         for (int i = 0; i < 20; i++) {
-            x = getFloatInRange(-100, 100);
-            y = getFloatInRange(-100, 100);
-            z = getFloatInRange(-100, 100);
+            x = util.getFloatInRange(-100, 100);
+            y = util.getFloatInRange(-100, 100);
+            z = util.getFloatInRange(-100, 100);
             Vec3 testVec = new Vec3(x, y, z);
-            x2 = getFloatInRange(-100, 100);
-            y2 = getFloatInRange(-100, 100);
-            z2 = getFloatInRange(-100, 100);
+            x2 = util.getFloatInRange(-100, 100);
+            y2 = util.getFloatInRange(-100, 100);
+            z2 = util.getFloatInRange(-100, 100);
 
 
             Vec3 actualVec = testVec.addEquals(new Vec3(x2, y2, z2));
@@ -223,13 +219,13 @@ public final class Vector3 {
         float z2;
 
         for (int i = 0; i < 200; i++) {
-            x = getFloatInRange(LOW, HIGH);
-            y = getFloatInRange(LOW, HIGH);
-            z = getFloatInRange(LOW, HIGH);
+            x = util.getFloatInRange(LOW, HIGH);
+            y = util.getFloatInRange(LOW, HIGH);
+            z = util.getFloatInRange(LOW, HIGH);
 
-            x2 = getFloatInRange(LOW, HIGH);
-            y2 = getFloatInRange(LOW, HIGH);
-            z2 = getFloatInRange(LOW, HIGH);
+            x2 = util.getFloatInRange(LOW, HIGH);
+            y2 = util.getFloatInRange(LOW, HIGH);
+            z2 = util.getFloatInRange(LOW, HIGH);
 
             Vec3 v1 = new Vec3(x, y, z);
 
@@ -415,15 +411,15 @@ public final class Vector3 {
 
         for (int tests = 0; tests < 20; tests++) {
 
-            x1 = getFloatInRange(-100, 100);
-            y1 = getFloatInRange(-100, 100);
-            z1 = getFloatInRange(-100, 100);
+            x1 = util.getFloatInRange(-100, 100);
+            y1 = util.getFloatInRange(-100, 100);
+            z1 = util.getFloatInRange(-100, 100);
 
             Vec3 testVector = new Vec3(x1, y1, z1);
 
-            x2 = getFloatInRange(-100, 100);
-            y2 = getFloatInRange(-100, 100);
-            z2 = getFloatInRange(-100, 100);
+            x2 = util.getFloatInRange(-100, 100);
+            y2 = util.getFloatInRange(-100, 100);
+            z2 = util.getFloatInRange(-100, 100);
 
             Vec3 vectorToBeScaledBy = new Vec3(x2, y2, z2);
             testVector.scaleEquals(vectorToBeScaledBy);
@@ -441,11 +437,11 @@ public final class Vector3 {
         float h = 100;
         float l = -100;
         for (int i = 0; i < 20; i++) {
-            float x1 = getFloatInRange(l, h);
-            float y1 = getFloatInRange(l, h);
-            float z1 = getFloatInRange(l, h);
+            float x1 = util.getFloatInRange(l, h);
+            float y1 = util.getFloatInRange(l, h);
+            float z1 = util.getFloatInRange(l, h);
             Vec3 testVec = new Vec3(x1, y1, z1);
-            float t = getFloatInRange(l, h);
+            float t = util.getFloatInRange(l, h);
 
             testVec.divideEqual(t);
             assertEquals(x1 / t, testVec.x, 1e-3);
@@ -460,9 +456,9 @@ public final class Vector3 {
     @DisplayName("Should Give Length Squared")
     public void lengthSquaredTest() {
         for (int i = 0; i < 200; i++) {
-            float x = getFloatInRange(LOW, HIGH);
-            float y = getFloatInRange(LOW, HIGH);
-            float z = getFloatInRange(LOW, HIGH);
+            float x = util.getFloatInRange(LOW, HIGH);
+            float y = util.getFloatInRange(LOW, HIGH);
+            float z = util.getFloatInRange(LOW, HIGH);
 
             float expectedLength = x * x + y * y + z * z;
             Vec3 v1 = new Vec3(x, y, z);
@@ -474,9 +470,9 @@ public final class Vector3 {
     @DisplayName("Should give Length Squared")
     public void should_give_Length() {
         for (int i = 0; i < 200; i++) {
-            float x = getFloatInRange(LOW, HIGH);
-            float y = getFloatInRange(LOW, HIGH);
-            float z = getFloatInRange(LOW, HIGH);
+            float x = util.getFloatInRange(LOW, HIGH);
+            float y = util.getFloatInRange(LOW, HIGH);
+            float z = util.getFloatInRange(LOW, HIGH);
 
 
             Vec3 v1 = new Vec3(x, y, z);
@@ -494,9 +490,9 @@ public final class Vector3 {
             float z = x;
             final int noOfTests = 2000;
         for (int i = 0; i < noOfTests; i++) {
-            x = getFloatInRange(LOW, HIGH);
-            y = getFloatInRange(LOW, HIGH);
-            z = getFloatInRange(LOW, HIGH);
+            x = util.getFloatInRange(LOW, HIGH);
+            y = util.getFloatInRange(LOW, HIGH);
+            z = util.getFloatInRange(LOW, HIGH);
 
             Vec3 vectorToTest = new Vec3(x,y,z);
 
@@ -535,9 +531,9 @@ public final class Vector3 {
         for (int tests = 0; tests < 200; tests++) {
             float x = 0; float y = x; float z = x;
 
-            x = getFloatInRange(LOW,HIGH);
-            y = getFloatInRange(LOW,HIGH);
-            z = getFloatInRange(LOW,HIGH);
+            x = util.getFloatInRange(LOW,HIGH);
+            y = util.getFloatInRange(LOW,HIGH);
+            z = util.getFloatInRange(LOW,HIGH);
 
             Vec3 v1 = new Vec3(x, y , z );
 
@@ -572,9 +568,9 @@ public final class Vector3 {
     @DisplayName("toRGB should print Vector 3 in Colour Format")
     public void vector3ToRGBTest(){
         for (int i = 0; i < 2000; i++) {
-                Vec3  testVector = new Vec3(getFloatInRange(LOW,HIGH),
-                                            getFloatInRange(LOW,HIGH),
-                                            getFloatInRange(LOW,HIGH));
+                Vec3  testVector = new Vec3(util.getFloatInRange(LOW,HIGH),
+                                            util.getFloatInRange(LOW,HIGH),
+                                            util.getFloatInRange(LOW,HIGH));
                 int r = (int) (testVector.x * 255.999);
                 int g = (int) (testVector.y * 255.999);
                 int b = (int) (testVector.z * 255.999);

@@ -6,22 +6,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RayClass {
-    private Random gen;
-
+private TestUtil util;
     @BeforeEach
-    public void Before() {
-        gen = new Random();
+    public void Before(){
+        util = new TestUtil();
     }
-
-    public float getFloatInRange(int high, int low) {
-        return gen.nextFloat() * (high - low) + low;
-    }
-
     @Test
     @DisplayName("Should have origin and direction")
     public void ClassTest() {
@@ -36,8 +29,8 @@ public class RayClass {
     public void constructorTest() {
         for (int tests = 0; tests < 2000; tests++) {
 
-            Vec3 v1 = new Vec3(getFloatInRange(-100, 100), getFloatInRange(-100, 100), getFloatInRange(-100, 100));
-            Vec3 v2 = new Vec3(getFloatInRange(-100, 100), getFloatInRange(-100, 100), getFloatInRange(-100, 100));
+            Vec3 v1 = new Vec3(util.getFloatInRange(-100f, 100f), util.getFloatInRange(-100, 100f), util.getFloatInRange(-100f, 100f));
+            Vec3 v2 = new Vec3(util.getFloatInRange(-100f, 100f), util.getFloatInRange(-100, 100f), util.getFloatInRange(-100f, 100f));
 
             Ray ray = new Ray(v1, v2);
 
@@ -51,23 +44,23 @@ public class RayClass {
     public void setMethodTest() {
 
         for (int tests = 0; tests < 2000; tests++) {
-            Vec3 v1 = new Vec3(getFloatInRange(-100, 100),
-                    getFloatInRange(-100, 100),
-                    getFloatInRange(-100, 100));
+            Vec3 v1 = new Vec3(util.getFloatInRange(-100, 100),
+                    util.getFloatInRange(-100, 100),
+                    util.getFloatInRange(-100, 100));
 
-            Vec3 v2 = new Vec3(getFloatInRange(-100, 100),
-                    getFloatInRange(-100, 100),
-                    getFloatInRange(-100, 100));
+            Vec3 v2 = new Vec3(util.getFloatInRange(-100, 100),
+                    util.getFloatInRange(-100, 100),
+                    util.getFloatInRange(-100, 100));
 
             Ray ray = new Ray(v1, v2);
 
             // Is set called on ray
-            v2.set(new Vec3(getFloatInRange(-100, 100), getFloatInRange(-100, 100), getFloatInRange(-100, 100)));
+            v2.set(new Vec3(util.getFloatInRange(-100, 100), util.getFloatInRange(-100, 100), util.getFloatInRange(-100, 100)));
             ray.set(new Ray(v1, v2));
             assertEquals(v2.z, ray.direction.z);
 
 
-            v2.set(new Vec3(getFloatInRange(-100, 100), getFloatInRange(-100, 100), getFloatInRange(-100, 100)));
+            v2.set(new Vec3(util.getFloatInRange(-100, 100), util.getFloatInRange(-100, 100), util.getFloatInRange(-100, 100)));
             ray.set(new Ray(v1, v2));
             assertEquals(v1.z, ray.origin.z);
         }
@@ -100,20 +93,20 @@ public class RayClass {
         for (int tests = 0; tests < 2000; tests++) {
             // Given origin and direction
             Vec3 origin = new Vec3(
-                    getFloatInRange(Vector3.HIGH, Vector3.LOW),
-                    getFloatInRange(Vector3.HIGH, Vector3.LOW),
-                    getFloatInRange(Vector3.HIGH, Vector3.LOW));
+                    util.getFloatInRange(Vector3.HIGH, Vector3.LOW),
+                    util.getFloatInRange(Vector3.HIGH, Vector3.LOW),
+                    util.getFloatInRange(Vector3.HIGH, Vector3.LOW));
 
             Vec3 direction = new Vec3(
-                    getFloatInRange(Vector3.HIGH, Vector3.LOW),
-                    getFloatInRange(Vector3.HIGH, Vector3.LOW),
-                    getFloatInRange(Vector3.HIGH, Vector3.LOW));
+                    util.getFloatInRange(Vector3.HIGH, Vector3.LOW),
+                    util.getFloatInRange(Vector3.HIGH, Vector3.LOW),
+                    util.getFloatInRange(Vector3.HIGH, Vector3.LOW));
 
             Ray r = new Ray(origin, direction);
 
             // When ray.at is called
             Ray ray = new Ray(origin, direction);
-            final float t = getFloatInRange(-10, 10);
+            final float t = util.getFloatInRange(-10, 10);
 
             // return correct Vector
             Vec3 result = origin.add(direction.scale(t));
