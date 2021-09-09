@@ -67,7 +67,7 @@ public class Vec3 {
 
     public static Vec3 normalize(Vec3 v){
         if (v.x == 0 && v.y == 0 && v.z == 0)
-            throw new ArithmeticException("Can't Normalize a Zero Vector");
+            return new Vec3(0, 0, 0);
         return divide(v,v.length());
     }
 
@@ -129,14 +129,14 @@ public class Vec3 {
     }
 
     public int getRedValue() {
-        return (int) (x * 255.999);
+        return (int) (x *  255.999);
     }
 
     public int getGreenValue() {
-        return (int) (y * 255.999);
+        return (int) (y *  255.999);
     }
 
     public int getBlueValue() {
-        return (int) (z * 255.999);
+        return (int) (z *  255.999);
     }
 }
