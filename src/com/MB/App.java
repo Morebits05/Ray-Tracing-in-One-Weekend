@@ -51,8 +51,7 @@ public final class App {
 
                     Vec3 pixelColor = rayColor(ray);
 
-                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColor), System.lineSeparator()));
-                }
+                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColor), System.lineSeparator()));                }
             }
             fw.close();
             System.err.println(System.lineSeparator());

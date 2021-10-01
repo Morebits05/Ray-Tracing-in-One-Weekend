@@ -1,6 +1,6 @@
 package com.MB;
 
-public class PPM {
+public final class PPM {
     /** Number to multiply to get RGB. **/
     private static float multiplier = 0;
     {
