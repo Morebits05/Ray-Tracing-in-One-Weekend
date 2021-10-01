@@ -1,6 +1,7 @@
 package Tests;
 
 
+import com.MB.PPM;
 import com.MB.Vec3;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -57,7 +58,6 @@ public final class Vector3 {
 
         assertEquals(v2, v1);
     }
-
 
 
     @Test
@@ -126,7 +126,7 @@ public final class Vector3 {
         final float z = 3;
 
         Vec3 v1 = new Vec3(x, y, z);
-          assertThat((float)Math.round(Vec3.normalize(v1).x), is(1.0f));
+        assertThat((float) Math.round(Vec3.normalize(v1).x), is(1.0f));
     }
 
     @Test
@@ -157,12 +157,12 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Equality Should Fail with Null or Other Class")
-    public void NullEqualityTest() {
+    public void nullEqualityTest() {
         Vec3 v1 = new Vec3(3, 3, 2);
         Vec3 v2 = null;
-        Integer v3 = new Integer(3);
+        Integer v3 = 3;
 
-        assertThat(v1.equals(v2), is(not(true)));
+        assertThat(v1 == null, is(not(true)));
         assertThat(v1.equals(v3), is(not(true)));
     }
 
@@ -198,8 +198,8 @@ public final class Vector3 {
 
 
     @Test
-    @DisplayName("Should Add Two Positive Vectors And Return Vector With Positive y")
-    public void shouldAddTwoPositiveVectorsAndReturnVectorWithPositivey() {
+    @DisplayName("Should Add Two Positive Vectors and Return Vector With Positive y")
+    public void shouldAddTwoPositiveVectorsAndReturnVectorWithPositiveY() {
         Vec3 testVector = new Vec3(1, 2, 3);
 
         Vec3 expectedVector = new Vec3(2, 2, 3);
@@ -210,7 +210,7 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Should Call minus equals, with random numbers")
-    public void MinusEqualsTest() {
+    public void minusEqualsTest() {
         float x;
         float y;
         float z;
@@ -484,36 +484,38 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Should Give A Unit Vector Close To 1 - With Random Values")
-    public void unitVectorTest2(){
-            float x = 0;
-            float y = x;
-            float z = x;
-            final int noOfTests = 2000;
+    public void unitVectorTest2() {
+        float x = 0;
+        float y = x;
+        float z = x;
+        final int noOfTests = 2000;
         for (int i = 0; i < noOfTests; i++) {
             x = util.getFloatInRange(LOW, HIGH);
             y = util.getFloatInRange(LOW, HIGH);
             z = util.getFloatInRange(LOW, HIGH);
 
-            Vec3 vectorToTest = new Vec3(x,y,z);
+            Vec3 vectorToTest = new Vec3(x, y, z);
 
-            assertEquals(1.0,Vec3.normalize(vectorToTest).length(),1.0e-3);
+            assertEquals(1.0, Vec3.normalize(vectorToTest).length(), 1.0e-3);
         }
 
     }
 
     @Test
     @DisplayName("Should give dot Product")
-    public void dotProduct(){
+    public void dotProduct() {
         for (int tests = 0; tests < 200; tests++) {
-            float x = 0; float y = x; float z = x;
+            float x;
+            float y;
+            float z;
 
-            x = util.getFloatInRange(LOW,HIGH);
-            y = util.getFloatInRange(LOW,HIGH);
-            z = util.getFloatInRange(LOW,HIGH);
+            x = util.getFloatInRange(LOW, HIGH);
+            y = util.getFloatInRange(LOW, HIGH);
+            z = util.getFloatInRange(LOW, HIGH);
 
-            Vec3 v1 = new Vec3(x, y , z );
+            Vec3 v1 = new Vec3(x, y, z);
 
-            Vec3 v2 = new Vec3(x+2,y+2,z+2);
+            Vec3 v2 = new Vec3(x + 2, y + 2, z + 2);
 
             float expected = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
             float actual = Vec3.dot(v1, v2);
@@ -523,8 +525,8 @@ public final class Vector3 {
 
     @Test
     @DisplayName("Set Method should set Vector")
-    public void setMethodTest(){
-        Vec3 vec1 = new Vec3(3,2,1);
+    public void setMethodTest() {
+        Vec3 vec1 = new Vec3(3, 2, 1);
 
         Vec3 vec2 = new Vec3();
         vec2.set(vec1);
@@ -537,45 +539,45 @@ public final class Vector3 {
 
         vec2.set(vec1);
 
-      assertAll(vec1, vec2);
+        assertAll(vec1, vec2);
     }
 
     @Test
     @DisplayName("toRGB should print Vector 3 in Colour Format")
-    public void vector3ToRGBTest(){
+    public void vector3ToRGBTest() {
         for (int i = 0; i < 2000; i++) {
-                Vec3  testVector = new Vec3(util.getFloatInRange(LOW,HIGH),
-                                            util.getFloatInRange(LOW,HIGH),
-                                            util.getFloatInRange(LOW,HIGH));
-                int r = (int) (testVector.x * 255.999);
-                int g = (int) (testVector.y * 255.999);
-                int b = (int) (testVector.z * 255.999);
+            Vec3 testVector = new Vec3(util.getFloatInRange(LOW, HIGH),
+                    util.getFloatInRange(LOW, HIGH),
+                    util.getFloatInRange(LOW, HIGH));
+            int r = (int) (testVector.x * 255.999);
+            int g = (int) (testVector.y * 255.999);
+            int b = (int) (testVector.z * 255.999);
 
-                String expected = String.format("%d %d %d",r,g,b);
+            String expected = String.format("%d %d %d", r, g, b);
 
-                assertEquals(expected,testVector.toRGB());
+            assertEquals(expected, PPM.vectorToRGB(testVector));
         }
     }
 
     @Test
     @DisplayName("getRedValue should return Red Value")
-    public void RedTest(){
-        assertEquals(255,new Vec3(1,1,1).getRedValue());
+    public void RedTest() {
+        assertEquals(255, PPM.getRedValue(new Vec3(1, 1, 1)));
     }
 
     @Test
     @DisplayName("getGreenValue should return Green Value")
-    public void GreenTest(){
-        assertEquals(255,new Vec3(1,1,1).getGreenValue());
+    public void GreenTest() {
+        assertEquals(255, PPM.getGreenValue(new Vec3(1, 1, 1)));
     }
 
     @Test
     @DisplayName("getBlueValue should return Blue Value")
-    public void BlueTest(){
-        assertEquals(255,new Vec3(1,1,1).getBlueValue());
+    public void BlueTest() {
+        assertEquals(255, PPM.getBlueValue( new Vec3(1, 1, 1)));
     }
 
-    private void assertAll(Vec3 expected,Vec3 actual){
+    private void assertAll(final Vec3 expected, final Vec3 actual) {
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
         assertEquals(expected.z, actual.z);
