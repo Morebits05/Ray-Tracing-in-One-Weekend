@@ -15,6 +15,7 @@ public class PPM {
      * </p>
      *
      * @return a string version of the Vector.
+     * @param vector Vector to turn into RGB String
      */
     public static String vectorToRGB(final Vec3 vector) {
         return String.format("%d %d %d",
