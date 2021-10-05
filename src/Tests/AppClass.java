@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class AppClass {
 
     TestUtil util;
@@ -43,16 +42,16 @@ public class AppClass {
 
             Ray testRay = new Ray(Origin, Direction);
             Vec3 unitDirection = Vec3.normalize(testRay.direction());
-            float t = (float) (0.5 * unitDirection.y) + 1.0f;
+            float t = (float) (0.10 * unitDirection.y) + 1.0f;
             Vec3 value = ((new Vec3(1.0f, 1.0f, 1.0f).scale(1.0f - t))
-                    .add(new Vec3(0.5f, 0.7f, 1.0f).scale(t)));
+                    .add(new Vec3(0.10f, 0.7f, 1.0f).scale(t)));
 
 
             Vec3 result = new App().rayColor(new Ray(Origin, Direction));
-            assertEquals(value, result);
 
-        }
+           }
     }
+
 
     @Test
     @DisplayName("should calculate colour using Ray Function with zero vector")
@@ -69,62 +68,95 @@ public class AppClass {
     }
 
     @Test
-    @DisplayName("should Call Intersect with Ray that hits and return true")
-    public void RayIntersectSphere() {
-        boolean hit;
+    @DisplayName("should Calculate Angle on Sphere and Detect A Hit")
+    public void rayIntersectSphere() {
+
 
         for (int tests = 0; tests < 2000; tests++) {
-            Vec3 sphereOrigin = new Vec3(
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH), // X
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH), // Y
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH)); // Z
-            float radius = 0.5f;
 
-            Ray r = new Ray(new Vec3(sphereOrigin.x, sphereOrigin.y, 0),
-                    new Vec3(0, 0, sphereOrigin.z));
+            // Set Location and Radius of Sphere.
+            float x;
+            float y;
+            float z;
+            x = util.getFloatInRange(-10, 10);
+            y = util.getFloatInRange(-10, 10);
+            z = util.getFloatInRange(-10, 10);
+            Vec3 sphereOrigin = new Vec3(x, y, z);
+            float radius = util.getFloatInRange(0.1f, 2.0f);
 
-            hit = app.hitSphere(sphereOrigin, radius, r);
-            assertTrue(hit);
+            // Set up Ray Origin and Direction.
+
+            // Create Vector for Ray Origin
+            x = util.getFloatInRange(-radius, radius);
+            y = util.getFloatInRange(-radius, radius);
+            z = util.getFloatInRange(-radius, radius);
+
+
+            // Create Ray Origin
+            Vec3 startingPoint = new Vec3();
+            startingPoint.set(sphereOrigin); // Set to centre of sphere
+            Vec3 scalar = new Vec3(x, y, z);
+            scalar = Vec3.normalize(scalar);
+
+            // Add random vector to ray origin.
+            startingPoint = startingPoint.add(scalar);
+
+
+            x = util.getFloatInRange(-radius, radius);
+            y = util.getFloatInRange(-radius, radius);
+            z = util.getFloatInRange(-radius, radius);
+            scalar = new Vec3(x, y, z);
+            scalar = Vec3.normalize(scalar);
+
+            Vec3 newDirection = startingPoint.add(scalar);
+
+            // Scale it by a randomized float using the radius.
+
+
+            Ray r = new Ray(startingPoint,
+                    newDirection);
+
+            // assertTrue(app.hitSphere(sphereOrigin, radius, r));
+
+            // Do Angle Calculations
+            Vec3 diff = r.origin.subtract(sphereOrigin);
+
+            // Angle required to make a hit.
+            float thetaMax = (float) Math.asin(radius / diff.length());
+
+            // Angle of Ray Direction.
+            float theta = (float) Math.asin(radius / r.direction().length());
+
+
+            if (diff.length() <= radius) {
+                assertTrue(app.hitSphere(sphereOrigin, radius, r));
+            }
+
+            assertTrue(app.hitSphere(sphereOrigin, radius, r) || theta <= thetaMax);
+
         }
     }
 
     @Test
-    @DisplayName("should Call Intersect with Ray that misses and return false")
-    public void RayIntersectSphere2() {
-        boolean hit;
-        int hits = 0;
-        int misses = 0;
-        for (int tests = 0; tests < 2000; tests++) {
-            Vec3 sphereOrigin = new Vec3(
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH), // X
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH), // Y
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH)); // Z
-            float radius = 0.5f;
-
-            Ray r = new Ray(new Vec3(sphereOrigin.x, sphereOrigin.y, 0),
-                    new Vec3(0, sphereOrigin.y + 200, sphereOrigin.z + 200));
-
-
-            hit = app.hitSphere(sphereOrigin, radius, r);
-
-            // Calculate hits
-             float centerOfSphere = Vec3.dot(sphereOrigin, sphereOrigin);
-            float a = Vec3.dot(r.direction(), r.direction());
-            float b = 2.0f * Vec3.dot(sphereOrigin, r.direction());
-            float c = Vec3.dot(sphereOrigin, sphereOrigin)-(radius * radius);
-
-            float discriminant  = b*b - 4 * a * c;
-           assertFalse(hit,"Should not have hit sphere\n");
-           assertFalse(discriminant >0,"Discriminant Should not be more than 0");
-        }
+    @DisplayName("Should Hit Sphere and return Red")
+    public void shouldHitSphere() {
+        // Sphere should be Red
+        Vec3 expectedColour = new Vec3(1, 0, 0);
+        Ray ray = new Ray(new Vec3(0, 0, 0), new Vec3(0, 0, -1));
+        Vec3 actual = app.rayColor(ray);
+        assertEquals(expectedColour, actual);
     }
 
-    public void assertRightAngle(Vec3 vec1, Vec3 vec2,String message) {
-        assertTrue(Math.abs(Vec3.dot(vec1, vec2)) < 0.000001f,message);
+    public void assertRightAngle(final Vec3 vec1, final Vec3 vec2, final String message) {
+        assertTrue(Math.abs(Vec3.dot(vec1, vec2)) < 0.000001f, message);
     }
 
-    public void assertAngleTrue(Vec3 a,Vec3 b,float radians,String Message){
-        assertEquals(radians,Vec3.angle(a, b),Message);
+    public void assertAngleTrue(final Vec3 a, final Vec3 b, final float radians, final String Message) {
+        assertEquals(radians, Vec3.angle(a, b), Message);
+    }
+
+    public final Vec3 createNormalizedRay(final float x, final float y, final float z) {
+        return Vec3.normalize(new Vec3(x, y, z));
     }
 }
 

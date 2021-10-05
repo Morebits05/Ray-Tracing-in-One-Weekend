@@ -561,19 +561,19 @@ public final class Vector3 {
 
     @Test
     @DisplayName("getRedValue should return Red Value")
-    public void RedTest() {
+    public void redTest() {
         assertEquals(255, PPM.getRedValue(new Vec3(1, 1, 1)));
     }
 
     @Test
     @DisplayName("getGreenValue should return Green Value")
-    public void GreenTest() {
+    public void greenTest() {
         assertEquals(255, PPM.getGreenValue(new Vec3(1, 1, 1)));
     }
 
     @Test
     @DisplayName("getBlueValue should return Blue Value")
-    public void BlueTest() {
+    public void blueTest() {
         assertEquals(255, PPM.getBlueValue( new Vec3(1, 1, 1)));
     }
 

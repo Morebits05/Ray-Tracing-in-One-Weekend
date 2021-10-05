@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public final class App {
-    /** The actual program. */
+    /**
+     * The actual program.
+     */
     public void run() {
         // Image
         final float aspectRatio = 16.0f / 9.0f;
@@ -51,7 +53,8 @@ public final class App {
 
                     Vec3 pixelColor = rayColor(ray);
 
-                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColor), System.lineSeparator()));                }
+                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColor), System.lineSeparator()));
+                }
             }
             fw.close();
             System.err.println(System.lineSeparator());
@@ -62,24 +65,33 @@ public final class App {
 
     }
 
-    /** RayColor.
+    /**
+     * RayColor.
      * Calculates the colour of the pixel.
+     *
      * @param r - Ray to use
      * @return The Background Colour if no hit,
      * else returns the Color of the object.
      */
     public Vec3 rayColor(final Ray r) {
+       /* if (hitSphere(new Vec3(0, 0, -1), 0.5f, r)) {
+            return new Vec3(1, 0, 0);
+        }*/
+
         Vec3 unitDirection = Vec3.normalize(r.direction);
         float t = 0.5f * (unitDirection.y) + 1.0f;
         return ((new Vec3(1.0f, 1.0f, 1.0f).scale(1.0F - t)
                 .add(new Vec3(0.5f, 0.7f, 1.0f).scale(t))));
     }
 
-    /** Calculates if the sphere has been hit.
+    /**
+     * Calculates if the sphere has been hit.
+     *
      * @param centreOfSphere The Vector for the Sphere.
-     * @param radius the radius of the sphere.
-     * @param  ray the Ray to use.
-     * @return if the ray hit the sphere.*/
+     * @param radius         the radius of the sphere.
+     * @param ray            the Ray to use.
+     * @return if the ray hit the sphere.
+     */
     public boolean hitSphere(final Vec3 centreOfSphere,
                              final float radius,
                              final Ray ray) { // cos stands for Centre of Sphere
