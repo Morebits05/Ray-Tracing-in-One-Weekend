@@ -9,15 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8cc55c-78f2-4e97-904e-ac11b8a0ce03" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/image.ppm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/Tests/Vector3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/Tests/Vector3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/com/MB/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/com/MB/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/com/MB/Vec3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/com/MB/Vec3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/AppClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/AppClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/Vector3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Vector3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/MB/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/MB/PPM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/PPM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/MB/Vec3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/Vec3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +115,7 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="JUnit.AppClass.rayColorTest">
+  <component name="RunManager" selected="JUnit.AppClass.rayIntersectSphere">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -126,6 +125,23 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
+    </configuration>
+    <configuration name="AppClass.rayIntersectSphere" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
+      <option name="METHOD_NAME" value="rayIntersectSphere" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -192,7 +208,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass.shouldHitSphere (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Vector3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
@@ -201,29 +217,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="shouldHitSphere" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AppClass.shouldHitSphere" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="shouldHitSphere(com.MB.Ray)" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="Tests.Vector3" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -264,19 +259,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.AppClass.rayIntersectSphere" />
-      <item itemvalue="JUnit.AppClass.shouldHitSphere" />
-      <item itemvalue="JUnit.AppClass.shouldHitSphere (1)" />
-      <item itemvalue="JUnit.AppClass" />
+      <item itemvalue="JUnit.Vector3" />
       <item itemvalue="JUnit.AppClass.rayColorTest" />
+      <item itemvalue="JUnit.AppClass" />
+      <item itemvalue="Android JUnit.AppClass.rayIntersectSphere" />
+      <item itemvalue="JUnit.AppClass.rayIntersectSphere" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppClass.rayColorTest" />
         <item itemvalue="JUnit.AppClass.rayIntersectSphere" />
+        <item itemvalue="Android JUnit.AppClass.rayIntersectSphere" />
         <item itemvalue="JUnit.AppClass" />
-        <item itemvalue="JUnit.AppClass.shouldHitSphere (1)" />
-        <item itemvalue="JUnit.AppClass.shouldHitSphere" />
+        <item itemvalue="JUnit.Vector3" />
+        <item itemvalue="JUnit.AppClass.rayColorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -314,20 +309,38 @@
           <line>119</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/MB/Vec3.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tests/AppClass.java</url>
-          <line>143</line>
+          <line>151</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tests/AppClass.java</url>
-          <line>33</line>
+          <line>35</line>
           <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
+          <line>98</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tests/Vector3.java</url>
+          <line>548</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tests/AppClass.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/com/MB/PPM.java</url>
+          <line>36</line>
+          <properties class="com.MB.PPM" method="getGreenValue">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

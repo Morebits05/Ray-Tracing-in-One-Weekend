@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AppClass {
@@ -42,14 +44,18 @@ public class AppClass {
 
             Ray testRay = new Ray(Origin, Direction);
             Vec3 unitDirection = Vec3.normalize(testRay.direction());
-            float t = (float) (0.10 * unitDirection.y) + 1.0f;
-            Vec3 value = ((new Vec3(1.0f, 1.0f, 1.0f).scale(1.0f - t))
-                    .add(new Vec3(0.10f, 0.7f, 1.0f).scale(t)));
+
+            float t = (0.5f * unitDirection.y) + 1.0f;
+            final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
+            final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
+            Vec3 value = Vec3.lerp(a, b, t);
 
 
             Vec3 result = new App().rayColor(new Ray(Origin, Direction));
 
-           }
+
+            assertThat(value, is(result));
+        }
     }
 
 
@@ -72,7 +78,7 @@ public class AppClass {
     public void rayIntersectSphere() {
 
 
-        for (int tests = 0; tests < 2000; tests++) {
+        for (int tests = 0; tests < 20000; tests++) {
 
             // Set Location and Radius of Sphere.
             float x;
@@ -132,7 +138,9 @@ public class AppClass {
                 assertTrue(app.hitSphere(sphereOrigin, radius, r));
             }
 
-            assertTrue(app.hitSphere(sphereOrigin, radius, r) || theta <= thetaMax);
+            assertTrue(app.hitSphere(sphereOrigin, radius, r), "App.HitSphere failed");
+            assertFalse(theta <= thetaMax);
+
 
         }
     }

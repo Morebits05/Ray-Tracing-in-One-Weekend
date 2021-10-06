@@ -37,6 +37,7 @@ public final class Vec3 {
      * <p>
      * Base Constructor takes 3 parameters.
      * <p>
+     *
      * @param newX - float
      * @param newY - float
      * @param newZ - float
@@ -329,5 +330,16 @@ public final class Vec3 {
         x = other.x;
         y = other.y;
         z = other.z;
+    }
+
+    /** Linear Interpolation function.
+     * @param v0 - First Point
+     * @param v1 - Second Point
+     * @param t - tweak value
+     * @return New Vector between v0 and v1
+     * @see <a href="https://en.wikipedia.org/wiki/Linear_interpolation"></a>
+     * **/
+    public static Vec3 lerp(Vec3 v0, Vec3 v1, float t) {
+        return v0.scale(1-t).add( v1.scale(t));
     }
 }

@@ -2,12 +2,8 @@ package com.MB;
 
 public final class PPM {
     /** Number to multiply to get RGB. **/
-    private static float multiplier = 0;
-    {
-        multiplier =  255.999f;
-    }
-
-    /**
+    private static float multiplier = 255.999f;
+        /**
      * To RGB().
      * Prints the Vector as an RGB String.
      * <p>
@@ -20,8 +16,8 @@ public final class PPM {
     public static String vectorToRGB(final Vec3 vector) {
         return String.format("%d %d %d",
                 getRedValue(vector),
-                getBlueValue(vector),
-                getGreenValue(vector));
+                getGreenValue(vector),
+                getBlueValue(vector));
     }
 
     /**

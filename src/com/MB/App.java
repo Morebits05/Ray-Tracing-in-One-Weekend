@@ -74,14 +74,16 @@ public final class App {
      * else returns the Color of the object.
      */
     public Vec3 rayColor(final Ray r) {
-       /* if (hitSphere(new Vec3(0, 0, -1), 0.5f, r)) {
+        if (hitSphere(new Vec3(0, 0, -1), 0.5f, r)) {
             return new Vec3(1, 0, 0);
-        }*/
+        }
 
         Vec3 unitDirection = Vec3.normalize(r.direction);
         float t = 0.5f * (unitDirection.y) + 1.0f;
-        return ((new Vec3(1.0f, 1.0f, 1.0f).scale(1.0F - t)
-                .add(new Vec3(0.5f, 0.7f, 1.0f).scale(t))));
+        final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
+        final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
+
+        return Vec3.lerp(a, b, t);
     }
 
     /**
