@@ -13,8 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AppClass {
 
+
     TestUtil util;
     App app;
+    private boolean _normalized = true;
 
     @BeforeEach
     public void setup() {
@@ -78,7 +80,7 @@ public class AppClass {
     public void rayIntersectSphere() {
 
 
-        for (int tests = 0; tests < 20000; tests++) {
+        for (int tests = 0; tests < 200; tests++) {
 
             // Set Location and Radius of Sphere.
             float x;
@@ -90,58 +92,64 @@ public class AppClass {
             Vec3 sphereOrigin = new Vec3(x, y, z);
             float radius = util.getFloatInRange(0.1f, 2.0f);
 
-            // Set up Ray Origin and Direction.
-
-            // Create Vector for Ray Origin
+            // To Set Up Coords for The Ray Location
+            // We need Coordinates based on the radius.
+            // If you don't understand why, ask Tesseract.
             x = util.getFloatInRange(-radius, radius);
             y = util.getFloatInRange(-radius, radius);
             z = util.getFloatInRange(-radius, radius);
 
 
-            // Create Ray Origin
+            // Create a new Starting Point for the Ray
             Vec3 startingPoint = new Vec3();
-            startingPoint.set(sphereOrigin); // Set to centre of sphere
+            // Set the starting point to centre of the sphere.
+            startingPoint.set(sphereOrigin);
+
+            // Now we want a random normalized origin, so create a vector for that.
             Vec3 scalar = new Vec3(x, y, z);
             scalar = Vec3.normalize(scalar);
 
-            // Add random vector to ray origin.
-            startingPoint = startingPoint.add(scalar);
+            // Multiply the starting point by the scalar to add noise.
+            startingPoint = startingPoint.scale(scalar);
 
 
+            // Get a Random Direction
             x = util.getFloatInRange(-radius, radius);
             y = util.getFloatInRange(-radius, radius);
             z = util.getFloatInRange(-radius, radius);
             scalar = new Vec3(x, y, z);
             scalar = Vec3.normalize(scalar);
 
-            Vec3 newDirection = startingPoint.add(scalar);
+            // Multiply by Random Direction to add noise
+            Vec3 newDirection = startingPoint.scale(scalar);
 
             // Scale it by a randomized float using the radius.
-
-
             Ray r = new Ray(startingPoint,
                     newDirection);
 
-            // assertTrue(app.hitSphere(sphereOrigin, radius, r));
-
-            // Do Angle Calculations
+            // Do Angle Calculation for Maximum Angle.
             Vec3 diff = r.origin.subtract(sphereOrigin);
 
-            // Angle required to make a hit.
+            //System.err.println("Calculating Theta Max");
             float thetaMax = (float) Math.asin(radius / diff.length());
 
-            // Angle of Ray Direction.
-            float theta = (float) Math.asin(radius / r.direction().length());
+            // Calculate Angle of Ray
+            //System.err.println("Calculating Theta");
+            float theta = Vec3.angle(r.direction, sphereOrigin);
+            float dp = Vec3.dot(r.direction, sphereOrigin);
 
+            //assertEquals(true, theta <= thetaMax, "theta was not >= thetaMax");
 
+            // Is the Ray inside the sphere
             if (diff.length() <= radius) {
                 assertTrue(app.hitSphere(sphereOrigin, radius, r));
             }
+            boolean testVar = app.hitSphere(sphereOrigin, radius, r);
+            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax,
+                    "theta (in degrees) was " + theta + " & thetaMax (in degrees) was " + thetaMax;
 
-            assertTrue(app.hitSphere(sphereOrigin, radius, r), "App.HitSphere failed");
-            assertFalse(theta <= thetaMax);
-
-
+            // assertEquals(0, dp, "Ray is not orthogonal to angle");
+            //assertFalse(theta <= thetaMax, "theta is less than or equal to thetaMax");
         }
     }
 
