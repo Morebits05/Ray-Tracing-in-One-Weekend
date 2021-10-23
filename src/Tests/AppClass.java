@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AppClass {
 
 
+    public Vec3 sphereOrigin;
     TestUtil util;
     App app;
     private boolean _normalized = true;
@@ -22,6 +23,8 @@ public class AppClass {
     public void setup() {
         app = new App();
         util = new TestUtil();
+
+        sphereOrigin = new Vec3();
     }
 
     @Test
@@ -35,16 +38,14 @@ public class AppClass {
     public void rayColorTest() {
         for (int tests = 0; tests < 2000; tests++) {
             // Generate random Origin
-            Vec3 Origin = new Vec3(util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
-                    util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH));
+            Vec3 sphereOrigin = util.getSphereOrigin(TestUtil.LOW, TestUtil.HIGH);
 
             // Generate random Direction
-            Vec3 Direction = new Vec3(util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
+            Vec3 direction = new Vec3(util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
                     util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
                     util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH));
 
-            Ray testRay = new Ray(Origin, Direction);
+            Ray testRay = new Ray(sphereOrigin, direction);
             Vec3 unitDirection = Vec3.normalize(testRay.direction());
 
             float t = (0.5f * unitDirection.y) + 1.0f;
@@ -53,7 +54,7 @@ public class AppClass {
             Vec3 value = Vec3.lerp(a, b, t);
 
 
-            Vec3 result = new App().rayColor(new Ray(Origin, Direction));
+            Vec3 result = new App().rayColor(new Ray(sphereOrigin, direction));
 
 
             assertThat(value, is(result));
@@ -83,75 +84,38 @@ public class AppClass {
         for (int tests = 0; tests < 200; tests++) {
 
             // Set Location and Radius of Sphere.
-            float x;
-            float y;
-            float z;
-            x = util.getFloatInRange(-10, 10);
-            y = util.getFloatInRange(-10, 10);
-            z = util.getFloatInRange(-10, 10);
-            Vec3 sphereOrigin = new Vec3(x, y, z);
-            float radius = util.getFloatInRange(0.1f, 2.0f);
-
-            // To Set Up Coords for The Ray Location
-            // We need Coordinates based on the radius.
-            // If you don't understand why, ask Tesseract.
-            x = util.getFloatInRange(-radius, radius);
-            y = util.getFloatInRange(-radius, radius);
-            z = util.getFloatInRange(-radius, radius);
+            sphereOrigin = util.getSphereOrigin(-10f, 10f);
 
 
-            // Create a new Starting Point for the Ray
-            Vec3 startingPoint = new Vec3();
-            // Set the starting point to centre of the sphere.
-            startingPoint.set(sphereOrigin);
-
-            // Now we want a random normalized origin, so create a vector for that.
-            Vec3 scalar = new Vec3(x, y, z);
-            scalar = Vec3.normalize(scalar);
-
-            // Multiply the starting point by the scalar to add noise.
-            startingPoint = startingPoint.scale(scalar);
+            float radius = util.getRandomRadius(0.1f, 8.0f);
 
 
-            // Get a Random Direction
-            x = util.getFloatInRange(-radius, radius);
-            y = util.getFloatInRange(-radius, radius);
-            z = util.getFloatInRange(-radius, radius);
-            scalar = new Vec3(x, y, z);
-            scalar = Vec3.normalize(scalar);
+            // Create a origin and direction for the ray
+            Vec3 rayOrigin = util.getRandomPointOnUnitSphere();
+            Vec3 rayDirection = util.getRandomPointOnUnitSphere();
 
-            // Multiply by Random Direction to add noise
-            Vec3 newDirection = startingPoint.scale(scalar);
+            // Set up the Ray
+            Ray r = new Ray(rayOrigin,
+                    rayDirection);
 
-            // Scale it by a randomized float using the radius.
-            Ray r = new Ray(startingPoint,
-                    newDirection);
-
-            // Do Angle Calculation for Maximum Angle.
+            // Do Angle Calculation for Maximum Angle needed to hit (in radians).
             Vec3 diff = r.origin.subtract(sphereOrigin);
-
-            //System.err.println("Calculating Theta Max");
             float thetaMax = (float) Math.asin(radius / diff.length());
 
-            // Calculate Angle of Ray
-            //System.err.println("Calculating Theta");
+            //Calculate the actual angle of the ray (in radians).
             float theta = Vec3.angle(r.direction, sphereOrigin);
-            float dp = Vec3.dot(r.direction, sphereOrigin);
 
-            //assertEquals(true, theta <= thetaMax, "theta was not >= thetaMax");
+            // If the sphere origin is behind the ray origin, the hitSphere function should still return true;
+            assertFalse(!(sphereOrigin.z < r.origin.z) ^ (app.hitSphere(sphereOrigin, radius, r)));
 
-            // Is the Ray inside the sphere
-            if (diff.length() <= radius) {
-                assertTrue(app.hitSphere(sphereOrigin, radius, r));
-            }
-            boolean testVar = app.hitSphere(sphereOrigin, radius, r);
-            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax,
-                    "theta (in degrees) was " + theta + " & thetaMax (in degrees) was " + thetaMax;
+            // Do we get a hit
+            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
 
-            // assertEquals(0, dp, "Ray is not orthogonal to angle");
-            //assertFalse(theta <= thetaMax, "theta is less than or equal to thetaMax");
         }
+
+
     }
+
 
     @Test
     @DisplayName("Should Hit Sphere and return Red")
@@ -174,6 +138,11 @@ public class AppClass {
     public final Vec3 createNormalizedRay(final float x, final float y, final float z) {
         return Vec3.normalize(new Vec3(x, y, z));
     }
+
+    public void assertEdgeCaseN(int theta, int thetaMax, int caseNo) {
+        assertTrue(theta < thetaMax, "Edge Case " + caseNo);
+    }
 }
+
 
 

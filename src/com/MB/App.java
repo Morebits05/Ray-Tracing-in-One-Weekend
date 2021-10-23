@@ -98,7 +98,7 @@ public final class App {
                              final float radius,
                              final Ray ray) { // cos stands for Centre of Sphere
         // Create Vector for calculation from origin and centre
-        Vec3 oc = (ray.origin()).subtract(centreOfSphere);
+        Vec3 oc = ray.origin().subtract(centreOfSphere);
         // Set up Quadratic formulae for Discriminant
         float a = Vec3.dot(ray.direction(), ray.direction());
         float b = 2.0f * Vec3.dot(oc, ray.direction());
