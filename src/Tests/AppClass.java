@@ -76,6 +76,103 @@ public class AppClass {
 
     }
 
+
+    @Test
+    @DisplayName("should Call HitSphere and the Ray misses the Sphere")
+    public void rayMissesSphereWhenBehindRayOrigin() {
+        // Set up Sphere behind Ray Origin
+        sphereOrigin = new Vec3(2, 5, 1);
+        Vec3 rayOrigin = new Vec3(2, 5, 0);
+        Vec3 rayDirection = new Vec3(0, 0, -1).normalize();
+        Ray r = new Ray(rayOrigin, rayDirection);
+        float radius = 2.0f;
+
+        // Set up Calculations
+        Vec3 diff = r.origin.subtract(sphereOrigin);
+
+        float thetaMax = (float) Math.asin(radius / diff.length());
+        float thetaPiMax = 180f - thetaMax;
+
+        float theta = Vec3.angle(rayOrigin, sphereOrigin);
+
+        // Do we have a miss
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+    }
+
+
+    @Test
+    @DisplayName("should Call HitSphere and the Ray misses the Sphere when in front of Sphere")
+    public void rayMissesSphereWhenInFrontOfRayOrigin() {
+        // Set up Sphere behind Ray Origin
+        sphereOrigin = new Vec3(2, 5, 0);
+        Vec3 rayOrigin = new Vec3(2, 5, -1);
+        Vec3 rayDirection = new Vec3(0, 0, -1).normalize();
+        Ray r = new Ray(rayOrigin, rayDirection);
+        float radius = 2.0f;
+
+        // Set up Calculations
+        Vec3 diff = r.origin.subtract(sphereOrigin);
+
+        float thetaMax = (float) Math.asin(radius / diff.length());
+        float thetaPiMax = 180f - thetaMax;
+
+        float theta = Vec3.angle(rayOrigin, sphereOrigin);
+
+        // Do we have a miss
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax, "Not Hit!");
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+    }
+
+
+    @Test
+    @DisplayName("should Call HitSphere and the Ray misses the Sphere when on right of Sphere")
+    public void rayMissesSphereWhenOnRightOfSphere() {
+        // Set up Sphere behind Ray Origin
+        sphereOrigin = new Vec3(2, 5, 0);
+        Vec3 rayOrigin = new Vec3(3, 5, 0);
+        Vec3 rayDirection = new Vec3(1, 0, 0).normalize();
+        Ray r = new Ray(rayOrigin, rayDirection);
+        float radius = 2.0f;
+
+        // Set up Calculations
+        Vec3 diff = r.origin.subtract(sphereOrigin);
+
+        float thetaMax = (float) Math.asin(radius / diff.length());
+        float thetaPiMax = 180f - thetaMax;
+
+        float theta = Vec3.angle(rayOrigin, sphereOrigin);
+
+        // Do we have a miss
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+    }
+
+
+    @Test
+    @DisplayName("should Call HitSphere and the Ray misses the Sphere when on left of Sphere")
+    public void rayMissesSphereWhenOnLeftOfSphere() {
+        // Set up Sphere behind Ray Origin
+        sphereOrigin = new Vec3(2, 5, 0);
+        Vec3 rayOrigin = new Vec3(1, 5, 0);
+        Vec3 rayDirection = new Vec3(-1, 0, 0).normalize();
+        Ray r = new Ray(rayOrigin, rayDirection);
+        float radius = 2.0f;
+
+        // Set up Calculations
+        Vec3 diff = r.origin.subtract(sphereOrigin);
+
+        float thetaMax = (float) Math.asin(radius / diff.length());
+        float thetaPiMax = 180f - thetaMax;
+
+        float theta = Vec3.angle(rayOrigin, sphereOrigin);
+
+        // Do we have a miss
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
+        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+    }
+
+
     @Test
     @DisplayName("should Calculate Angle on Sphere and Detect A Hit")
     public void rayIntersectSphere() {
@@ -94,6 +191,7 @@ public class AppClass {
             Vec3 rayOrigin = util.getRandomPointOnUnitSphere();
             Vec3 rayDirection = util.getRandomPointOnUnitSphere();
 
+
             // Set up the Ray
             Ray r = new Ray(rayOrigin,
                     rayDirection);
@@ -101,16 +199,13 @@ public class AppClass {
             // Do Angle Calculation for Maximum Angle needed to hit (in radians).
             Vec3 diff = r.origin.subtract(sphereOrigin);
             float thetaMax = (float) Math.asin(radius / diff.length());
-
+            float thetaPiMax = (float) 180.0f - thetaMax;
             //Calculate the actual angle of the ray (in radians).
             float theta = Vec3.angle(r.direction, sphereOrigin);
 
-            // If the sphere origin is behind the ray origin, the hitSphere function should still return true;
-            assertFalse(!(sphereOrigin.z < r.origin.z) ^ (app.hitSphere(sphereOrigin, radius, r)));
-
             // Do we get a hit
-            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
-
+            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax," Not Less Than theta Max");
+            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax, "Not Less than theta Pi Max");
         }
 
 
