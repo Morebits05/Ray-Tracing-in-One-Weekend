@@ -51,7 +51,7 @@ public final class App {
                                     .add((vertical.scale(v)))
                                     .subtract(origin))))));
 
-                    Vec3 pixelColor = rayColor(ray);
+                      Vec3 pixelColor = rayColor(ray);
 
                     fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColor), System.lineSeparator()));
                 }
@@ -74,37 +74,46 @@ public final class App {
      * else returns the Color of the object.
      */
     public Vec3 rayColor(final Ray r) {
-        if (hitSphere(new Vec3(0, 0, -1), 0.5f, r)) {
-            return new Vec3(1, 0, 0);
+        // smallest hit point aka t
+        float t = hitSphere(new Vec3(0, 0, -1), 0.5f, r);
+        // If there is a hit
+        if (t > 0) {
+            // Calculate the Normal
+            Vec3 N = Vec3.normalize(r.at(t).subtract(new Vec3(0,0,-1)));
+            return new Vec3(N.x+1,N.y+1,N.z+1).scale(.5f);
         }
 
         Vec3 unitDirection = Vec3.normalize(r.direction);
-        float t = 0.5f * (unitDirection.y) + 1.0f;
-        final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
-        final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
-
-        return Vec3.lerp(a, b, t);
+           t = 0.5f * (unitDirection.y) + 1.0f;
+           final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
+           final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
+           return Vec3.lerp(a, b, t);
     }
 
     /**
      * Calculates if the sphere has been hit.
+     * Using a simplified Quadratic Equation.
      *
      * @param centreOfSphere The Vector for the Sphere.
      * @param radius         the radius of the sphere.
      * @param ray            the Ray to use.
      * @return if the ray hit the sphere.
      */
-    public boolean hitSphere(final Vec3 centreOfSphere,
-                             final float radius,
-                             final Ray ray) { // cos stands for Centre of Sphere
+    public float hitSphere(final Vec3 centreOfSphere,
+                           final float radius,
+                           final Ray ray) { // cos stands for Centre of Sphere
         // Create Vector for calculation from origin and centre
         Vec3 oc = ray.origin().subtract(centreOfSphere);
         // Set up Quadratic formulae for Discriminant
-        float a = Vec3.dot(ray.direction(), ray.direction());
-        float b = 2.0f * Vec3.dot(oc, ray.direction());
-        float c = Vec3.dot(oc, oc) - (radius * radius);
+        float a = ray.direction().lengthSquared();
+        float halfB = Vec3.dot(oc, ray.direction());
+        float c = oc.lengthSquared() - (radius * radius);
         // Return if the ray hit the sphere
-        float discriminant = b * b - 4 * a * c;
-        return (discriminant > 0);
+        float discriminant = halfB * halfB -  a * c;
+        if (discriminant < 0) {
+            return -1;
+        } else {
+            return (float) ((-halfB - Math.sqrt(discriminant)) / a);
+        }
     }
 }

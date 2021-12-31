@@ -13,11 +13,20 @@ public class TestUtil {
         return gen.nextFloat() * (h - l) + l;
     }
 
-    public Vec3 getRandomPointOnUnitSphere() {
-        Vec3 retVal = new Vec3(getFloatInRange(-1, 1),
-                getFloatInRange(-1, 1),
-                getFloatInRange(-1, 1));
-        return Vec3.normalize(retVal);
+    public float getFloat() {
+        return gen.nextFloat();
+    }
+
+    public Vec3 getRandomPointOnUnitSphere(final float lower, final float higher) {
+        return new Vec3(getFloatInRange(lower, higher),
+                getFloatInRange(lower, higher),
+                getFloatInRange(lower, higher));
+    }
+
+    public Vec3 getRandomPointOnUnitSphere(float radius) {
+        return new Vec3(getFloat() * radius,
+                getFloat() * radius,
+                getFloat()*radius);
     }
 
     public float getRandomRadius(final float low, final float high) {

@@ -344,7 +344,9 @@ public final class Vec3 {
         z = other.z;
     }
 
-    /** Return this vector normalized **/
+    /**
+     * Return this vector normalized
+     **/
     public Vec3 normalize() {
         return Vec3.normalize(this);
     }

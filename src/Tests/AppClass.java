@@ -3,12 +3,12 @@ package Tests;
 import com.MB.App;
 import com.MB.Ray;
 import com.MB.Vec3;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AppClass {
@@ -17,7 +17,6 @@ public class AppClass {
     public Vec3 sphereOrigin;
     TestUtil util;
     App app;
-    private boolean _normalized = true;
 
     @BeforeEach
     public void setup() {
@@ -54,10 +53,10 @@ public class AppClass {
             Vec3 value = Vec3.lerp(a, b, t);
 
 
-            Vec3 result = new App().rayColor(new Ray(sphereOrigin, direction));
+           Vec3 result = new App().rayColor(new Ray(sphereOrigin, direction));
 
 
-            assertThat(value, is(result));
+           assertThat(value, Matchers.is(result));
         }
     }
 
@@ -85,7 +84,7 @@ public class AppClass {
         Vec3 rayOrigin = new Vec3(2, 5, 0);
         Vec3 rayDirection = new Vec3(0, 0, -1).normalize();
         Ray r = new Ray(rayOrigin, rayDirection);
-        float radius = 2.0f;
+        float radius = 0.5f;
 
         // Set up Calculations
         Vec3 diff = r.origin.subtract(sphereOrigin);
@@ -96,8 +95,8 @@ public class AppClass {
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
         // Do we have a miss
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+        assertEquals(theta <= thetaMax,app.hitSphere(sphereOrigin, radius, r) <0 );
+        //assertEquals(theta <= thetaPiMax,app.hitSphere(sphereOrigin, radius, r)<0);
     }
 
 
@@ -109,7 +108,7 @@ public class AppClass {
         Vec3 rayOrigin = new Vec3(2, 5, -1);
         Vec3 rayDirection = new Vec3(0, 0, -1).normalize();
         Ray r = new Ray(rayOrigin, rayDirection);
-        float radius = 2.0f;
+        float radius = 0.5f;
 
         // Set up Calculations
         Vec3 diff = r.origin.subtract(sphereOrigin);
@@ -119,9 +118,8 @@ public class AppClass {
 
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
-        // Do we have a miss
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax, "Not Hit!");
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+        // Do we have a hit
+       assertEquals( theta <= thetaMax,app.hitSphere(sphereOrigin, radius, r) <0, "Theta was not <= Theta Max");
     }
 
 
@@ -131,9 +129,9 @@ public class AppClass {
         // Set up Sphere behind Ray Origin
         sphereOrigin = new Vec3(2, 5, 0);
         Vec3 rayOrigin = new Vec3(3, 5, 0);
-        Vec3 rayDirection = new Vec3(1, 0, 0).normalize();
+        Vec3 rayDirection = new Vec3(1, 0, 0);
         Ray r = new Ray(rayOrigin, rayDirection);
-        float radius = 2.0f;
+        float radius = 0.5f;
 
         // Set up Calculations
         Vec3 diff = r.origin.subtract(sphereOrigin);
@@ -144,8 +142,7 @@ public class AppClass {
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
         // Do we have a miss
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+        assertEquals(theta <= thetaMax,app.hitSphere(sphereOrigin, radius, r) < 0 );
     }
 
 
@@ -155,9 +152,9 @@ public class AppClass {
         // Set up Sphere behind Ray Origin
         sphereOrigin = new Vec3(2, 5, 0);
         Vec3 rayOrigin = new Vec3(1, 5, 0);
-        Vec3 rayDirection = new Vec3(-1, 0, 0).normalize();
+        Vec3 rayDirection = new Vec3(-1, 0, 0);
         Ray r = new Ray(rayOrigin, rayDirection);
-        float radius = 2.0f;
+        float radius = 0.5f;
 
         // Set up Calculations
         Vec3 diff = r.origin.subtract(sphereOrigin);
@@ -168,58 +165,39 @@ public class AppClass {
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
         // Do we have a miss
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax);
-        assertNotEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax);
+        assertEquals(theta <= thetaMax,app.hitSphere(sphereOrigin, radius, r) < 0 );
     }
 
-
     @Test
-    @DisplayName("should Calculate Angle on Sphere and Detect A Hit")
-    public void rayIntersectSphere() {
-
-
-        for (int tests = 0; tests < 200; tests++) {
-
-            // Set Location and Radius of Sphere.
-            sphereOrigin = util.getSphereOrigin(-10f, 10f);
-
-
-            float radius = util.getRandomRadius(0.1f, 8.0f);
-
-
-            // Create a origin and direction for the ray
-            Vec3 rayOrigin = util.getRandomPointOnUnitSphere();
-            Vec3 rayDirection = util.getRandomPointOnUnitSphere();
-
-
-            // Set up the Ray
-            Ray r = new Ray(rayOrigin,
-                    rayDirection);
-
-            // Do Angle Calculation for Maximum Angle needed to hit (in radians).
-            Vec3 diff = r.origin.subtract(sphereOrigin);
-            float thetaMax = (float) Math.asin(radius / diff.length());
-            float thetaPiMax = (float) 180.0f - thetaMax;
-            //Calculate the actual angle of the ray (in radians).
-            float theta = Vec3.angle(r.direction, sphereOrigin);
-
-            // Do we get a hit
-            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaMax," Not Less Than theta Max");
-            assertEquals(app.hitSphere(sphereOrigin, radius, r), theta <= thetaPiMax, "Not Less than theta Pi Max");
-        }
-
-
+    @DisplayName("Should Return -1 when Discriminant is <0 otherwise return (-b - sqrt(discriminant) ) / (2.0*a)")
+    public void HitSphereTest(){
+            Vec3 sphereOrigin = new Vec3(0,3,1);
+            Vec3 rayOrigin = new Vec3(0,0,0);
+            Vec3 rayDirection = new Vec3(0,0,1);
+            Ray r = new Ray(rayOrigin,rayDirection);
+            assertTrue(app.hitSphere(sphereOrigin,.5f,r) < 0);
     }
 
-
     @Test
-    @DisplayName("Should Hit Sphere and return Red")
+    @DisplayName("Should Not  Return -1 when Discriminant is not <0")
+    public void HitSphereTest2(){
+        Vec3 sphereOrigin = new Vec3(0,0,1);
+        Vec3 rayOrigin = new Vec3(0,0,0);
+        Vec3 rayDirection = new Vec3(0,0,1);
+        Ray r = new Ray(rayOrigin,rayDirection);
+        assertFalse(app.hitSphere(sphereOrigin,.5f,r) < 0);
+    }
+    @Test
+    @DisplayName("should Call Ray Colour and Should Not Return Black")
     public void shouldHitSphere() {
-        // Sphere should be Red
-        Vec3 expectedColour = new Vec3(1, 0, 0);
+        // Set expected Color to Black
+        Vec3 expectedColour = new Vec3(0, 0, 0);
+        // Set up Ray
         Ray ray = new Ray(new Vec3(0, 0, 0), new Vec3(0, 0, -1));
+
+        // Call Function and Check Colour
         Vec3 actual = app.rayColor(ray);
-        assertEquals(expectedColour, actual);
+        assertNotEquals(expectedColour, actual);
     }
 
     public void assertRightAngle(final Vec3 vec1, final Vec3 vec2, final String message) {
