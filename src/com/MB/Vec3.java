@@ -350,4 +350,9 @@ public final class Vec3 {
     public Vec3 normalize() {
         return Vec3.normalize(this);
     }
+
+    /** Return this vector inverted */
+    public Vec3 neg() {
+        return new Vec3(-x,-y,-z);
+    }
 }
