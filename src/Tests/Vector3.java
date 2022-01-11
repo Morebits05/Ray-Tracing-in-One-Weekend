@@ -542,41 +542,6 @@ public final class Vector3 {
         assertAll(vec1, vec2);
     }
 
-    @Test
-    @DisplayName("toRGB should print Vector 3 in Colour Format")
-    public void vector3ToRGBTest() {
-        for (int i = 0; i < 2000; i++) {
-            Vec3 testVector = new Vec3(util.getFloatInRange(LOW, HIGH),
-                    util.getFloatInRange(LOW, HIGH),
-                    util.getFloatInRange(LOW, HIGH));
-            int r = (int) (testVector.x * 255.999f);
-            int g = (int) (testVector.y * 255.999f);
-            int b = (int) (testVector.z * 255.999f);
-
-            String expected = String.format("%d %d %d", r, g, b);
-
-            assertEquals(expected, PPM.vectorToRGB(testVector));
-        }
-    }
-
-    @Test
-    @DisplayName("getRedValue should return Red Value")
-    public void redTest() {
-        assertEquals(255, PPM.getRedValue(new Vec3(1, 0, 0)));
-    }
-
-    @Test
-    @DisplayName("getGreenValue should return Green Value")
-    public void greenTest() {
-        assertEquals(255, PPM.getGreenValue(new Vec3(0, 1, 0)));
-    }
-
-    @Test
-    @DisplayName("getBlueValue should return Blue Value")
-    public void blueTest() {
-        assertEquals(255, PPM.getBlueValue(new Vec3(0, 0, 1)));
-    }
-
     private void assertAll(final Vec3 expected, final Vec3 actual) {
         assertEquals(expected.x, actual.x);
         assertEquals(expected.y, actual.y);
@@ -600,6 +565,16 @@ public final class Vector3 {
             Vec3 expected = v0.scale(1 - rT).add((v1.scale(rT)));
             Vec3 result = Vec3.lerp(v0, v1, rT);
         }
+    }
+
+    @Test
+    @DisplayName("Should Clamp number to RGB")
+    public void vectorToRGBTest(){
+        Vec3 testVector = new Vec3(0,0,1);
+
+        String rgbString = "0 0 255";
+
+        assertEquals(rgbString,PPM.vectorToRGB(testVector,255));
     }
 
 }

@@ -9,24 +9,18 @@ public final class App {
      * The actual program.
      */
     public void run() {
+
+        HitTableList world = new HitTableList();
+        world.add(new Sphere(new Vec3(0,0,-1),.5f));
+        world.add(new Sphere(new Vec3(0,-100.5f,-1),100f));
         // Image
         final float aspectRatio = 16.0f / 9.0f;
         final int imageWidth = 400;
         final int imageHeight = (int) (imageWidth / aspectRatio);
-
+        final int samplesPerPixel = 100;
         // Camera
 
-        float viewportHeight = 2.0F;
-        float viewportWidth = aspectRatio * viewportHeight;
-        float focalLength = 1.0F;
-
-        Vec3 origin = new Vec3(0, 0, 0);
-        Vec3 horizontal = new Vec3(viewportWidth, 0, 0);
-        Vec3 vertical = new Vec3(0, viewportHeight, 0);
-        Vec3 lowerLeftCorner = ((origin
-                .subtract((Vec3.divide(horizontal, 2)))
-                .subtract((Vec3.divide(vertical, 2)))
-                .subtract(new Vec3(0, 0, focalLength))));
+       Camera camera = new Camera();
 
 
         // Write to Working Directory
@@ -44,16 +38,17 @@ public final class App {
                 System.err.println("Scan lines remaining: " + j + " ");
                 System.err.flush();
                 for (int i = 0; i < imageWidth; ++i) { // x value
-                    float u = (float) (i) / (imageWidth - 1);
-                    float v = (float) (j) / (imageHeight - 1);
-                    Ray ray = new Ray(origin, (((lowerLeftCorner
-                            .add((horizontal.scale(u))
-                                    .add((vertical.scale(v)))
-                                    .subtract(origin))))));
+                    Vec3 pixelColour = new Vec3(0,0,0);
+                    for (int samples = 0; samples < samplesPerPixel; samples++) {
+                        float u = (float) (i) / (imageWidth - 1);
+                        float v = (float) (j) / (imageHeight - 1);
+                        Ray ray = camera.getRay(u, v);
 
-                      Vec3 pixelColor = rayColor(ray);
+                        pixelColour.addEquals(
+                                rayColor(ray, world));
+                    }
 
-                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColor), System.lineSeparator()));
+                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColour,samplesPerPixel), System.lineSeparator()));
                 }
             }
             fw.close();
@@ -62,7 +57,6 @@ public final class App {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     /**
@@ -73,18 +67,14 @@ public final class App {
      * @return The Background Colour if no hit,
      * else returns the Color of the object.
      */
-    public Vec3 rayColor(final Ray r) {
+    public Vec3 rayColor(final Ray r,final HitTableList world) {
+        HitRecord hitRecord = new HitRecord();
         // smallest hit point aka t
-        float t = hitSphere(new Vec3(0, 0, -1), 0.5f, r);
-        // If there is a hit
-        if (t > 0) {
-            // Calculate the Normal
-            Vec3 N = Vec3.normalize(r.at(t).subtract(new Vec3(0,0,-1)));
-            return new Vec3(N.x+1,N.y+1,N.z+1).scale(.5f);
+        if (world.hit(r,0,Utils.Constants.infinity,hitRecord)){
+            return  (new Vec3(1,1,1).add(hitRecord.normal)).scale(.5f);
         }
-
         Vec3 unitDirection = Vec3.normalize(r.direction);
-           t = 0.5f * (unitDirection.y) + 1.0f;
+          float t = 0.5f * (unitDirection.y) + 1.0f;
            final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
            final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
            return Vec3.lerp(a, b, t);

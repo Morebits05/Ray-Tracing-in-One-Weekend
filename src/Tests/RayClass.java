@@ -40,7 +40,7 @@ private TestUtil util;
     }
 
     @Test
-    @DisplayName("Set Method sets origin and Direction")
+    @DisplayName("Set Method should set origin and Direction")
     public void setMethodTest() {
 
         for (int tests = 0; tests < 2000; tests++) {

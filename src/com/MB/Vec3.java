@@ -355,4 +355,6 @@ public final class Vec3 {
     public Vec3 neg() {
         return new Vec3(-x,-y,-z);
     }
+
+    
 }

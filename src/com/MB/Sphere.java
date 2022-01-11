@@ -2,10 +2,25 @@ package com.MB;
 
 public class Sphere implements HitTable{
 
+    /**
+     * Base Constructor
+     * @param center - The Vector for the Center of the Sphere
+     * @param radius - The Radius of the Sphere
+     */
     public Sphere(Vec3 center, float radius){
         this.centerSphere = center;
         this.radius = radius;
     }
+
+    /**
+     * Hit
+     * <p>Detects if a ray hit the sphere</p>
+     * @param ray - The Incoming Ray
+     * @param tMin - Minimum no of Hits
+     * @param tMax - Maximum no of Hits
+     * @param rec - Hit Record
+     * @return Whether the ray hit the sphere
+     */
     @Override
     public boolean hit(Ray ray, float tMin, float tMax, HitRecord rec) {
         // Create Vector for calculation from origin and centre
@@ -35,6 +50,12 @@ public class Sphere implements HitTable{
         return true;
     }
 
+    /**
+     * The Center of the Sphere
+     * */
     public Vec3 centerSphere;
+    /**
+     * The Radius of the Sphere
+     */
     public float radius;
 }

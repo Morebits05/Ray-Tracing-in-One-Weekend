@@ -1,23 +1,30 @@
 package Tests;
 
-import com.MB.App;
-import com.MB.Ray;
-import com.MB.Vec3;
-import org.hamcrest.Matchers;
+import com.MB.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
+
+
+// In The Test Framework
+// The Layout read like
+// Sentences.
+// Eg. AppClass
+//      - Should Run Basic Ray Trace
 
 public class AppClass {
 
 
     public Vec3 sphereOrigin;
-    TestUtil util;
-    App app;
+    TestUtil util; // Utility Class for Random Generator.
+    App app; // The App to Test.
 
+    /**
+     * Set up the base Variables before each test
+     */
     @BeforeEach
     public void setup() {
         app = new App();
@@ -26,19 +33,25 @@ public class AppClass {
         sphereOrigin = new Vec3();
     }
 
+    /** Test The Basic App Function */
     @Test
     @DisplayName("Should Run Basic Ray Trace")
     public void Run() {
         app.run();
     }
 
+    /**
+     * Tests the RayColor Function using random co-ordinates
+     */
     @Test
-    @DisplayName("should calculate colour using Ray Function")
+    @DisplayName("should calculate colour using RayColour Function")
     public void rayColorTest() {
         for (int tests = 0; tests < 2000; tests++) {
             // Generate random Origin
-            Vec3 sphereOrigin = util.getSphereOrigin(TestUtil.LOW, TestUtil.HIGH);
+            HitTableList world = new HitTableList();
 
+            Vec3 sphereOrigin = util.getSphereOrigin(TestUtil.LOW, TestUtil.HIGH);
+            world.add(new Sphere(sphereOrigin,.5f));
             // Generate random Direction
             Vec3 direction = new Vec3(util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
                     util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
@@ -53,14 +66,17 @@ public class AppClass {
             Vec3 value = Vec3.lerp(a, b, t);
 
 
-           Vec3 result = new App().rayColor(new Ray(sphereOrigin, direction));
+           Vec3 result = new App().rayColor(new Ray(sphereOrigin, direction),world);
+           boolean worldHit = world.hit(testRay,0, Utils.Constants.infinity,new HitRecord());
 
-
-           assertThat(value, Matchers.is(result));
+           assertTrue(worldHit);
         }
     }
 
 
+    /**
+     * Tests Whether RayColour returns NaN, aka non-normalized.
+     */
     @Test
     @DisplayName("should calculate colour using Ray Function with zero vector")
     public void rayColorTestZeroVector() {
@@ -69,13 +85,15 @@ public class AppClass {
 
         Ray testRay = new Ray(origin, direction);
 
-        Vec3 color = new App().rayColor(testRay);
+        Vec3 color = new App().rayColor(testRay,new HitTableList());
 
         assertFalse(Float.isNaN(color.x));
 
     }
 
-
+    /** Tests Whether the Ray Misses Sphere when the Ray Originates from the Sphere
+     *  And Points Away from the sphere.
+     */
     @Test
     @DisplayName("should Call HitSphere and the Ray misses the Sphere")
     public void rayMissesSphereWhenBehindRayOrigin() {
@@ -100,6 +118,9 @@ public class AppClass {
     }
 
 
+    /** Tests Whether the Ray Misses Sphere when the Ray Originates In Front of the Sphere
+     *  And Points Away from the sphere.
+     */
     @Test
     @DisplayName("should Call HitSphere and the Ray misses the Sphere when in front of Sphere")
     public void rayMissesSphereWhenInFrontOfRayOrigin() {
@@ -123,6 +144,9 @@ public class AppClass {
     }
 
 
+    /** Tests Whether the Ray Misses Sphere when the Ray Originates from the Right of the Sphere
+     *  And Points Away from the sphere.
+     */
     @Test
     @DisplayName("should Call HitSphere and the Ray misses the Sphere when on right of Sphere")
     public void rayMissesSphereWhenOnRightOfSphere() {
@@ -145,7 +169,9 @@ public class AppClass {
         assertEquals(theta <= thetaMax,app.hitSphere(sphereOrigin, radius, r) < 0 );
     }
 
-
+    /** Tests Whether the Ray Misses Sphere when the Ray Originates from the left of the Sphere
+     *  And Points Away from the sphere.
+     */
     @Test
     @DisplayName("should Call HitSphere and the Ray misses the Sphere when on left of Sphere")
     public void rayMissesSphereWhenOnLeftOfSphere() {
@@ -196,22 +222,24 @@ public class AppClass {
         Ray ray = new Ray(new Vec3(0, 0, 0), new Vec3(0, 0, -1));
 
         // Call Function and Check Colour
-        Vec3 actual = app.rayColor(ray);
+        Vec3 actual = app.rayColor(ray,new HitTableList());
         assertNotEquals(expectedColour, actual);
     }
 
+    /** Specialized Assert */
     public void assertRightAngle(final Vec3 vec1, final Vec3 vec2, final String message) {
         assertTrue(Math.abs(Vec3.dot(vec1, vec2)) < 0.000001f, message);
     }
 
+    /** Specialized Assert */
     public void assertAngleTrue(final Vec3 a, final Vec3 b, final float radians, final String Message) {
         assertEquals(radians, Vec3.angle(a, b), Message);
     }
-
+    /** Specialized Assert */
     public final Vec3 createNormalizedRay(final float x, final float y, final float z) {
         return Vec3.normalize(new Vec3(x, y, z));
     }
-
+    /** Specialized Assert */
     public void assertEdgeCaseN(int theta, int thetaMax, int caseNo) {
         assertTrue(theta < thetaMax, "Edge Case " + caseNo);
     }

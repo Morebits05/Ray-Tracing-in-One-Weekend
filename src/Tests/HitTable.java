@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HitTable {
 
+    /** Tests Whether HitTable Contains Any Methods */
     @Test
     @DisplayName("should have Hit Method")
     public void MethodTest(){
