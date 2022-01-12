@@ -39,7 +39,7 @@ public final class App {
                 System.err.flush();
                 for (int i = 0; i < imageWidth; ++i) { // x value
                     Vec3 pixelColour = new Vec3(0,0,0);
-                    for (int samples = 0; samples < samplesPerPixel; samples++) {
+                    for (int samples = 0; samples < samplesPerPixel; ++samples) {
                         float u = (float) (i) / (imageWidth - 1);
                         float v = (float) (j) / (imageHeight - 1);
                         Ray ray = camera.getRay(u, v);
