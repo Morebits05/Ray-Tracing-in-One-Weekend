@@ -11,12 +11,7 @@
     <list default="true" id="8f8cc55c-78f2-4e97-904e-ac11b8a0ce03" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image.ppm" beforeDir="false" afterPath="$PROJECT_DIR$/image.ppm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/Tests/Vector3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ray Tracing in One Weekend/Tests/Vector3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/AppClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/AppClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tests/Vector3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Vector3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/MB/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/MB/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/MB/Vec3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/Vec3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +41,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1vJb9VWtd4y7GbYAiTX6UhkKkfx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
@@ -114,7 +110,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunManager" selected="JUnit.AppClass.Run">
     <configuration default="true" type="Applet">
@@ -311,6 +307,11 @@
     </task>
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -326,11 +327,6 @@
           <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/MB/HitTableList.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tests/PPMClass.java</url>
           <line>27</line>
           <option name="timeStamp" value="155" />
@@ -341,14 +337,10 @@
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <condition expression="depth == 2" language="JAVA" />
           <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="167" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="168" />
+          <line>83</line>
+          <option name="timeStamp" value="173" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ClassCastException" package="java.lang" />
@@ -377,6 +369,7 @@
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="object" language="JAVA" />
+        <watch expression="depth" />
       </configuration>
     </watches-manager>
   </component>

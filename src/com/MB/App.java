@@ -71,7 +71,7 @@ public final class App {
      * @return The Background Colour if no hit,
      * else returns the Color of the object.
      */
-    public Vec3 rayColor(final Ray r,final HitTableList world,int depth) {
+    public Vec3 rayColor(final Ray ray,final HitTableList world,int depth) {
         HitRecord hitRecord = new HitRecord();
         // If the depth is 0, there's no light
         if (depth <= 0)
@@ -79,12 +79,12 @@ public final class App {
 
 
         // smallest hit point aka t
-        if (world.hit(r,0,Utils.Constants.infinity,hitRecord)){
+        if (world.hit(ray,0,Utils.Constants.infinity,hitRecord)){
             Vec3 targetPoint = hitRecord.point.add(  (hitRecord.normal.add(Vec3.randomInUnitSphere()) )) ;
             return rayColor(new Ray(hitRecord.point,(targetPoint.subtract(hitRecord.point))),world,depth-1).scale(.5F);
         }
 
-        Vec3 unitDirection = Vec3.normalize(r.direction);
+        Vec3 unitDirection = Vec3.normalize(ray.direction);
           float t = 0.5f * (unitDirection.y) + 1.0f;
            final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
            final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
