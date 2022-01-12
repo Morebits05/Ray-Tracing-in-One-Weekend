@@ -149,6 +149,25 @@ public final class Vec3 {
         return v0.scale(1 - t).add(v1.scale(t));
     }
 
+    /** Generates a random Vector **/
+    public static Vec3 random() {
+        return new Vec3(Utils.randomFloat(),Utils.randomFloat(),Utils.randomFloat());
+    }
+
+    /** Generates a random Vector between min and max **/
+    public static Vec3 random(float min,float max){
+        return new Vec3(Utils.randomFloat(min,max),Utils.randomFloat(min,max),Utils.randomFloat(min,max));
+    }
+
+    public static Vec3 randomInUnitSphere() {
+        while (true){
+            Vec3 point = Vec3.random(-1,1);
+            if (point.lengthSquared() >= 1) continue;
+            return point;
+        }
+    }
+
+
     /**
      * toString.
      *

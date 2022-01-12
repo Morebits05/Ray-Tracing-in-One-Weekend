@@ -574,7 +574,26 @@ public final class Vector3 {
 
         String rgbString = "0 0 255";
 
-        assertEquals(rgbString,PPM.vectorToRGB(testVector,255));
+        assertEquals(rgbString,PPM.vectorToRGB(testVector,1));
+    }
+
+    @Test
+    @DisplayName("Should generate random Vector between -1 and 1")
+    public void generatorTest(){
+        Vec3 random;
+        for (int tests = 0; tests < 200; tests++) {
+            random =  Vec3.random();
+            assertTrue(random.x > -1.0F && random.x < 0.999F);
+        }
+    }
+
+    @Test
+    @DisplayName("Random Vector should be in Unit Sphere")
+    public void RandomInUnitSphere(){
+        for (int tests = 0; tests < 200; tests++) {
+            Vec3 rand = Vec3.randomInUnitSphere();
+            assertTrue( (rand.lengthSquared() < 1) || ( rand.lengthSquared() > 0));
+        }
     }
 
 }

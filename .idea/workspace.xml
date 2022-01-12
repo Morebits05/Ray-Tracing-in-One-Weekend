@@ -15,7 +15,7 @@
       <change beforePath="$PROJECT_DIR$/src/Tests/AppClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/AppClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests/Vector3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/Vector3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/MB/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/MB/PPM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/PPM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/MB/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/MB/Vec3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/MB/Vec3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +29,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -113,9 +114,9 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
-  <component name="RunManager" selected="JUnit.AppClass.rayIntersectSphere">
+  <component name="RunManager" selected="JUnit.AppClass.Run">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -125,23 +126,6 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
-    </configuration>
-    <configuration name="AppClass.rayIntersectSphere" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="rayIntersectSphere" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -160,6 +144,46 @@
       <option name="PACKAGE_NAME" value="Tests" />
       <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppClass.HitSphereTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
+      <option name="METHOD_NAME" value="HitSphereTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppClass.Run" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
+      <option name="METHOD_NAME" value="Run" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -188,7 +212,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass.rayIntersectSphere" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AppClass.rayColourTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
@@ -198,27 +222,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="Tests" />
       <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="rayIntersectSphere" />
+      <option name="METHOD_NAME" value="rayColourTest" />
       <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Vector3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.Vector3" />
-      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -229,6 +234,26 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.MB in Ray Tracing in One Weekend" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.MB.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.MB" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -259,18 +284,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.Vector3" />
-      <item itemvalue="JUnit.AppClass.rayColorTest" />
+      <item itemvalue="JUnit.com.MB in Ray Tracing in One Weekend" />
       <item itemvalue="JUnit.AppClass" />
-      <item itemvalue="Android JUnit.AppClass.rayIntersectSphere" />
-      <item itemvalue="JUnit.AppClass.rayIntersectSphere" />
+      <item itemvalue="JUnit.AppClass.rayColorTest" />
+      <item itemvalue="JUnit.AppClass.HitSphereTest" />
+      <item itemvalue="JUnit.AppClass.Run" />
+      <item itemvalue="JUnit.AppClass.rayColourTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppClass.rayIntersectSphere" />
-        <item itemvalue="Android JUnit.AppClass.rayIntersectSphere" />
+        <item itemvalue="JUnit.AppClass.Run" />
+        <item itemvalue="JUnit.AppClass.rayColourTest" />
         <item itemvalue="JUnit.AppClass" />
-        <item itemvalue="JUnit.Vector3" />
+        <item itemvalue="JUnit.AppClass.HitSphereTest" />
         <item itemvalue="JUnit.AppClass.rayColorTest" />
       </list>
     </recent_temporary>
@@ -278,71 +304,69 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8f8cc55c-78f2-4e97-904e-ac11b8a0ce03" name="Default Changelist" comment="" />
-      <created>1626282998871</created>
+      <created>1638093358612</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1626282998871</updated>
+      <updated>1638093358612</updated>
     </task>
     <servers />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <breakpoint type="java-wildcard-method">
+          <properties class="com.MB.AppClass" method="normalize">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="105" />
+        </breakpoint>
         <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tests/SphereClass.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/MB/HitTableList.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tests/PPMClass.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Tests/Vector3.java</url>
-          <line>160</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/RayClass.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/RayClass.java</url>
-          <line>142</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/RayClass.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/AppClass.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/AppClass.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="65" />
+          <line>592</line>
+          <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="66" />
+          <line>43</line>
+          <option name="timeStamp" value="167" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/Vector3.java</url>
-          <line>548</line>
-          <option name="timeStamp" value="68" />
+          <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="168" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/AppClass.java</url>
-          <line>140</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/com/MB/PPM.java</url>
-          <line>36</line>
-          <properties class="com.MB.PPM" method="getGreenValue">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ClassCastException" package="java.lang" />
+          <option name="timeStamp" value="136" />
+        </breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint log-message="true" log-stack="true" type="java-exception">
+          <dependency leave-enabled="true" master-id="1" />
+          <properties>
+            <catch-class-filters>
+              <class-filter pattern="Tests.AppClass" />
+            </catch-class-filters>
+            <option name="catch-filters-enabled" value="true" />
+            <option name="NOTIFY_CAUGHT" value="false" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
@@ -352,7 +376,7 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="v.length()" language="JAVA" />
+        <watch expression="object" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

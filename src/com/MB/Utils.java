@@ -19,9 +19,13 @@ public class Utils
     }
 
     /** Returns a Random Float */
-    public float randomFloat(float min,float max){
+    public static float randomFloat(float min,float max){
         Random rand = new Random();
         return min + (max - min) * rand.nextFloat();
+    }
+
+    public static float randomFloat(){
+        return randomFloat(0,1);
     }
 
     /** Clamp Number Between max and min **/
