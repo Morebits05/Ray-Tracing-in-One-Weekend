@@ -45,7 +45,7 @@ public class Sphere implements HitTable{
 
         rec.t = root;
         rec.point.set(ray.at(rec.t));
-        Vec3 outwardNormal = Vec3.divide( (rec.point).subtract(centerSphere),radius);
+        Vec3 outwardNormal = Vec3.divide(rec.point.subtract(centerSphere),radius);
         rec.setFaceNormal(ray,outwardNormal);
         return true;
     }

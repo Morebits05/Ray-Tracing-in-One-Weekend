@@ -17,9 +17,9 @@ public class Camera {
     }
 
     public Ray getRay(float u, float v) {
-        return new Ray(origin,lowerLeftCorner.add((horizontal.scale(u))
+        return new Ray(origin,lowerLeftCorner.add((horizontal.scale(u)))
                 .add((vertical.scale(v)))
-                .subtract(origin)));
+                .subtract(origin));
     }
     private Vec3 origin;
     private Vec3 horizontal;

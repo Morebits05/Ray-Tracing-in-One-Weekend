@@ -52,7 +52,7 @@ public class AppClass {
             HitTableList world = new HitTableList();
 
             Vec3 sphereOrigin = util.getSphereOrigin(TestUtil.LOW, TestUtil.HIGH);
-            world.add(new Sphere(sphereOrigin,.5f));
+            world.add(new Sphere(sphereOrigin,0.5F));
             // Generate random Direction
             Vec3 direction = new Vec3(util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
                     util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
@@ -61,9 +61,9 @@ public class AppClass {
             Ray testRay = new Ray(sphereOrigin, direction);
             Vec3 unitDirection = Vec3.normalize(testRay.direction());
 
-            float t = (0.5f * unitDirection.y) + 1.0f;
-            final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
-            final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
+            float t = (0.F * unitDirection.y) + 1.0F;
+            final Vec3 a = new Vec3(1.0F, 1.0F, 1.0F);
+            final Vec3 b = new Vec3(0.5F, 0.7F, 1.0F);
             Vec3 value = Vec3.lerp(a, b, t);
 
 
@@ -103,12 +103,12 @@ public class AppClass {
         Vec3 rayOrigin = new Vec3(2, 5, 0);
         Vec3 rayDirection = new Vec3(0, 0, -1).normalize();
         Ray r = new Ray(rayOrigin, rayDirection);
-        float radius = 0.5f;
+        float radius = 0.5F;
         // Set up Calculations
         Vec3 diff = r.origin.subtract(sphereOrigin);
 
         float thetaMax = (float) Math.asin(radius / diff.length());
-        float thetaPiMax = 180f - thetaMax;
+        float thetaPiMax = 180F - thetaMax;
 
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
@@ -134,7 +134,7 @@ public class AppClass {
         Vec3 diff = r.origin.subtract(sphereOrigin);
 
         float thetaMax = (float) Math.asin(radius / diff.length());
-        float thetaPiMax = 180f - thetaMax;
+        float thetaPiMax = 180F - thetaMax;
 
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
@@ -154,12 +154,12 @@ public class AppClass {
         Vec3 rayOrigin = new Vec3(3, 5, 0);
         Vec3 rayDirection = new Vec3(1, 0, 0);
         Ray r = new Ray(rayOrigin, rayDirection);
-        float radius = 0.5f;
+        float radius = 0.5F;
         // Set up Calculations
         Vec3 diff = r.origin.subtract(sphereOrigin);
 
         float thetaMax = (float) Math.asin(radius / diff.length());
-        float thetaPiMax = 180f - thetaMax;
+        float thetaPiMax = 180F - thetaMax;
 
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
@@ -184,7 +184,7 @@ public class AppClass {
         Vec3 diff = r.origin.subtract(sphereOrigin);
 
         float thetaMax = (float) Math.asin(radius / diff.length());
-        float thetaPiMax = 180f - thetaMax;
+        float thetaPiMax = 180F - thetaMax;
 
         float theta = Vec3.angle(rayOrigin, sphereOrigin);
 
@@ -255,8 +255,6 @@ public class AppClass {
             app.rayColor(new Ray(new Vec3(0,0,0),new Vec3(0,0,-1)), world, testDepth--);
         } while (testDepth != 0);
     }
-
-
 }
 
 

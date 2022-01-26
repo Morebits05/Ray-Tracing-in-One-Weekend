@@ -148,26 +148,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass.HitSphereTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="HitSphereTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AppClass.Run" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
@@ -219,6 +199,26 @@
       <option name="PACKAGE_NAME" value="Tests" />
       <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
       <option name="METHOD_NAME" value="rayColourTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Vector3.ScaleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.Vector3" />
+      <option name="METHOD_NAME" value="ScaleTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -283,17 +283,17 @@
       <item itemvalue="JUnit.com.MB in Ray Tracing in One Weekend" />
       <item itemvalue="JUnit.AppClass" />
       <item itemvalue="JUnit.AppClass.rayColorTest" />
-      <item itemvalue="JUnit.AppClass.HitSphereTest" />
       <item itemvalue="JUnit.AppClass.Run" />
       <item itemvalue="JUnit.AppClass.rayColourTest" />
+      <item itemvalue="JUnit.Vector3.ScaleTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.AppClass.Run" />
+        <item itemvalue="JUnit.Vector3.ScaleTest" />
         <item itemvalue="JUnit.AppClass.rayColourTest" />
-        <item itemvalue="JUnit.AppClass" />
-        <item itemvalue="JUnit.AppClass.HitSphereTest" />
         <item itemvalue="JUnit.AppClass.rayColorTest" />
+        <item itemvalue="JUnit.AppClass" />
       </list>
     </recent_temporary>
   </component>
@@ -337,10 +337,9 @@
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <condition expression="depth == 2" language="JAVA" />
-          <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
-          <line>83</line>
-          <option name="timeStamp" value="173" />
+          <url>file://$PROJECT_DIR$/src/Tests/Vector3.java</url>
+          <line>601</line>
+          <option name="timeStamp" value="185" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ClassCastException" package="java.lang" />
@@ -366,12 +365,6 @@
         <PinnedItemInfo parentTag="com.MB.Vec3" memberName="x" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="JUnit">
-        <watch expression="object" language="JAVA" />
-        <watch expression="depth" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

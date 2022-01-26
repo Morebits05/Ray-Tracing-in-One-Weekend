@@ -4,9 +4,11 @@ import java.util.Random;
 
 public class Utils
 {
+    private static Random rand;
     public static class Constants{
         public final static float infinity = Float.POSITIVE_INFINITY;
         public final static float pi = (float) Math.PI;
+
     }
 
     /**
@@ -17,10 +19,14 @@ public class Utils
    public float degreesToRadians(float degrees){
         return degrees * Constants.pi / 180F;
     }
+   public Utils (){
 
+   }
     /** Returns a Random Float */
     public static float randomFloat(float min,float max){
-        Random rand = new Random();
+        if (rand == null){
+            rand = new Random();
+        }
         return min + (max - min) * rand.nextFloat();
     }
 

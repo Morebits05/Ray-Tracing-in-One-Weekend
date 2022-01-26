@@ -596,4 +596,14 @@ public final class Vector3 {
         }
     }
 
+    @Test
+    @DisplayName("Vec3 Scale Methods should Return Same Result")
+    public  void ScaleTest(){
+        Vec3 firstNumber = new Vec3(3,0,0);
+        Vec3 secondNumber = new Vec3(2,0,0);
+
+        assertEquals(new Vec3(6,0,0),firstNumber.scale(secondNumber));
+        assertEquals(new Vec3(6,0,0),Vec3.scale(3,secondNumber));
+    }
+
 }

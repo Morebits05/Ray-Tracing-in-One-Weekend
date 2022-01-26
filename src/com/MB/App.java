@@ -14,13 +14,13 @@ public final class App {
     public void run() {
 
         HitTableList world = new HitTableList();
-        world.add(new Sphere(new Vec3(0,0,-1),.5f));
-        world.add(new Sphere(new Vec3(0,-100.5f,-1),100f));
+        world.add(new Sphere(new Vec3(0,0,-1),0.5F));
+        world.add(new Sphere(new Vec3(0,-100.5F,-1),100F));
         // Image
-        final float aspectRatio = 16.0f / 9.0f;
+        final float aspectRatio = 16.0F / 9.0F;
         final int imageWidth = 400;
         final int imageHeight = (int) (imageWidth / aspectRatio);
-        final int samplesPerPixel = 100;
+        int samplesPerPixel = 100;
         int maxDepth = 50;
         // Camera
 
@@ -44,12 +44,11 @@ public final class App {
                 for (int i = 0; i < imageWidth; ++i) { // x value
                     Vec3 pixelColour = new Vec3(0,0,0);
                     for (int samples = 0; samples < samplesPerPixel; ++samples) {
-                       float u = (float) ((i) + Utils.randomFloat())  / (imageWidth - 1);
-                        float v = (float) ((j) + Utils.randomFloat())  / (imageHeight - 1);
+                       float u = (float) (i + Utils.randomFloat())  / (float) (imageWidth - 1);
+                        float v = (float) (j + Utils.randomFloat())  / (float) (imageHeight - 1);
                         Ray ray = camera.getRay(u, v);
 
-                        pixelColour.addEquals(
-                                rayColor(ray, world,maxDepth));
+                        pixelColour.addEquals(rayColor(ray,world,maxDepth));
                     }
 
                     fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColour,samplesPerPixel), System.lineSeparator()));
@@ -67,27 +66,27 @@ public final class App {
      * RayColor.
      * Calculates the colour of the pixel.
      *
-     * @param r - Ray to use
+     * @param ray - Ray to use
      * @return The Background Colour if no hit,
      * else returns the Color of the object.
      */
     public Vec3 rayColor(final Ray ray,final HitTableList world,int depth) {
         HitRecord hitRecord = new HitRecord();
         // If the depth is 0, there's no light
-        if (depth <= 0)
-            return new Vec3(0,0,0);
-
+        if (depth <= 0) {
+            return new Vec3(0, 0, 0);
+        }
 
         // smallest hit point aka t
         if (world.hit(ray,0,Utils.Constants.infinity,hitRecord)){
-            Vec3 targetPoint = hitRecord.point.add(  (hitRecord.normal.add(Vec3.randomInUnitSphere()) )) ;
-            return rayColor(new Ray(hitRecord.point,(targetPoint.subtract(hitRecord.point))),world,depth-1).scale(.5F);
+            Vec3 targetPoint = hitRecord.point.add(hitRecord.normal).add(Vec3.randomInUnitSphere());
+            return rayColor(new Ray(hitRecord.point,targetPoint.subtract(hitRecord.point)),world,depth-1).scale(0.5F);
         }
 
         Vec3 unitDirection = Vec3.normalize(ray.direction);
-          float t = 0.5f * (unitDirection.y) + 1.0f;
-           final Vec3 a = new Vec3(1.0f, 1.0f, 1.0f);
-           final Vec3 b = new Vec3(0.5f, 0.7f, 1.0f);
+          float t = 0.5f * (unitDirection.y + 1.0F);
+           final Vec3 a = new Vec3(1.0F, 1.0F, 1.0F);
+           final Vec3 b = new Vec3(0.5F, 0.7F, 1.0F);
            return Vec3.lerp(a, b, t);
     }
 }
