@@ -36,9 +36,9 @@ public class PPMClass {
 
         float scale = 1.0F / samplesPerPixel;
 
-        red = (float) Math.sqrt(scale * red);
-        green = (float) Math.sqrt(scale * green);
-        blue = (float) Math.sqrt(scale * blue);
+        red = (float) (scale * red);
+        green = (float) (scale * green);
+        blue = (float) (scale * blue);
 
         int newRed = (int) (256 * Utils.clamp(red,0.0F,0.999F));
         int newGreen = (int) (256 * Utils.clamp(green,0.0F,0.999F));
