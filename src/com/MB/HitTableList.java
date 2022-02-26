@@ -18,6 +18,7 @@ public class HitTableList implements HitTable{
      * @param objectToAdd - Sphere To Add to list
      */
     public HitTableList(HitTable objectToAdd) {
+        objects = new Vector<HitTable>();
         add(objectToAdd);
     }
 
@@ -36,7 +37,7 @@ public class HitTableList implements HitTable{
         boolean didItHitAnything = false;
         float closestT = tMax;
 
-        for(final HitTable object: objects){
+        for(HitTable object: objects){
             if (object.hit(ray,tMin,closestT,temporaryHitRecord)){
                 didItHitAnything = true;
                 closestT = temporaryHitRecord.t;

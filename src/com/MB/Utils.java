@@ -1,16 +1,16 @@
 package com.MB;
 
+import java.util.Calendar;
 import java.util.Random;
 
 public class Utils
 {
-    private static Random rand;
     public static class Constants{
         public final static float infinity = Float.POSITIVE_INFINITY;
         public final static float pi = (float) Math.PI;
 
     }
-
+    public static Random r;
     /**
      * Degrees to Radians, converts Degrees to Radians
      * @param degrees - amount to Convert
@@ -24,14 +24,16 @@ public class Utils
    }
     /** Returns a Random Float */
     public static float randomFloat(float min,float max){
-        if (rand == null){
-            rand = new Random();
-        }
-        return min + (max - min) * rand.nextFloat();
+        return min + (max - min) * randomFloat();
     }
 
     public static float randomFloat(){
-        return randomFloat(0,1);
+         if (r == null)
+         {
+             r = new Random();
+             r.setSeed(Calendar.getInstance().getTimeInMillis());
+         }
+        return r.nextFloat();
     }
 
     /** Clamp Number Between max and min **/

@@ -18,9 +18,9 @@ public final class PPM {
 
         float scale = 1.0F / samplesPerPixel;
 
-        red *= scale;
-        green *= scale;
-        blue *= scale;
+        red = (float) Math.sqrt(scale*red);
+        green = (float) Math.sqrt(scale*green);
+        blue = (float) Math.sqrt(scale*blue);
 
         return String.format("%d %d %d",
                 (int) (256 * Utils.clamp(red,0.0F,0.999F)),

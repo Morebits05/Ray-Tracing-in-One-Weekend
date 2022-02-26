@@ -1,13 +1,11 @@
-package Tests;
+package Unit_Tests;
 
-import com.MB.Ray;
-import com.MB.Vec3;
+import com.MB.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RayClass {
 private TestUtil util;
@@ -144,5 +142,31 @@ private TestUtil util;
         r.setOrigin(orig);
         assertEquals(5 ,r.direction.z, 0.0);
         assertEquals(6 ,r.origin.z, 0.0);
+    }
+
+    @Test
+    @DisplayName("RayColour Should NOT return Black")
+    public void RayTest(){
+        Vec3 spherePos = new Vec3(0.0F,0.0F,-1.0F);
+        Vec3 groundPos = new Vec3(0.0F,-100.5F,-1.0F);
+        Ray ray = new Ray(new Vec3(0.0F,0.0F,0.0F), Vec3.normalize(new Vec3(0.0F,0.0F,-1.0F)));
+
+       float sphereRadius = 0.05F;
+        float groundRadius = 100F;
+
+        Material material = new Lambertian(new Vec3(0.3F,0.3F,0.7F));
+
+        HitTableList world = new HitTableList();
+
+        world.add(new Sphere(groundPos,
+                groundRadius,
+                new Lambertian(new Vec3(0.8F,0.8F,0.7F))));
+
+       world.add(new Sphere(spherePos
+                ,sphereRadius,
+               new Lambertian(new Vec3(0.3F,0.3F,0.7F))));
+
+
+        assertNotEquals(new Vec3(0.0F,0.0F,0.0F),new App().rayColor(ray,world,50));
     }
 }

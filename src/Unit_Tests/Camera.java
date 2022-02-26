@@ -1,4 +1,4 @@
-package Tests;
+package Unit_Tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package Tests;
+package Unit_Tests;
 
 
 import com.MB.PPM;
@@ -582,7 +582,7 @@ public final class Vector3 {
     public void generatorTest(){
         Vec3 random;
         for (int tests = 0; tests < 200; tests++) {
-            random =  Vec3.random();
+            random =  Vec3.generateRandom();
             assertTrue(random.x > -1.0F && random.x < 0.999F);
         }
     }
@@ -606,4 +606,28 @@ public final class Vector3 {
         assertEquals(new Vec3(6,0,0),Vec3.scale(3,secondNumber));
     }
 
+    @Test
+    @DisplayName("RandomInUnitSphere() should Generate a Random Number between -1 and 1")
+    public void randomTest(){
+        //Given: We have a test vector
+        Vec3 testVec;
+
+
+        for (int i = 0; i < 2000; i++) {
+            // When: I generate a Vector
+            testVec = Vec3.randomInUnitSphere();
+
+
+            // Then: It Should Be Between -1 and 1
+            assertTrue(testVec.x > -1);
+            assertTrue(testVec.x < 1);
+
+            assertTrue(testVec.y > -1);
+            assertTrue(testVec.y < 1);
+
+            assertTrue(testVec.z > -1);
+            assertTrue(testVec.z < 1);
+        }
+
+    }
 }

@@ -5,6 +5,7 @@ public class HitRecord {
     public Vec3 normal; // The Normal Where It Hit
     public float t; //hits
     public boolean frontFace; // FrontFace or BackFace
+    public Material material;
 
     /**
      * Base Constructor
@@ -21,7 +22,7 @@ public class HitRecord {
      * @param r - Incoming Ray
      * @param outwardNormal - The Normal To Check
      */
-    void setFaceNormal(final Ray r,Vec3 outwardNormal){
+    void setFaceNormal(Ray r,Vec3 outwardNormal){
         frontFace = Vec3.dot(r.direction(),outwardNormal) < 0;
         normal.set ( frontFace ? outwardNormal : outwardNormal.neg());
     }
@@ -35,7 +36,7 @@ public class HitRecord {
         this.point = other.point;
         this.normal = other.normal;
         this.t = other.t;
-        this.frontFace = other.frontFace;
+        this.material = other.material;
     }
 
 

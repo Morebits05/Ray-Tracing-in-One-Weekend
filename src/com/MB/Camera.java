@@ -7,7 +7,7 @@ public class Camera {
         float viewportWidth = aspectRatio * viewportHeight;
         float focalLength = 1.0F;
 
-        origin = new Vec3(0,0,0);
+        origin = new Vec3(0F,0F,0F);
         horizontal = new Vec3(viewportWidth, 0.0F, 0.0F);
         vertical = new Vec3(0.0F,viewportHeight,0.0F);
 
@@ -16,9 +16,19 @@ public class Camera {
                 .subtract(new Vec3(0,0,focalLength));
     }
 
+    @Override
+    public String toString() {
+        return "Camera{" +
+                "origin=" + origin +
+                ", horizontal=" + horizontal +
+                ", vertical=" + vertical +
+                ", lowerLeftCorner=" + lowerLeftCorner +
+                '}';
+    }
+
     public Ray getRay(float u, float v) {
-        return new Ray(origin,lowerLeftCorner.add((horizontal.scale(u)))
-                .add((vertical.scale(v)))
+        return new Ray(origin,lowerLeftCorner.add(horizontal.scale(u))
+                .add(vertical.scale(v))
                 .subtract(origin));
     }
     private Vec3 origin;

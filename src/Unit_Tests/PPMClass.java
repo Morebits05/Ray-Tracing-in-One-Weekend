@@ -1,4 +1,4 @@
-package Tests;
+package Unit_Tests;
 
 import com.MB.PPM;
 import com.MB.Utils;

@@ -36,6 +36,7 @@ public final class Vec3 {
      * Name: Vec3.
      * <p>
      * Base Constructor takes 3 parameters.
+     * Can also be used to make a Colour.
      * <p>
      *
      * @param newX - float
@@ -150,21 +151,33 @@ public final class Vec3 {
     }
 
     /** Generates a random Vector **/
-    public static Vec3 random() {
+    public static Vec3 generateRandom() {
         return new Vec3(Utils.randomFloat(),Utils.randomFloat(),Utils.randomFloat());
     }
 
     /** Generates a random Vector between min and max **/
-    public static Vec3 random(float min,float max){
+    public static Vec3 generateRandom(float min, float max){
         return new Vec3(Utils.randomFloat(min,max),Utils.randomFloat(min,max),Utils.randomFloat(min,max));
     }
 
     public static Vec3 randomInUnitSphere() {
         while (true){
-            Vec3 point = Vec3.random(-1,1);
+            Vec3 point = Vec3.generateRandom(-1,1);
             if (point.lengthSquared() >= 1) continue;
             return point;
         }
+    }
+
+    public static Vec3 randomInHemisphere(final Vec3 normal){
+        Vec3 inUnitSphere = randomInUnitSphere();
+        if (dot(inUnitSphere,normal)> 0.0F)
+            return inUnitSphere;
+        else
+            return inUnitSphere.neg();
+    }
+
+    public static Vec3 randomUnitVector(){
+        return Vec3.normalize(randomInUnitSphere());
     }
 
 
@@ -375,5 +388,19 @@ public final class Vec3 {
         return new Vec3(-x,-y,-z);
     }
 
-    
+    /** Returns whether the vector is near zero **/
+    public boolean nearZero(){
+        final float s = 1e-8F;
+        return (Math.abs(x) < s) && (Math.abs(y) < s) && (Math.abs(z) < s);
+    }
+
+    /***
+     * Reflect
+     * @param v - Incoming Vector
+     * @param n - Normal To Reflect Off
+     * @return - the Vector of the ray reflected
+     */
+    public static Vec3 reflect(final Vec3 v,final Vec3 n){
+        return v.subtract(n.scale(dot(v,n)*2));
+    }
 }

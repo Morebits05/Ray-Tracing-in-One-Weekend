@@ -8,7 +8,6 @@ public class Ray {
         this.origin = new Vec3();
         this.direction = new Vec3();
     }
-
     public Ray(Vec3 newOrigin, Vec3 newDirection){
        origin = newOrigin;
        direction = newDirection;

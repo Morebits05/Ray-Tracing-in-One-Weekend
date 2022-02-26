@@ -1,9 +1,9 @@
-package Tests;
+package Unit_Tests;
 
 import com.MB.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,9 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 // In The Test Framework
 // The Layout read like
 // Sentences.
-// Eg. AppClass
+// E.g. AppClass
 //      - Should Run Basic Ray Trace
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AppClass {
 
 
@@ -37,9 +38,11 @@ public class AppClass {
     /** Test The Basic App Function */
     @Test
     @DisplayName("Should Run Basic Ray Trace")
+    @Order(1)
     public void Run() {
+        App app = new App();
         app.run();
-    }
+     }
 
     /**
      * Tests the RayColor Function using random co-ordinates
@@ -47,12 +50,11 @@ public class AppClass {
     @Test
     @DisplayName("should calculate colour using RayColour Function")
     public void rayColorTest() {
-        for (int tests = 0; tests < 2000; tests++) {
             // Generate random Origin
             HitTableList world = new HitTableList();
 
             Vec3 sphereOrigin = util.getSphereOrigin(TestUtil.LOW, TestUtil.HIGH);
-            world.add(new Sphere(sphereOrigin,0.5F));
+           // world.add(new Sphere(sphereOrigin,0.5F));
             // Generate random Direction
             Vec3 direction = new Vec3(util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
                     util.getFloatInRange(TestUtil.LOW, TestUtil.HIGH),
@@ -61,7 +63,7 @@ public class AppClass {
             Ray testRay = new Ray(sphereOrigin, direction);
             Vec3 unitDirection = Vec3.normalize(testRay.direction());
 
-            float t = (0.F * unitDirection.y) + 1.0F;
+            float t = (float) 0.5 * (unitDirection.y + 1.0F);
             final Vec3 a = new Vec3(1.0F, 1.0F, 1.0F);
             final Vec3 b = new Vec3(0.5F, 0.7F, 1.0F);
             Vec3 value = Vec3.lerp(a, b, t);
@@ -70,8 +72,8 @@ public class AppClass {
            Vec3 result = new App().rayColor(new Ray(sphereOrigin, direction),world,1);
            boolean worldHit = world.hit(testRay,0, Utils.Constants.infinity,new HitRecord());
 
-           assertTrue(worldHit);
-        }
+           assertFalse(worldHit);
+           assertEquals(value,result);
     }
 
 
@@ -195,7 +197,6 @@ public class AppClass {
     @Test
     @DisplayName("Should Return -1 when Discriminant is <0 otherwise return (-b - sqrt(discriminant) ) / (2.0*a)")
     public void HitSphereTest(){
-
             Vec3 sphereOrigin = new Vec3(0,3,1);
             Vec3 rayOrigin = new Vec3(0,0,0);
             Vec3 rayDirection = new Vec3(0,0,1);
@@ -211,9 +212,14 @@ public class AppClass {
         Vec3 rayOrigin = new Vec3(0,0,0);
         Vec3 rayDirection = new Vec3(0,0,1);
         world.add(new Sphere(sphereOrigin,.5f));
+
         Ray r = new Ray(rayOrigin,rayDirection);
         assertFalse(world.hit(r,0,0,new HitRecord()));
     }
+
+    /**
+     * This Test tests if rayColour doesn't return Black when depth is > 0
+     * **/
     @Test
     @DisplayName("should Call Ray Colour and Should Not Return Black")
     public void shouldHitSphere() {
@@ -227,34 +233,106 @@ public class AppClass {
         assertNotEquals(expectedColour, actual);
     }
 
-    /** Specialized Assert */
+
+    /**
+     * assertRightAngle
+     * Asserts that the angle between the two vectors are
+     * a right angle using the dot product.
+     * @param vec1 First Vector
+     * @param vec2 Second Vector
+     * @param message message to print : optional
+     */
     public void assertRightAngle(final Vec3 vec1, final Vec3 vec2, final String message) {
         assertTrue(Math.abs(Vec3.dot(vec1, vec2)) < 0.000001f, message);
     }
 
-    /** Specialized Assert */
+    /**
+     * assertAngleTrue
+     * Asserts that the angle between the two vectors are
+     * equal to the parameter radians.
+     * @param a First Vector
+     * @param b Second Vector
+     * @param radians the angle to assert against
+     * @param Message message to print : optional
+     */
     public void assertAngleTrue(final Vec3 a, final Vec3 b, final float radians, final String Message) {
         assertEquals(radians, Vec3.angle(a, b), Message);
     }
-    /** Specialized Assert */
+
+    /** Creates a Normalized Ray */
     public final Vec3 createNormalizedRay(final float x, final float y, final float z) {
         return Vec3.normalize(new Vec3(x, y, z));
     }
-    /** Specialized Assert */
-    public void assertEdgeCaseN(int theta, int thetaMax, int caseNo) {
-        assertTrue(theta < thetaMax, "Edge Case " + caseNo);
-    }
 
     @Test
-    @DisplayName("RayColor should break when depth is 0")
-    public void rayColourTest(){
-        int testDepth = 2;
-        HitTableList world = new HitTableList();
-        world.add(new Sphere(new Vec3(0,0,0),.5F));
-        do {
-            app.rayColor(new Ray(new Vec3(0,0,0),new Vec3(0,0,-1)), world, testDepth--);
-        } while (testDepth != 0);
+    public void appShould_WhenRun_DrawPicture(){
+        App app = new App();
+        app.run();
+
+        File picture = new File("image.ppm");
+        assertTrue(picture.exists());
     }
+
+
+    @Test
+    @DisplayName("RayColour should Scatter Ray")
+    @Disabled
+    public void scatterTest(){
+        // Set up the World
+        for (int i = 0; i < 4000;i++) {
+            Sphere worldSphere = new Sphere(new Vec3(0, -100.5F, -1), 100F);
+
+
+            // Set up the Ray Origin and Direction
+         final   Vec3 origin = new Vec3(Utils.randomFloat(), Utils.randomFloat(), Utils.randomFloat());
+           final Vec3 direction = new Vec3(Utils.randomFloat(), Utils.randomFloat(), Utils.randomFloat());
+            assertAll("Direction should be greater than 0",
+                    ()->  assertTrue(direction.x >0),
+                    ()->assertTrue(direction.y >0),
+                    ()->assertTrue(direction.z >0)
+            );
+          //  direction = direction.normalize();
+           // Ray r = new Ray(origin, direction);
+
+
+            // Set up the HitList
+           // HitTableList world = new HitTableList();
+           // world.add(worldSphere);
+
+            // Set up the HitRecord
+          //  HitRecord hitRecord = new HitRecord();
+
+            // Send Ray at worldSphere
+            //App app = new App();
+           // Vec3 expectedRayColor = app.rayColor(r, world, 4);
+
+          //  assertTrue(expectedRayColor.x < 1.0F);
+         //   assertTrue(expectedRayColor.y < 1.0F);
+          //  assertEquals(1.0F, expectedRayColor.z);
+
+
+
+        }
+    }
+
+
+
+    private Vec3 CalculateScatter(Sphere s, Ray r,HitRecord rec,Vec3 target,Vec3 random){
+
+        HitRecord tempRec = new HitRecord();
+        if (s.hit(r,0,Float.POSITIVE_INFINITY,tempRec)) {
+            target.set(tempRec.point
+                    .add(tempRec.normal)
+                    .add(random));
+            return CalculateColor(target);
+        }
+        return new Vec3(0,0,0);
+    }
+
+    private Vec3 CalculateColor(Vec3 color){
+        return color.scale(0.5f);
+    }
+
 }
 
 

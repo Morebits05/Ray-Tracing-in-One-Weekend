@@ -1,4 +1,4 @@
-package Tests;
+package Unit_Tests;
 
 import com.MB.*;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +23,7 @@ public class HitTableListSpec {
     public void HitTest(){
         HitTableList list = new HitTableList();
         Sphere s1 = new Sphere(new Vec3(0,0,-1),.5F);
+
         list.add(s1);
 
         Vec3 rO = new Vec3(0,0,0); // ray Origin
