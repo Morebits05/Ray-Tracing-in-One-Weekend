@@ -42,4 +42,8 @@ public class Utils
         if (x > max) return max;
         return x;
     }
+
+    public float[] vectorToArray(Vec3 vector){
+        return new float[]{vector.x,vector.y,vector.z};
+    }
 }
