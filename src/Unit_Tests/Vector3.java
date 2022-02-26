@@ -2,6 +2,7 @@ package Unit_Tests;
 
 
 import com.MB.PPM;
+import com.MB.Utils;
 import com.MB.Vec3;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -629,5 +630,10 @@ public final class Vector3 {
             assertTrue(testVec.z < 1);
         }
 
+    }
+
+    @Test
+    public void negMethod_ShouldInvertAxis(){
+        assertThat( new Utils().vectorToArray(new Vec3(0F,0F,-1F).neg()),is( new float[]{-0F,-0F,1.0F}));
     }
 }
