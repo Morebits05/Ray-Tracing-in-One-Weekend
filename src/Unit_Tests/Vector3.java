@@ -318,6 +318,7 @@ public final class Vector3 {
     }
 
 
+
     /* This Test subtracts <3,31,-2> from <36,-2,46> to get <-33,33,-48> */
     @Test
     @DisplayName("Subtract Method Subtracts Postive and Negative - Part Two")
@@ -630,6 +631,17 @@ public final class Vector3 {
             assertTrue(testVec.z < 1);
         }
 
+    }
+
+    @Test
+    public void dotShouldCalculateProperly(){
+        Vec3 vec1 = new Vec3(0,0,-1);
+        Vec3 vec2 = new Vec3(0,0,0);
+
+        float dp = Vec3.dot(vec1.neg(),vec2);
+
+        Vec3 scattered = vec1.scale(1.0f / 1.5f);
+        assertThat(scattered, is (new Vec3(0,0,-0.6666667f)));
     }
 
     @Test

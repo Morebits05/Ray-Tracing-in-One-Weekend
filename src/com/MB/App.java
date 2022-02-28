@@ -16,9 +16,9 @@ public final class App {
         HitTableList world = new HitTableList();
 
         Material matGround = new Lambertian(new Vec3(0.8F,0.8F,0.0F));
-        Material matSphere = new Dialectric(1.5F);
+        Material matSphere = new Lambertian(new Vec3(0.1F,0.2F,0.5F));
         Material matLeft = new Dialectric(1.5F);
-        Material matRight = new Metal(new Vec3(0.8F,0.6F,0.2F),1.0F);
+        Material matRight = new Metal(new Vec3(0.8F,0.6F,0.2F),0.0F);
 
 
         Sphere ground = new Sphere(new Vec3(0.0F,-100.5F,-1.0F),100F,matGround);

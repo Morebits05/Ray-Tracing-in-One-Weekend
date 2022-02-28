@@ -13,7 +13,6 @@ public class HitRecord {
     public HitRecord(){
         this.point = new Vec3();
         this.t = 0;
-        this.frontFace = false;
         this.normal = new Vec3();
     }
 
@@ -37,6 +36,7 @@ public class HitRecord {
         this.normal = other.normal;
         this.t = other.t;
         this.material = other.material;
+        this.frontFace = other.frontFace;
     }
 
 

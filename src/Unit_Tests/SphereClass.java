@@ -29,7 +29,7 @@ public class SphereClass {
 
         Sphere s = new Sphere(new Vec3(0F,3F,0F),0.5F, new Material() {
             @Override
-            protected boolean scatter(Ray rayIn, HitRecord hitRecord, Vec3 attenuation, Ray scattered) {
+            public boolean scatter(Ray rayIn, HitRecord hitRecord, Vec3 attenuation, Ray scattered) {
                 return false;
             }
         });
@@ -45,7 +45,7 @@ public class SphereClass {
         rayDirection.z = 1F;
         Sphere s = new Sphere(new Vec3(0F,0F,0F),0.5F, new Material() {
             @Override
-            protected boolean scatter(Ray rayIn, HitRecord hitRecord, Vec3 attenuation, Ray scattered) {
+            public boolean scatter(Ray rayIn, HitRecord hitRecord, Vec3 attenuation, Ray scattered) {
                 return false;
             }
         });
@@ -73,7 +73,7 @@ public class SphereClass {
         HitRecord hr = new HitRecord();
         Sphere sphere1 = new Sphere(new Vec3(0, 0, 0), 0.5f, new Material() {
             @Override
-            protected boolean scatter(Ray rayIn, HitRecord hitRecord, Vec3 attenuation, Ray scattered) {
+            public boolean scatter(Ray rayIn, HitRecord hitRecord, Vec3 attenuation, Ray scattered) {
                 return false;
             }
         });
