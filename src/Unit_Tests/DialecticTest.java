@@ -15,7 +15,7 @@ public class DialecticTest {
     @DisplayName("Refract Should Calculate Properly")
     public void refractTest(){
         float indexRefraction = 1.5f;
-        Dialectric dialectric = new Dialectric(indexRefraction);
+        Dielectric dialectric = new Dielectric(indexRefraction);
 
         Vec3 uv = new Vec3(0,0,-1);
         Vec3 n = new Vec3(0,0,-1);
@@ -35,7 +35,7 @@ public class DialecticTest {
     @Test
     public void ScatteredTest(){
         float indexRefraction = 1.5f;
-        Dialectric dialectric = new Dialectric(indexRefraction);
+        Dielectric dialectric = new Dielectric(indexRefraction);
         Sphere s= new Sphere(new Vec3(0,0,-1f),.5f,dialectric);
         HitTableList world = new HitTableList(s);
 
