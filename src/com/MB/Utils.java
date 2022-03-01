@@ -16,7 +16,7 @@ public class Utils
      * @param degrees - amount to Convert
      * @return the amount of radians
      */
-   public float degreesToRadians(float degrees){
+   public static float degreesToRadians(float degrees){
         return degrees * Constants.pi / 180F;
     }
    public Utils (){

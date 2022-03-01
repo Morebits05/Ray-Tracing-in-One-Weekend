@@ -13,25 +13,21 @@ public final class App {
 
     public void run() {
 
+
         HitTableList world = new HitTableList();
 
-        Material matGround = new Lambertian(new Vec3(0.8F,0.8F,0.0F));
-        Material matSphere = new Lambertian(new Vec3(0.1F,0.2F,0.5F));
-        Material matLeft = new Dielectric(1.5F);
-        Material matRight = new Metal(new Vec3(0.8F,0.6F,0.2F),0.0F);
+        Material matGround = new Lambertian(new Vec3(0.8f,0.8f,0.0f));
+        Material matCentre = new Lambertian(new Vec3(0.1f,0.2f,0.5f));
+        Material matLeft = new Dielectric(1.5f);
+        Material matRight = new Metal(new Vec3(0.8f,0.6f,0.2f),0.0f);
 
 
-        Sphere ground = new Sphere(new Vec3(0.0F,-100.5F,-1.0F),100F,matGround);
-        Sphere centre = new Sphere(new Vec3(0.0F,0.0F,-1.0F),0.5F,matSphere);
-        Sphere left = new Sphere(new Vec3(-1.0F,0.0F,-1.0F),.5F,matLeft);
-        Sphere centreLeft = new Sphere(new Vec3(-1.0F,0.0F,-1.0F),-0.4F,matLeft);
-        Sphere right = new Sphere(new Vec3(1.0F,0.0F,-1.0F),.5F,matRight);
+        world.add(new Sphere(new Vec3(0.0f,-100.5f,-1.0f),100.0f,matGround));
+        world.add(new Sphere(new Vec3(0.0f,0.0f,-1.0f),0.5f,matCentre));
+        world.add(new Sphere(new Vec3(-1.0f,0.0f,-1.0f),0.5f,matLeft));
+        world.add(new Sphere(new Vec3(-1.0f,0.0f,-1.0f),-0.45f,matLeft));
+        world.add(new Sphere(new Vec3(1.0f,0.0f,-1.0f),0.5f,matRight));
 
-        world.add(ground);
-        world.add(centre);
-        world.add(left);
-        world.add(centreLeft);
-        world.add(right);
         // Image
         float aspectRatio = 16.0F / 9.0F;
         int imageWidth = 400;
@@ -40,14 +36,16 @@ public final class App {
         int maxDepth = 50;
         // Camera
 
-       Camera camera = new Camera();
+       Camera camera = new Camera(new Vec3(-2f,2f,1f),
+        new Vec3(0,0,-1),
+               new Vec3(0,1,0),
+               20,aspectRatio);
 
 
         // Write to Working Directory
         StringBuilder sb = new StringBuilder();
         sb.append(Paths.get(".").toAbsolutePath().normalize());
         sb.append("\\image.ppm");
-        Ray debugRay;
         // Render
         try {
             FileWriter fw = new FileWriter(sb.toString());
@@ -109,7 +107,7 @@ public final class App {
            return Vec3.lerp(a, b, t);
     }
 
-    public Ray ray(Vec3 origin, Vec3 direction){
+    public static Ray ray(Vec3 origin, Vec3 direction){
         return new Ray(origin,direction);
     }
 

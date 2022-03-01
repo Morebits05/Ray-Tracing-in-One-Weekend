@@ -11,4 +11,6 @@ public class Camera {
     public void constructorTest(){
         assertEquals(1, Camera.class.getConstructors().length);
     }
+
+
 }

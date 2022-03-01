@@ -52,6 +52,12 @@ public final class Vec3 {
         this.z = newZ;
     }
 
+    public  Vec3(Vec3 other){
+        this.x = other.x;
+        this.y = other.y;
+        this.z = other.z;
+    }
+
     /**
      * Default Constructor for Vector3.
      */
@@ -178,6 +184,12 @@ public final class Vec3 {
 
     public static Vec3 randomUnitVector(){
         return Vec3.normalize(randomInUnitSphere());
+    }
+
+    public static Vec3 cross(Vec3 u, Vec3 v) {
+        return new Vec3(u.y * v.z - u.z * v.y,
+                        u.z * v.x - u.x * v.z,
+                        u.x * v.y - u.y * v.x);
     }
 
 
