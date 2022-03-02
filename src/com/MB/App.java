@@ -34,12 +34,23 @@ public final class App {
         int imageHeight = (int) (imageWidth / aspectRatio);
         int samplesPerPixel = 100;
         int maxDepth = 50;
+
         // Camera
 
-       Camera camera = new Camera(new Vec3(-2f,2f,1f),
-        new Vec3(0,0,-1),
-               new Vec3(0,1,0),
-               20,aspectRatio);
+        Vec3 lookFrom = new Vec3(3,3,2);
+        Vec3 lookAt = new Vec3(0f,0f,-1f);
+        Vec3 vup = new Vec3(0f,1f,0f);
+
+        float distToFocus = (lookFrom.subtract(lookAt)).length();
+        float aperture = 2.0F;
+
+       Camera camera = new Camera(lookFrom,
+                                lookAt,
+                                vup
+                                ,20
+                                ,aspectRatio
+                                ,aperture
+                                ,distToFocus);
 
 
         // Write to Working Directory
