@@ -4,7 +4,8 @@
 
 ## Instructions
 
-Download using git or by downlaoding the zip file off Github.\n
+Download using git or by downlaoding the zip file off Github.
+
 javac Main or java Main
  
 That's it!
