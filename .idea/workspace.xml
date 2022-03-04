@@ -24,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -106,11 +107,26 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="true" />
     <property name="Repository.Attach.Sources" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="introduce.parameter.lambda" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.MB" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.MB" />
+    </key>
   </component>
   <component name="RunManager" selected="JUnit.AppClass.Run">
     <configuration default="true" type="Applet">
@@ -129,35 +145,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AppClass.Run" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Tests.*" />
+          <option name="PATTERN" value="Unit_Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.AppClass" />
       <option name="METHOD_NAME" value="Run" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -168,17 +165,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass.rayColorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AppClass.randomScene_ShouldGenerateList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Tests.*" />
+          <option name="PATTERN" value="Unit_Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="rayColorTest" />
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.AppClass" />
+      <option name="METHOD_NAME" value="randomScene_ShouldGenerateList" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -188,17 +185,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass.rayColourTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DialecticTest.ScatteredTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Tests.*" />
+          <option name="PATTERN" value="Unit_Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.AppClass" />
-      <option name="METHOD_NAME" value="rayColourTest" />
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.DialecticTest" />
+      <option name="METHOD_NAME" value="ScatteredTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -208,17 +205,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Vector3.ScaleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DialecticTest.refractTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Tests.*" />
+          <option name="PATTERN" value="Unit_Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.Vector3" />
-      <option name="METHOD_NAME" value="ScaleTest" />
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.DialecticTest" />
+      <option name="METHOD_NAME" value="refractTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Vector3.dotShouldCalculateProperly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Unit_Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.Vector3" />
+      <option name="METHOD_NAME" value="dotShouldCalculateProperly" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -242,7 +259,7 @@
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.MB.*" />
+          <option name="PATTERN" value="Unit_Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -281,19 +298,19 @@
     </configuration>
     <list>
       <item itemvalue="JUnit.com.MB in Ray Tracing in One Weekend" />
-      <item itemvalue="JUnit.AppClass" />
-      <item itemvalue="JUnit.AppClass.rayColorTest" />
+      <item itemvalue="JUnit.DialecticTest.refractTest" />
+      <item itemvalue="JUnit.DialecticTest.ScatteredTest" />
+      <item itemvalue="JUnit.Vector3.dotShouldCalculateProperly" />
       <item itemvalue="JUnit.AppClass.Run" />
-      <item itemvalue="JUnit.AppClass.rayColourTest" />
-      <item itemvalue="JUnit.Vector3.ScaleTest" />
+      <item itemvalue="JUnit.AppClass.randomScene_ShouldGenerateList" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.AppClass.Run" />
-        <item itemvalue="JUnit.Vector3.ScaleTest" />
-        <item itemvalue="JUnit.AppClass.rayColourTest" />
-        <item itemvalue="JUnit.AppClass.rayColorTest" />
-        <item itemvalue="JUnit.AppClass" />
+        <item itemvalue="JUnit.AppClass.randomScene_ShouldGenerateList" />
+        <item itemvalue="JUnit.DialecticTest.ScatteredTest" />
+        <item itemvalue="JUnit.Vector3.dotShouldCalculateProperly" />
+        <item itemvalue="JUnit.DialecticTest.refractTest" />
       </list>
     </recent_temporary>
   </component>
@@ -315,36 +332,32 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <breakpoint type="java-wildcard-method">
-          <properties class="com.MB.AppClass" method="normalize">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="105" />
-        </breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/SphereClass.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="127" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/PPMClass.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/Vector3.java</url>
-          <line>592</line>
-          <option name="timeStamp" value="160" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/Vector3.java</url>
-          <line>601</line>
-          <option name="timeStamp" value="185" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.ClassCastException" package="java.lang" />
-          <option name="timeStamp" value="136" />
+          <properties class="java.lang.NullPointerException" package="java.lang">
+            <option name="NOTIFY_UNCAUGHT" value="false" />
+          </properties>
+          <option name="timeStamp" value="221" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Unit_Tests/DialecticTest.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="245" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Unit_Tests/DialecticTest.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="247" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Unit_Tests/Vector3.java</url>
+          <line>637</line>
+          <option name="timeStamp" value="249" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Unit_Tests/DialecticTest.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="250" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint log-message="true" log-stack="true" type="java-exception">
@@ -363,8 +376,14 @@
       <pinned-members>
         <PinnedItemInfo parentTag="com.MB.Vec3" memberName="X" />
         <PinnedItemInfo parentTag="com.MB.Vec3" memberName="x" />
+        <PinnedItemInfo parentTag="com.MB.Sphere" memberName="centerSphere" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="ray" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

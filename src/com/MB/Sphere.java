@@ -74,7 +74,6 @@ public class Sphere implements HitTable{
                 '}';
     }
 
-
     /**
      * The Center of the Sphere
      * */
@@ -85,4 +84,5 @@ public class Sphere implements HitTable{
     public float radius;
     /** The Material of the Sphere */
     public Material material;
+
 }

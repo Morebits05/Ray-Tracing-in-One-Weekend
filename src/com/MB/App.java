@@ -3,6 +3,8 @@ package com.MB;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 
 public final class App {
     /**
@@ -13,36 +15,31 @@ public final class App {
 
     public void run() {
 
-
         HitTableList world = new HitTableList();
 
-        Material matGround = new Lambertian(new Vec3(0.8f,0.8f,0.0f));
-        Material matCentre = new Lambertian(new Vec3(0.1f,0.2f,0.5f));
-        Material matLeft = new Dielectric(1.5f);
-        Material matRight = new Metal(new Vec3(0.8f,0.6f,0.2f),0.0f);
-
-
-        world.add(new Sphere(new Vec3(0.0f,-100.5f,-1.0f),100.0f,matGround));
-        world.add(new Sphere(new Vec3(0.0f,0.0f,-1.0f),0.5f,matCentre));
-        world.add(new Sphere(new Vec3(-1.0f,0.0f,-1.0f),0.5f,matLeft));
-        world.add(new Sphere(new Vec3(-1.0f,0.0f,-1.0f),-0.45f,matLeft));
-        world.add(new Sphere(new Vec3(1.0f,0.0f,-1.0f),0.5f,matRight));
-
         // Image
-        float aspectRatio = 16.0F / 9.0F;
-        int imageWidth = 400;
+        float aspectRatio = 3.0F / 2.0F;
+        int imageWidth = 1200;
         int imageHeight = (int) (imageWidth / aspectRatio);
-        int samplesPerPixel = 100;
+        int samplesPerPixel = 500;
         int maxDepth = 50;
 
+
+        Instant start;
+        Instant end;
+        // Generate World
+        world = randomScene();
+
+
+
+
         // Camera
+        Vec3 lookFrom = new Vec3(13F,2F,3F);
+        Vec3 lookAt = new Vec3(0F,0F,0F);
+        Vec3 vup = new Vec3(0F,1F,0F);
 
-        Vec3 lookFrom = new Vec3(3,3,2);
-        Vec3 lookAt = new Vec3(0f,0f,-1f);
-        Vec3 vup = new Vec3(0f,1f,0f);
-
-        float distToFocus = (lookFrom.subtract(lookAt)).length();
-        float aperture = 2.0F;
+        float distToFocus = 10F;
+        float aperture = 0.1F;
 
        Camera camera = new Camera(lookFrom,
                                 lookAt,
@@ -64,7 +61,8 @@ public final class App {
             fw.write(imageWidth + " "
                     + imageHeight + System.lineSeparator()
                     + "255" + System.lineSeparator());
-            Ray ray = new Ray();
+            Ray ray;
+            start = Instant.now();
             for (int j = imageHeight - 1; j >= 0; --j) { // y value
                 System.err.println("Scan lines remaining: " + j + " ");
                 System.err.flush();
@@ -82,8 +80,13 @@ public final class App {
                 }
             }
             fw.close();
+            end = Instant.now();
             System.err.println(System.lineSeparator());
             System.err.println("Done.");
+            System.out.println("Image Size: "+imageHeight + " x "+imageWidth );
+            System.out.println("No. of Samples: "+samplesPerPixel);
+            System.out.println("Depth:" +maxDepth);
+            System.out.println("Time took: "+Duration.between(start,end));
         } catch ( IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -122,4 +125,49 @@ public final class App {
         return new Ray(origin,direction);
     }
 
+    public HitTableList randomScene() {
+        HitTableList world = new HitTableList();
+
+        Lambertian groundMat = new Lambertian(new Vec3(0.5f,0.5f,0.5f));
+        world.add(new Sphere(new Vec3(0f,-1000f,0f),1000f,groundMat));
+
+        for (int i = -11; i < 11; i++) {
+            for (int j = -11; j < 11; j++) {
+                float chooseMat = Utils.randomFloat();
+                Vec3 centre = new Vec3(i + 0.9f * Utils.randomFloat(),0.2f,j+Utils.randomFloat());
+
+                if ( (centre.subtract( new Vec3(4f,0.2f,0f)).length() > 0.9)){
+                    Material sphereMaterial;
+
+                    if (chooseMat < 0.8F){
+                        // Diffuse
+                        Vec3 albedo = Vec3.generateRandom().scale(Vec3.generateRandom());
+                        sphereMaterial = new Lambertian(albedo);
+                        world.add(new Sphere(centre,0.2f,sphereMaterial));
+                    } else if (chooseMat <0.9F)
+                    {
+                        // Metal
+                        Vec3 albedo = Vec3.generateRandom(0.5f,1.0F);
+                        float fuzz = Utils.randomFloat(0f,0.5F);
+                        sphereMaterial = new Metal(albedo,fuzz);
+                        world.add(new Sphere(centre,0.2f,sphereMaterial));
+                    } else {
+                        sphereMaterial = new Dielectric(1.5f);
+                        world.add(new Sphere(centre,0.2f,sphereMaterial));
+                    }
+                }
+            }
+        }
+        Material dielectric = new Dielectric(1.5f);
+        world.add(new Sphere(new Vec3(0f,1f,0f),1.0f,dielectric));
+
+        Material lambertian = new Lambertian(new Vec3(0.4f,0.2f,0.1f));
+        world.add(new Sphere(new Vec3(-4f,1f,0f),1.0f,lambertian));
+
+        Material metal = new Metal(new Vec3(0.7f,0.6f,.5f),0.0f);
+        world.add(new Sphere(new Vec3(4f,1f,0f),1.0f,metal));
+
+
+        return world;
+    }
 }
