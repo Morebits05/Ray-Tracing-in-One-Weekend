@@ -49,6 +49,14 @@ public class DialecticTest {
 
     }
 
+
+    /***
+     * Refract
+     * @param uv incoming ray
+     * @param n normal
+     * @param ir angle of refraction
+     * @return The Vector of the refracted ray
+     */
     private Vec3 refract(Vec3 uv, Vec3 n, float ir){
         float cosTheta = Math.min(dot((uv.neg()),n),1.0F);
 

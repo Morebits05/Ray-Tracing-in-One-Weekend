@@ -273,50 +273,6 @@ public class AppClass {
         assertTrue(picture.exists());
     }
 
-
-    @Test
-    @DisplayName("RayColour should Scatter Ray")
-    @Disabled
-    public void scatterTest(){
-        // Set up the World
-        for (int i = 0; i < 4000;i++) {
-            Sphere worldSphere = new Sphere(new Vec3(0, -100.5F, -1), 100F);
-
-
-            // Set up the Ray Origin and Direction
-         final   Vec3 origin = new Vec3(Utils.randomFloat(), Utils.randomFloat(), Utils.randomFloat());
-           final Vec3 direction = new Vec3(Utils.randomFloat(), Utils.randomFloat(), Utils.randomFloat());
-            assertAll("Direction should be greater than 0",
-                    ()->  assertTrue(direction.x >0),
-                    ()->assertTrue(direction.y >0),
-                    ()->assertTrue(direction.z >0)
-            );
-          //  direction = direction.normalize();
-           // Ray r = new Ray(origin, direction);
-
-
-            // Set up the HitList
-           // HitTableList world = new HitTableList();
-           // world.add(worldSphere);
-
-            // Set up the HitRecord
-          //  HitRecord hitRecord = new HitRecord();
-
-            // Send Ray at worldSphere
-            //App app = new App();
-           // Vec3 expectedRayColor = app.rayColor(r, world, 4);
-
-          //  assertTrue(expectedRayColor.x < 1.0F);
-         //   assertTrue(expectedRayColor.y < 1.0F);
-          //  assertEquals(1.0F, expectedRayColor.z);
-
-
-
-        }
-    }
-
-
-
     private Vec3 CalculateScatter(Sphere s, Ray r,HitRecord rec,Vec3 target,Vec3 random){
 
         HitRecord tempRec = new HitRecord();
@@ -332,6 +288,7 @@ public class AppClass {
     private Vec3 CalculateColor(Vec3 color){
         return color.scale(0.5f);
     }
+
 
 
 }

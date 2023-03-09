@@ -1,53 +1,47 @@
 package com.MB;
 
+
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.Duration;
-import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class App {
+
+
+
     /**
      * The actual program.
-     *
      **/
 
 
-    public void run() {
+    public void  run() {
 
         HitTableList world = new HitTableList();
-
         // Image
-        float aspectRatio = 3.0F / 2.0F;
+        float aspectRatio = 3.0f / 2.0f;
         int imageWidth = 1200;
         int imageHeight = (int) (imageWidth / aspectRatio);
         int samplesPerPixel = 500;
         int maxDepth = 50;
-
-
-        Instant start;
-        Instant end;
         // Generate World
         world = randomScene();
-
-
-
-
         // Camera
-        Vec3 lookFrom = new Vec3(13F,2F,3F);
-        Vec3 lookAt = new Vec3(0F,0F,0F);
-        Vec3 vup = new Vec3(0F,1F,0F);
+        Vec3 lookFrom = new Vec3(13F, 2F, 3F);
+        Vec3 lookAt = new Vec3(0F, 0F, 0F);
+        Vec3 vup = new Vec3(0F, 1F, 0F);
 
         float distToFocus = 10F;
         float aperture = 0.1F;
 
-       Camera camera = new Camera(lookFrom,
-                                lookAt,
-                                vup
-                                ,20
-                                ,aspectRatio
-                                ,aperture
-                                ,distToFocus);
+        Camera camera = new Camera(lookFrom,
+                lookAt,
+                vup
+                , 20
+                , aspectRatio
+                , aperture
+                , distToFocus);
 
 
         // Write to Working Directory
@@ -62,64 +56,53 @@ public final class App {
                     + imageHeight + System.lineSeparator()
                     + "255" + System.lineSeparator());
             Ray ray;
-            start = Instant.now();
-            for (int j = imageHeight - 1; j >= 0; --j) { // y value
-                System.err.println("Scan lines remaining: " + j + " ");
-                System.err.flush();
 
-                for (int i = 0; i < imageWidth; ++i) { // x value
-                    Vec3 pixelColour = new Vec3(0,0,0);
-                    for (int samples = 0; samples < samplesPerPixel; ++samples) {
-                       float u = (i + Utils.randomFloat(0.0f,1.0f))  / (float) (imageWidth - 1);
-                       float v = (j + Utils.randomFloat(0.0f,1.0f))  / (float) (imageHeight - 1);
-                        ray = camera.getRay(u, v);
+            HitTableList finalWorld = world;
+            List<String> results =
+               IntStream.range(0,imageHeight-1)
+               .parallel()
+               .mapToObj(i -> { // y value
+                   String row =   IntStream.range(0, imageWidth)
+                                   .mapToObj(j ->
+                                    getPPMPixelColor(i, j,imageWidth, imageHeight, camera, finalWorld, maxDepth))
+                           .collect(Collectors.joining(System.lineSeparator()));
+                   return row;
+               }).collect(Collectors.toList());
 
-                        pixelColour.addEquals(rayColor(ray,world,maxDepth));
-                    }
-                    fw.write(String.format("%s%s", PPM.vectorToRGB(pixelColour,samplesPerPixel), System.lineSeparator()));
-                }
-            }
-            fw.close();
-            end = Instant.now();
-            System.err.println(System.lineSeparator());
-            System.err.println("Done.");
-            System.out.println("Image Size: "+imageHeight + " x "+imageWidth );
-            System.out.println("No. of Samples: "+samplesPerPixel);
-            System.out.println("Depth:" +maxDepth);
-            System.out.println("Time took: "+Duration.between(start,end));
-        } catch ( IOException ex) {
-            System.out.println(ex.getMessage());
+
+            fw.write(results.toString());
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
-    }
+    };
 
     /**
      * RayColor.
      * Calculates the colour of the pixel.
-     *
      * @param ray - Ray to use
      * @return The Background Colour if no hit,
      * else returns the Color of the object.
      */
-    public Vec3 rayColor(final Ray ray,final HitTableList world,int depth) {
+    public static Vec3 rayColor(final Ray ray, final HitTableList world, int depth) {
         HitRecord hitRecord = new HitRecord();
         // If the depth is 0, there's no light
         if (depth <= 0)
             return new Vec3(0, 0, 0);
 
-        if (world.hit(ray,0.001F,Float.POSITIVE_INFINITY,hitRecord)){
+        if (world.hit(ray,0.001F,Float.POSITIVE_INFINITY,hitRecord)) {
             Ray scattered = new Ray();
             Vec3 attenuation = new Vec3();
-            if (hitRecord.material.scatter(ray,hitRecord,attenuation,scattered))
-                return attenuation.scale(rayColor(scattered,world,depth-1));
-            return new Vec3(0,0,0);
+            if (hitRecord.material.scatter(ray, hitRecord, attenuation, scattered))
+                return attenuation.scale(rayColor(scattered, world, depth - 1));
+            return new Vec3(0, 0, 0);
         }
 
-           Vec3 unitDirection = Vec3.normalize(ray.direction);
-           float t = 0.5f * (unitDirection.y + 1.0F);
-           final Vec3 a = new Vec3(1.0F, 1.0F, 1.0F);
-           final Vec3 b = new Vec3(0.5F, 0.7F, 1.0F);
-           return Vec3.lerp(a, b, t);
-    }
+            Vec3 unitDirection = Vec3.normalize(ray.direction);
+            float t = 0.5f * (unitDirection.y + 1.0F);
+            final Vec3 a = new Vec3(1.0F, 1.0F, 1.0F);
+            final Vec3 b = new Vec3(0.5F, 0.7F, 1.0F);
+            return Vec3.lerp(a, b, t);
+        }
 
     public static Ray ray(Vec3 origin, Vec3 direction){
         return new Ray(origin,direction);
@@ -170,4 +153,15 @@ public final class App {
 
         return world;
     }
+    public static String getPPMPixelColor(int i, int j, int imageWidth, int imageHeight,Camera camera,HitTableList world,int depth) {
+        Vec3 pixelColour = new Vec3(0, 0, 0);
+        float u = (i + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageWidth - 1);
+        float v = (j + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageHeight - 1);
+        final Ray rayP = camera.getRay(u, v);
+
+        pixelColour.addEquals(App.rayColor(rayP, world, depth));
+        String pixel = PPM.vectorToRGB(pixelColour, 1);
+        return pixel;
+    }
+
 }

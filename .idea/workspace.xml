@@ -41,6 +41,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1vJb9VWtd4y7GbYAiTX6UhkKkfx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -102,21 +105,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="true" />
-    <property name="Repository.Attach.Sources" value="true" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="create.test.in.the.same.root" value="true" />
-    <property name="introduce.parameter.lambda" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "D:/Documents/GitHub/Ray Tracing in One Weekend",
+    "settings.editor.selected.configurable": "configurable.group.build"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -128,7 +122,7 @@
       <recent name="com.MB" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AppClass.Run">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -138,6 +132,20 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.MB.Main" />
+      <module name="Ray Tracing in One Weekend" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.MB.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -165,7 +173,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AppClass.randomScene_ShouldGenerateList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Run.shouldCreateAIntStream" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Ray Tracing in One Weekend" />
       <extension name="coverage">
         <pattern>
@@ -174,68 +182,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Unit_Tests" />
-      <option name="MAIN_CLASS_NAME" value="Unit_Tests.AppClass" />
-      <option name="METHOD_NAME" value="randomScene_ShouldGenerateList" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DialecticTest.ScatteredTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Unit_Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Unit_Tests" />
-      <option name="MAIN_CLASS_NAME" value="Unit_Tests.DialecticTest" />
-      <option name="METHOD_NAME" value="ScatteredTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DialecticTest.refractTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Unit_Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Unit_Tests" />
-      <option name="MAIN_CLASS_NAME" value="Unit_Tests.DialecticTest" />
-      <option name="METHOD_NAME" value="refractTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Vector3.dotShouldCalculateProperly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Ray Tracing in One Weekend" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Unit_Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Unit_Tests" />
-      <option name="MAIN_CLASS_NAME" value="Unit_Tests.Vector3" />
-      <option name="METHOD_NAME" value="dotShouldCalculateProperly" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.Run" />
+      <option name="METHOD_NAME" value="shouldCreateAIntStream" />
       <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -260,13 +208,53 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Unit_Tests.*" />
-          <option name="ENABLED" value="true" />
+          <option name="ENABLED" value="false" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.MB" />
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="getPPMPixelColor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Unit_Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.getPPMPixelColor" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="getPPMPixelColor.stringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Ray Tracing in One Weekend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Unit_Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Unit_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Unit_Tests.getPPMPixelColor" />
+      <option name="METHOD_NAME" value="stringTest" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -297,20 +285,20 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.com.MB in Ray Tracing in One Weekend" />
-      <item itemvalue="JUnit.DialecticTest.refractTest" />
-      <item itemvalue="JUnit.DialecticTest.ScatteredTest" />
-      <item itemvalue="JUnit.Vector3.dotShouldCalculateProperly" />
+      <item itemvalue="JUnit.getPPMPixelColor" />
+      <item itemvalue="JUnit.getPPMPixelColor.stringTest" />
       <item itemvalue="JUnit.AppClass.Run" />
-      <item itemvalue="JUnit.AppClass.randomScene_ShouldGenerateList" />
+      <item itemvalue="JUnit.Run.shouldCreateAIntStream" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.AppClass.Run" />
-        <item itemvalue="JUnit.AppClass.randomScene_ShouldGenerateList" />
-        <item itemvalue="JUnit.DialecticTest.ScatteredTest" />
-        <item itemvalue="JUnit.Vector3.dotShouldCalculateProperly" />
-        <item itemvalue="JUnit.DialecticTest.refractTest" />
+        <item itemvalue="JUnit.getPPMPixelColor.stringTest" />
+        <item itemvalue="JUnit.getPPMPixelColor" />
+        <item itemvalue="JUnit.Run.shouldCreateAIntStream" />
       </list>
     </recent_temporary>
   </component>
@@ -355,8 +343,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Unit_Tests/DialecticTest.java</url>
-          <line>52</line>
+          <line>60</line>
           <option name="timeStamp" value="250" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/MB/App.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="256" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Unit_Tests/AppClass.java</url>
+          <line>41</line>
+          <properties class="Unit_Tests.AppClass" method="Run">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="253" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -381,7 +383,10 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="ray" />
+        <watch expression="imageWidth" language="JAVA" />
+        <watch expression="j" language="JAVA" />
+        <watch expression="pixelColour" language="JAVA" />
+        <watch expression="pixel" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -390,13 +395,19 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$Vector3_Add_Two_Negative_Vectors_Return_Negative.ic" NAME="Vector3.Add_Two_Negative_Vectors_Return_Negative Coverage Results" MODIFIED="1626716766977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$Vector3.ic" NAME="Vector3 Coverage Results" MODIFIED="1627597389188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Tests.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$AppClass_Run.ic" NAME="AppClass.Run Coverage Results" MODIFIED="1631870250366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Tests.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$Vector3.ic" NAME="Vector3 Coverage Results" MODIFIED="1627597389188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$Vector3_Add_Two_Negative_Vectors_Return_Negative.ic" NAME="Vector3.Add_Two_Negative_Vectors_Return_Negative Coverage Results" MODIFIED="1626716766977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Tests.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$RayClass.ic" NAME="RayClass Coverage Results" MODIFIED="1633269358089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>Tests.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$AppClass.ic" NAME="AppClass Coverage Results" MODIFIED="1631870425811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Tests.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$AppClass_rayIntersectSphere.ic" NAME="AppClass.rayIntersectSphere Coverage Results" MODIFIED="1633428431722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -405,13 +416,7 @@
     <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$Vector3_shouldAddTwoVectorsAndReturnVectorWithNegativeY.ic" NAME="Vector3.shouldAddTwoVectorsAndReturnVectorWithNegativeY Coverage Results" MODIFIED="1626716434681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Tests.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$AppClass.ic" NAME="AppClass Coverage Results" MODIFIED="1631870425811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Tests.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$Vector3_shouldAddTwoVectorsAndReturnVectorWithNegativeX.ic" NAME="Vector3.shouldAddTwoVectorsAndReturnVectorWithNegativeX Coverage Results" MODIFIED="1626716007983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>Tests.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Ray_Tracing_in_One_Weekend$RayClass.ic" NAME="RayClass Coverage Results" MODIFIED="1633269358089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Tests.*</FILTER>
     </SUITE>
   </component>
