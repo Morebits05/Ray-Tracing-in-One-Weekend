@@ -70,7 +70,7 @@ public final class App {
                }).collect(Collectors.toList());
 
 
-            fw.write(results.toString());
+            fw.write(String.join(System.lineSeperator(),results);
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
