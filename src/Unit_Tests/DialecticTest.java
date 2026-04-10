@@ -1,36 +1,53 @@
 package Unit_Tests;
 
 import com.MB.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.MB.Vec3.dot;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+
+
 public class DialecticTest {
-
-
 
     @Test
     @DisplayName("Refract Should Calculate Properly")
-    public void refractTest(){
-        float indexRefraction = 1.5f;
-        Dielectric dialectric = new Dielectric(indexRefraction);
+    public void refractTest() {
+        float etaRatio = 1.0f / 1.5f; // air into glass
 
-        Vec3 uv = new Vec3(0,0,-1);
-        Vec3 n = new Vec3(0,0,-1);
+        // 45-degree incident ray, normalized
+        float inv = (float)(1.0 / Math.sqrt(2.0));
+        Vec3 uv = new Vec3(inv, 0, -inv);
+
+        // Surface normal pointing TOWARD the incoming ray
+        Vec3 n = new Vec3(0, 0, 1);
+
         Vec3 negUv = uv.neg();
-        float cosTheta = Math.min(dot(negUv,n),1.0F);
-        Vec3 rayOutPerpendicular = Vec3.scale(indexRefraction,uv.add(n.scale(cosTheta)));
-        Vec3 rayOutParallel = n.scale((float) -(Math.sqrt(Math.abs(1.0F-rayOutPerpendicular.lengthSquared()))));
+        float cosTheta = Math.min(dot(negUv, n), 1.0f);
 
+        Vec3 rayOutPerpendicular = Vec3.scale(etaRatio, uv.add(n.scale(cosTheta)));
+        Vec3 rayOutParallel = n.scale((float) -Math.sqrt(Math.abs(1.0f - rayOutPerpendicular.lengthSquared())));
 
         Vec3 refracted = rayOutPerpendicular.add(rayOutParallel);
 
-        assertThat(refracted,is(new Vec3(0,0,-1)));
-
+        float epsilon = 1e-4f;
+        Assertions.assertEquals(0.4714f, refracted.x, epsilon);
+        Assertions.assertEquals(0.0f, refracted.y, epsilon);
+        Assertions.assertEquals(-0.8819f, refracted.z, epsilon);
     }
 
+    private static float getCosTheta(float a) {
+        float cosTheta;
+        if (Float.isNaN(a)) {
+            cosTheta = a;// a is NaN
+        } else {
+            cosTheta = Math.min(a, 1.0F);
+        }
+        return cosTheta;
+    }
 
     @Test
     public void ScatteredTest(){
@@ -44,9 +61,11 @@ public class DialecticTest {
         HitRecord rec = new HitRecord();
         Vec3 attenuation = new Vec3();
         Ray scatteredRay = new Ray();
-        rayColor(r,world,1);
 
-
+        Vec3 rayColour  = rayColor(r,world,1);
+        assertThat(rayColour.x,is(0.0F));
+        assertThat(rayColour.y,is(0.0F));
+        assertThat(rayColour.z,is(0.0F));
     }
 
 
@@ -60,10 +79,10 @@ public class DialecticTest {
     private Vec3 refract(Vec3 uv, Vec3 n, float ir){
         float cosTheta = Math.min(dot((uv.neg()),n),1.0F);
 
-        assertThat(cosTheta,is(0));
+        assertThat(cosTheta, is(1.0F));
         Vec3 rayOutPerpendicular = Vec3.scale(ir,(uv.add(n.scale(cosTheta))));
 
-        assertThat(rayOutPerpendicular, is (new Vec3(0,0,-0.6666667F)));
+        assertThat(rayOutPerpendicular, equalTo (new Vec3(0,0,0)));
         Vec3 rayOutParallel = n.scale((float) -(Math.sqrt(Math.abs(1.0F-rayOutPerpendicular.lengthSquared()))));
         return rayOutPerpendicular.add(rayOutParallel);
     }
@@ -76,7 +95,7 @@ public class DialecticTest {
 
         Vec3 unitDirection = Vec3.normalize(rayIn.direction());
 
-        assertThat(unitDirection,is(new Vec3(0,0,-1.0f)));
+        assertThat(unitDirection,equalTo(new Vec3(0,0,-1.0f)));
         Vec3 refracted = refract(unitDirection,hitRecord.normal,refractionRatio);
 
 
@@ -114,5 +133,4 @@ public class DialecticTest {
         final Vec3 b = new Vec3(0.5F, 0.7F, 1.0F);
         return Vec3.lerp(a, b, t);
     }
-
 }

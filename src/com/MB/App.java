@@ -20,10 +20,10 @@ public final class App {
 
         HitTableList world = new HitTableList();
         // Image
-        float aspectRatio = 3.0f / 2.0f;
-        int imageWidth = 1200;
-        int imageHeight = (int) (imageWidth / aspectRatio);
-        int samplesPerPixel = 500;
+        float aspectRatio = 16.0f / 9.0f;
+        int imageWidth = 400;
+        int imageHeight = Math.max(1, (int) Math.round((double) imageWidth / aspectRatio));
+        int samplesPerPixel = 10;
         int maxDepth = 50;
         // Generate World
         world = randomScene();
@@ -48,30 +48,36 @@ public final class App {
         StringBuilder sb = new StringBuilder();
         sb.append(Paths.get(".").toAbsolutePath().normalize());
         sb.append("\\image.ppm");
-        // Render
-        try {
-            FileWriter fw = new FileWriter(sb.toString());
-            fw.write("P3" + System.lineSeparator());
-            fw.write(imageWidth + " "
-                    + imageHeight + System.lineSeparator()
-                    + "255" + System.lineSeparator());
-            Ray ray;
 
-            HitTableList finalWorld = world;
-            List<String> results =
-               IntStream.range(0,imageHeight-1)
-               .parallel()
-               .mapToObj(i -> { // y value
-                   String row =   IntStream.range(0, imageWidth)
-                                   .mapToObj(j ->
-                                    getPPMPixelColor(i, j,imageWidth, imageHeight, camera, finalWorld, maxDepth))
-                           .collect(Collectors.joining(System.lineSeparator()));
-                   return row;
-               }).collect(Collectors.toList());
+        Ray ray;
 
+            // Flatten the 2D stream into a single sequence of pixel strings,
+// then join them all with a single consistent newline.
+// There's no meaningful difference between pixels "within" a row
+// and pixels "between" rows in the PPM format — it's just a flat list.
+        try (FileWriter fw = new FileWriter(sb.toString())) {
+            fw.write("P3\n");
+            fw.write(imageWidth + " " + imageHeight + "\n255\n");
+            // Capture the final state of world in a new variable.
+// Java sees this is assigned exactly once and never changed,
+// making it safe to use inside lambdas.
 
-            fw.write(String.join(System.lineSeperator(),results);
-        } catch (Exception ex) {
+            for (int i = 0; i < imageHeight; i++) {
+                final int row = i;
+
+                HitTableList finalWorld = world;
+                List<String> rowPixels = IntStream.range(0, imageWidth)
+                        .parallel()
+                        .mapToObj(j -> getPPMPixelColor(row, j, imageWidth, imageHeight,
+                                camera, finalWorld, samplesPerPixel, maxDepth))
+                        .collect(Collectors.toList());
+
+                for (String pixel : rowPixels) {
+                    fw.write(pixel);
+                    fw.write("\n");
+                }
+            }
+    } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
     };
@@ -153,14 +159,32 @@ public final class App {
 
         return world;
     }
-    public static String getPPMPixelColor(int i, int j, int imageWidth, int imageHeight,Camera camera,HitTableList world,int depth,int samplesPerPixel) {
+    public static String getPPMPixelColor(int i, int j, int imageWidth, int imageHeight,
+                                          Camera camera, HitTableList world,
+                                          int samplesPerPixel, int depth) {
         Vec3 pixelColour = new Vec3(0, 0, 0);
-        for (int s= 0; s < samplesPerPixel; s++){
-            float u = (i + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageWidth - 1);
-            float v = (j + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageHeight - 1);
+
+        for (int s = 0; s < samplesPerPixel; s++) {
+            float u = (j + Utils.randomFloat(0.0f, 1.0f)) / (float)(imageWidth - 1);
+            float v = 1.0f - (i + Utils.randomFloat(0.0f, 1.0f)) / (float)(imageHeight - 1);
             final Ray rayP = camera.getRay(u, v);
             pixelColour.addEquals(App.rayColor(rayP, world, depth));
         }
-        return PPM.vectorToRGB(pixelColour, samplesPerPixel);
+
+        String result = PPM.vectorToRGB(pixelColour, samplesPerPixel);
+
+        String[] tokens = result.trim().split("\\s+");
+        if (tokens.length != 3) {
+            // Write bad pixels to a separate log file we can actually read
+            try (FileWriter log = new FileWriter("badpixels.txt", true)) { // true = append mode
+                log.write("BAD PIXEL at (" + i + "," + j + "): '"
+                        + result + "' — " + tokens.length + " tokens, colour was "
+                        + pixelColour + "\n");
+            } catch (Exception ex) {
+                // ignore logging errors
+            }
+        }
+
+        return result;
     }
 }

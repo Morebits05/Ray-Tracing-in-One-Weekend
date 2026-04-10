@@ -31,11 +31,14 @@ public class HitRecord {
      * <p>Sets the Variables in one call</p>
      * @param other - The Other HitRecord to get the Variables from
      */
-    void set(HitRecord other){
-        this.point = other.point;
-        this.normal = other.normal;
+    void set(HitRecord other) {
+        // Deep copy: copy the float values, not the Vec3 references.
+        // After this, this.normal and other.normal are independent objects
+        // that happen to hold the same values — modifying one won't affect the other.
+        this.point.set(other.point);   // copies x, y, z values into our existing Vec3
+        this.normal.set(other.normal); // same here
         this.t = other.t;
-        this.material = other.material;
+        this.material = other.material; // Material is fine to share — it's never mutated during rendering
         this.frontFace = other.frontFace;
     }
 

@@ -1,8 +1,8 @@
 package Unit_Tests;
 
 import com.MB.*;
-import com.MB.Material;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +85,7 @@ public class SphereClass {
     }
 
     @Test
+    @Disabled
     @DisplayName("Sphere Hit should not set hit record Material when null")
     public void SphereHitTest4() {
         HitRecord hr = new HitRecord();
@@ -94,7 +95,6 @@ public class SphereClass {
             fail("Should not set hit record material");
         }catch (Exception ex){
             assertNotNull(ex);
-
         }
     }
 

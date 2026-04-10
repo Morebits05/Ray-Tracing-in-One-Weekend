@@ -15,7 +15,7 @@ public class Dielectric extends Material {
         // Use Schlick's approximation for reflectance
         float r0 = (1 - refIDX) / (1 + refIDX);
         r0 = r0 * r0;
-        return (float) (r0 + (1 - r0) * Math.pow((-cosine), 5));
+        return (float) (r0 + (1 - r0) * Math.pow((1-cosine), 5));
     }
 
     @Override

@@ -10,11 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.hamcrest.CoreMatchers.not;
 public final class Vector3 {
     static int LOW = -100;
     static int HIGH = 100;
@@ -67,8 +66,8 @@ public final class Vector3 {
         Vec3 v1 = new Vec3(0, 2, 0);
         Vec3 v2 = new Vec3(0, 2, 0);
 
-        assertThat(v1.equals(v2), is(v2.equals(v1)));
-        assertThat(v1.hashCode(), is(v2.hashCode()));
+        assertThat(v1.equals(v2), equalTo(v2.equals(v1)));
+        assertThat(v1.hashCode(), equalTo(v2.hashCode()));
     }
 
     @Test
@@ -127,7 +126,7 @@ public final class Vector3 {
         final float z = 3;
 
         Vec3 v1 = new Vec3(x, y, z);
-        assertThat((float) Math.round(Vec3.normalize(v1).x), is(1.0f));
+        assertThat((float) Math.round(Vec3.normalize(v1).x), equalTo(1.0f));
     }
 
     @Test
@@ -163,8 +162,8 @@ public final class Vector3 {
         Vec3 v2 = null;
         Integer v3 = 3;
 
-        assertThat(v1 == null, is(not(true)));
-        assertThat(v1.equals(v3), is(not(true)));
+        assertThat(v1 == null, not(equalTo(true)));
+        assertThat(v1.equals(v3), not(equalTo(true)));
     }
 
 
@@ -464,7 +463,7 @@ public final class Vector3 {
 
             float expectedLength = x * x + y * y + z * z;
             Vec3 v1 = new Vec3(x, y, z);
-            assertThat(v1.lengthSquared(), is(expectedLength));
+            assertThat(v1.lengthSquared(), equalTo(expectedLength));
         }
     }
 
@@ -480,7 +479,7 @@ public final class Vector3 {
             Vec3 v1 = new Vec3(x, y, z);
             float expectedLengthSquared = (float) Math.sqrt(v1.lengthSquared());
 
-            assertThat(v1.length(), is(expectedLengthSquared));
+            assertThat(v1.length(), equalTo(expectedLengthSquared));
         }
     }
 
@@ -641,11 +640,11 @@ public final class Vector3 {
         float dp = Vec3.dot(vec1.neg(),vec2);
 
         Vec3 scattered = vec1.scale(1.0f / 1.5f);
-        assertThat(scattered, is (new Vec3(0,0,-0.6666667f)));
+        assertThat(scattered, equalTo(new Vec3(0,0,-0.6666667f)));
     }
 
     @Test
     public void negMethod_ShouldInvertAxis(){
-        assertThat( new Utils().vectorToArray(new Vec3(0F,0F,-1F).neg()),is( new float[]{-0F,-0F,1.0F}));
+        assertThat( new Utils().vectorToArray(new Vec3(0F,0F,-1F).neg()),equalTo( new float[]{-0F,-0F,1.0F}));
     }
 }
