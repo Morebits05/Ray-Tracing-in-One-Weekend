@@ -153,15 +153,14 @@ public final class App {
 
         return world;
     }
-    public static String getPPMPixelColor(int i, int j, int imageWidth, int imageHeight,Camera camera,HitTableList world,int depth) {
+    public static String getPPMPixelColor(int i, int j, int imageWidth, int imageHeight,Camera camera,HitTableList world,int depth,int samplesPerPixel) {
         Vec3 pixelColour = new Vec3(0, 0, 0);
-        float u = (i + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageWidth - 1);
-        float v = (j + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageHeight - 1);
-        final Ray rayP = camera.getRay(u, v);
-
-        pixelColour.addEquals(App.rayColor(rayP, world, depth));
-        String pixel = PPM.vectorToRGB(pixelColour, 1);
-        return pixel;
+        for (int s= 0; s < samplesPerPixel; s++){
+            float u = (i + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageWidth - 1);
+            float v = (j + Utils.randomFloat(0.0f, 1.0f)) / (float) (imageHeight - 1);
+            final Ray rayP = camera.getRay(u, v);
+            pixelColour.addEquals(App.rayColor(rayP, world, depth));
+        }
+        return PPM.vectorToRGB(pixelColour, samplesPerPixel);
     }
-
 }
