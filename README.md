@@ -1,6 +1,6 @@
 # Ray-Tracing-in-One-Weekend
 
-## My Ray Tracing project that has took 2 years.
+## My Ray Tracing project that has took 6 years.
 
 ## Instructions
 
