@@ -6,6 +6,6 @@
 
 Download using git or by downloading the zip file off Github.
 
-javac Main or java Main
+java -jar Ray_Tracing_in_One_Weekend.jar
  
 That's it!
